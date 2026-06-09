@@ -1,0 +1,45 @@
+/* ============================================================
+   CONTACT & FOOTER
+   ============================================================ */
+
+/* ── Contact Section ─────────────────────────────────────── */
+
+.contact-section {
+  padding-bottom: var(--space-32);
+}
+
+.contact-content {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-content p {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-10);
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+
+.footer {
+  border-top: 1px solid var(--color-border-subtle);
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.footer-text .mono {
+  font-size: var(--text-xs);
+}

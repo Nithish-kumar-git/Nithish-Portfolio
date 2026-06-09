@@ -1,0 +1,160 @@
+/* ============================================================
+   FWMS SHOWCASE SECTION
+   ============================================================ */
+
+.fwms-section {
+  background-color: var(--color-bg-subtle);
+  position: relative;
+}
+
+.fwms-header {
+  margin-bottom: var(--space-10);
+}
+
+.fwms-descriptor {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.fwms-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Panel Grid ──────────────────────────────────────────── */
+.fwms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-10);
+}
+
+@media (max-width: 1119px) {
+  .fwms-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* ── Panel 1: Problem ────────────────────────────────────── */
+.fwms-problem p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-base);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Panel 2: Architecture ───────────────────────────────── */
+.fwms-architecture {
+  background: var(--color-bg-overlay);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 240px;
+}
+
+.fwms-architecture svg {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+}
+
+/* ── Panel 3: Metrics ────────────────────────────────────── */
+.fwms-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.fwms-metric-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+
+.fwms-metric-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+}
+
+/* ── Panel 4: Classification Logic ───────────────────────── */
+.fwms-classification {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.classification-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.classification-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.class-tag {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  min-width: 110px;
+  text-align: center;
+}
+
+.class-tag.danger { background: rgba(216, 90, 48, 0.15); color: var(--color-danger); border: 1px solid rgba(216, 90, 48, 0.3); }
+.class-tag.success { background: rgba(29, 158, 117, 0.15); color: var(--color-success); border: 1px solid rgba(29, 158, 117, 0.3); }
+.class-tag.warning { background: rgba(212, 160, 23, 0.15); color: var(--color-warning); border: 1px solid rgba(212, 160, 23, 0.3); }
+
+.class-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.classification-rationale {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-4);
+}
+
+/* ── Actions ─────────────────────────────────────────────── */
+.fwms-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  border-top: 1px solid var(--color-border-glass);
+  padding-top: var(--space-8);
+}
+
+@media (max-width: 767px) {
+  .fwms-classification .classification-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .fwms-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

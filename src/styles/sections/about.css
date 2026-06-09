@@ -1,0 +1,79 @@
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* ── Left Column ─────────────────────────────────────────── */
+.about-content p {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-10);
+  max-width: 640px;
+}
+
+.about-beliefs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.belief-card {
+  background: var(--glass-bg);
+  border-left: 3px solid var(--color-accent);
+  padding: var(--space-6);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.belief-card p {
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ── Right Column (Aside) ────────────────────────────────── */
+.about-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.aside-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.aside-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  font-weight: 500;
+}
+
+.aside-value {
+  font-size: var(--text-base);
+  color: var(--color-text-primary);
+}
+
+.aside-value.mono {
+  color: var(--color-accent);
+}
+
+@media (max-width: 1119px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+  
+  .about-content p {
+    max-width: 100%;
+  }
+}

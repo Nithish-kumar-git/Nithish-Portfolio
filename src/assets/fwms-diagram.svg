@@ -1,0 +1,42 @@
+<svg viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .layer-box { fill: var(--color-bg-elevated); stroke: var(--color-border-subtle); stroke-width: 1; rx: 4; }
+    .layer-text { fill: var(--color-text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; }
+    .sub-text { fill: var(--color-text-secondary); font-family: 'Inter', sans-serif; font-size: 10px; }
+    .conn-line { stroke: var(--color-border-subtle); stroke-width: 1.5; stroke-dasharray: 4 4; }
+    .accent-dot { fill: var(--color-accent); }
+    
+    /* Animation class */
+    .animate-svg .conn-line {
+      stroke: var(--color-accent);
+      animation: dashFlow 2s linear infinite;
+    }
+    @keyframes dashFlow {
+      from { stroke-dashoffset: 8; }
+      to { stroke-dashoffset: 0; }
+    }
+  </style>
+
+  <!-- Access Layer -->
+  <rect class="layer-box" x="40" y="20" width="320" height="40" />
+  <text class="layer-text" x="200" y="38" text-anchor="middle">Access Layer</text>
+  <text class="sub-text" x="200" y="52" text-anchor="middle">4-tier RBAC (Faculty / Coord / HOD / Admin)</text>
+
+  <line class="conn-line" x1="200" y1="60" x2="200" y2="80" />
+  <circle class="accent-dot" cx="200" cy="70" r="3" />
+
+  <!-- Analytics & Logic Layer (Combined for diagram simplicity) -->
+  <rect class="layer-box" x="40" y="80" width="320" height="60" />
+  <text class="layer-text" x="200" y="102" text-anchor="middle">Business Logic & Analytics Layer</text>
+  <text class="sub-text" x="200" y="118" text-anchor="middle">5-Pass Allocation Algorithm · 9 Business Rules</text>
+  <text class="sub-text" x="200" y="132" text-anchor="middle">15 KPIs · Deviation Analysis · Export</text>
+
+  <line class="conn-line" x1="200" y1="140" x2="200" y2="160" />
+  <circle class="accent-dot" cx="200" cy="150" r="3" />
+
+  <!-- Data Layer -->
+  <rect class="layer-box" x="40" y="160" width="320" height="40" />
+  <text class="layer-text" x="200" y="178" text-anchor="middle">Data Layer</text>
+  <text class="sub-text" x="200" y="192" text-anchor="middle">22-table PostgreSQL Schema</text>
+
+</svg>

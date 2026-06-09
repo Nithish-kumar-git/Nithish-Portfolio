@@ -1,0 +1,131 @@
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+/* Featured card spans full width on desktop */
+.project-card--featured {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-10);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Card Header ─────────────────────────────────────────── */
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.project-title {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.project-role {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ── Card Body ───────────────────────────────────────────── */
+.project-desc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+  flex-grow: 1;
+}
+
+.project-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.fact-chip {
+  font-size: var(--text-xs);
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Card Footer ─────────────────────────────────────────── */
+.project-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: auto;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.project-links {
+  display: flex;
+  gap: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-glass);
+}
+
+/* ── Visual Accent for Featured ──────────────────────────── */
+.project-accent-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  opacity: 0.03;
+  background-image: 
+    linear-gradient(var(--color-text-primary) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-text-primary) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: linear-gradient(to right, transparent, black);
+  -webkit-mask-image: linear-gradient(to right, transparent, black);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-card > * {
+  z-index: 1;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-card--featured {
+    grid-column: 1;
+    padding: var(--space-6);
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+}
