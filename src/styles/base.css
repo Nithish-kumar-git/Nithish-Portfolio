@@ -104,3 +104,17 @@ ul, ol {
 .mono {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
 }
+
+/* ── Global Layout Utilities ─────────────────────────────── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

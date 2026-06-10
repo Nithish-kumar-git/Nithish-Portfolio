@@ -69,8 +69,8 @@
 /* ── Panel 3: Metrics ────────────────────────────────────── */
 .fwms-metrics {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .fwms-metric-card {

@@ -17,9 +17,8 @@
   gap: var(--space-6);
 }
 
-.section {
-  padding-top: var(--section-gap);
-  padding-bottom: var(--section-gap);
+section {
+  padding-block: 5rem;
 }
 
 .section-header {

@@ -2,14 +2,16 @@
    HERO SECTION
    ============================================================ */
 
-section.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 80px;
-  padding-bottom: 0;
+section.hero,
+.hero {
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding-top: 80px !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* Subtle background glow */

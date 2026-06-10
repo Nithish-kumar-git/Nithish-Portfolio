@@ -101,7 +101,7 @@
   /* ── LAYOUT ──────────────────────────────────────────────── */
   --max-width:       1120px;
   --nav-height:      72px;
-  --section-gap:     var(--space-32);
+  --section-gap:     var(--space-20);
 }
 
 /* ── Mobile type scale overrides ─────────────────────────── */
