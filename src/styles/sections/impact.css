@@ -8,12 +8,10 @@
   border-bottom: 1px solid var(--color-border-subtle);
   /* Intentionally missing typical section padding to feel like a band */
   padding: var(--space-16) 0;
-}
-
-.impact-grid {
+.metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   margin-top: 3rem;
 }
 
@@ -36,7 +34,7 @@
 }
 
 @media (max-width: 768px) {
-  .impact-grid {
+  .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -159,6 +159,32 @@
   }
 }
 
+.arch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1.5rem 0 0.5rem;
+}
+.arch-node {
+  background: rgba(14, 165, 233, 0.10);
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  color: #38BDF8;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+.arch-arrow {
+  color: #475569;
+  font-size: 1rem;
+}
+.arch-caption {
+  color: #94A3B8;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
 /* ── Arch Flow Component ─────────────────────────────────── */
 .arch-flow {
   display: flex;
