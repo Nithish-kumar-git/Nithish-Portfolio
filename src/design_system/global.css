@@ -245,6 +245,26 @@ section.section--subtle {
 }
 
 /* ────────────────────────────────────────────
+ * HERO SECTION OVERRIDE
+ * The hero must fill the viewport exactly.
+ * Override the generic section padding-block so
+ * the CTA buttons don't leave a giant empty area
+ * below them. Content is vertically centered.
+ * ──────────────────────────────────────────── */
+section.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-block: 0;
+}
+
+section.hero .hero-content {
+  width: 100%;
+  padding-block: var(--space-16);
+  max-width: 860px;
+}
+
+/* ────────────────────────────────────────────
  * DIVIDERS
  * ──────────────────────────────────────────── */
 hr {

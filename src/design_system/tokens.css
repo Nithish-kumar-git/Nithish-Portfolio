@@ -13,42 +13,42 @@
    * BACKGROUNDS
    * Four levels of elevation. Never use pure black.
    * ──────────────────────────────────────────── */
-  --color-bg-base:        #0A0A0F;   /* Page root — near-black, slight blue undertone */
-  --color-bg-elevated:    #111118;   /* Cards, panels, raised surfaces */
-  --color-bg-overlay:     #1A1A26;   /* Modals, deep-layered cards */
-  --color-bg-subtle:      #16161F;   /* Alternate section backgrounds */
-  --color-bg-scrim:       rgba(10, 10, 15, 0.85); /* Nav glass, overlays */
+  --color-bg-base:        #070B14;   /* deep navy-black */
+  --color-bg-elevated:    #0D1220;   /* cards sit above base */
+  --color-bg-overlay:     #111827;   /* modals/dropdowns */
+  --color-bg-subtle:      #0F1829;   /* section alternates */
+  --color-bg-scrim:       rgba(7, 11, 20, 0.88); /* Nav glass, overlays */
 
   /* ────────────────────────────────────────────
    * BORDERS
    * ──────────────────────────────────────────── */
-  --color-border-default: #1E1E2E;
-  --color-border-subtle:  #252535;
-  --color-border-glass:   rgba(255, 255, 255, 0.08);
-  --color-border-glass-hover: rgba(255, 255, 255, 0.14);
+  --color-border-default: #1E2D42;
+  --color-border-subtle:  #253649;
+  --color-border-glass:   rgba(148, 163, 184, 0.08);
+  --color-border-glass-hover: rgba(148, 163, 184, 0.15);
 
   /* ────────────────────────────────────────────
    * TEXT
    * Never pure white. --color-text-muted must still
    * meet 3:1 contrast on --color-bg-base for large text.
    * ──────────────────────────────────────────── */
-  --color-text-primary:   #F0F0F5;   /* Headings, key content */
-  --color-text-secondary: #9090A8;   /* Body copy, descriptions */
-  --color-text-muted:     #55556A;   /* Captions, metadata, labels */
-  --color-text-inverse:   #0A0A0F;   /* Text on accent-colored backgrounds */
-  --color-text-accent:    #A89EE0;   /* Tags, inline accent text */
+  --color-text-primary:   #F1F5F9;   /* slate-100 — not pure white */
+  --color-text-secondary: #94A3B8;   /* slate-400 */
+  --color-text-muted:     #475569;   /* slate-600 */
+  --color-text-inverse:   #070B14;   /* Text on accent-colored backgrounds */
+  --color-text-accent:    #38BDF8;   /* matches accent-hover */
 
   /* ────────────────────────────────────────────
    * ACCENT — Single accent. Used sparingly.
    * Rule: Maximum 2 visible instances per viewport.
    * ──────────────────────────────────────────── */
-  --color-accent:         #6E56CF;
-  --color-accent-hover:   #7C65DB;
-  --color-accent-active:  #5D47B8;
-  --color-accent-muted:   rgba(110, 86, 207, 0.12);
-  --color-accent-border:  rgba(110, 86, 207, 0.30);
-  --color-accent-glow:    rgba(110, 86, 207, 0.15);
-  --color-accent-glow-strong: rgba(110, 86, 207, 0.25);
+  --color-accent:         #0EA5E9;   /* sky-600 — electric teal */
+  --color-accent-hover:   #38BDF8;   /* sky-400 */
+  --color-accent-active:  #0284C7;   /* sky-700 */
+  --color-accent-muted:   rgba(14, 165, 233, 0.12);
+  --color-accent-border:  rgba(14, 165, 233, 0.25);
+  --color-accent-glow:    rgba(14, 165, 233, 0.18);
+  --color-accent-glow-strong: rgba(14, 165, 233, 0.28);
 
   /* ────────────────────────────────────────────
    * SEMANTIC COLORS
@@ -74,18 +74,19 @@
    * GLASS SYSTEM
    * See glass.css for component implementations.
    * ──────────────────────────────────────────── */
-  --glass-bg:             rgba(255, 255, 255, 0.04);
-  --glass-bg-hover:       rgba(255, 255, 255, 0.07);
-  --glass-bg-elevated:    rgba(255, 255, 255, 0.06);
-  --glass-bg-elevated-hover: rgba(255, 255, 255, 0.09);
-  --glass-border:         rgba(255, 255, 255, 0.08);
-  --glass-border-hover:   rgba(255, 255, 255, 0.14);
+  --glass-bg:             rgba(13, 18, 32, 0.65);
+  --glass-bg-hover:       rgba(13, 18, 32, 0.78);
+  --glass-bg-elevated:    rgba(17, 24, 39, 0.75);
+  --glass-bg-elevated-hover: rgba(17, 24, 39, 0.88);
+  --glass-border:         rgba(148, 163, 184, 0.08);
+  --glass-border-hover:   rgba(148, 163, 184, 0.16);
+  --glass-border-elevated: rgba(14, 165, 233, 0.15);
   --glass-blur:           blur(12px);
   --glass-blur-heavy:     blur(24px);
   --glass-blur-light:     blur(8px);
-  --glass-shadow:         0 8px 32px rgba(0, 0, 0, 0.30);
-  --glass-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.40);
-  --glass-inset-highlight: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  --glass-shadow:         0 8px 32px rgba(0, 0, 0, 0.40);
+  --glass-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --glass-inset-highlight: 0 1px 0 rgba(148, 163, 184, 0.07) inset;
 
   /* ────────────────────────────────────────────
    * TYPOGRAPHY

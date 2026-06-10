@@ -40,12 +40,12 @@
   background:
     radial-gradient(
       ellipse 80% 50% at 20% 60%,
-      rgba(110, 86, 207, 0.06) 0%,
+      var(--color-accent-glow) 0%,
       transparent 60%
     ),
     radial-gradient(
       ellipse 60% 40% at 80% 30%,
-      rgba(110, 86, 207, 0.04) 0%,
+      rgba(14, 165, 233, 0.05) 0%,
       transparent 60%
     );
   pointer-events: none;
@@ -133,7 +133,7 @@
 }
 
 .glass-card--accent:hover {
-  border-color: rgba(110, 86, 207, 0.50);
+  border-color: rgba(14, 165, 233, 0.50);
   box-shadow:
     0 0 0 1px var(--color-accent-glow-strong),
     var(--shadow-accent),
@@ -211,7 +211,7 @@
  * GLASS MODAL / MOBILE MENU OVERLAY
  * ──────────────────────────────────────────── */
 .glass-overlay {
-  background: rgba(10, 10, 15, 0.92);
+  background: rgba(7, 11, 20, 0.94);
   backdrop-filter: var(--glass-blur-heavy);
   -webkit-backdrop-filter: var(--glass-blur-heavy);
 }
@@ -254,7 +254,7 @@
   background:
     radial-gradient(
       ellipse 70% 60% at 50% 30%,
-      rgba(110, 86, 207, 0.07) 0%,
+      rgba(14, 165, 233, 0.08) 0%,
       transparent 65%
     );
 }
@@ -294,7 +294,7 @@
   }
 
   .nav--glass {
-    background: rgba(10, 10, 15, 0.97);
+    background: rgba(7, 11, 20, 0.97);
   }
 }
 
@@ -305,6 +305,6 @@
  * Remove before production.
  * ──────────────────────────────────────────── */
 .glass-debug {
-  outline: 2px dashed rgba(110, 86, 207, 0.5);
+  outline: 2px dashed rgba(14, 165, 233, 0.5);
   outline-offset: -2px;
 }
