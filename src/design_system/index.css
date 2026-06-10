@@ -1,0 +1,160 @@
+/**
+ * ============================================================
+ * DESIGN SYSTEM — index.css
+ * Nithish Kumar V Portfolio v2.0
+ *
+ * Master import file. Import this single file in main.js
+ * or as the first <link> in index.html.
+ *
+ * IMPORT ORDER IS MANDATORY — do not reorder.
+ * Each file depends on the ones above it.
+ *
+ * Usage in Vite (main.js):
+ *   import './design-system/index.css'
+ *
+ * Usage in HTML:
+ *   <link rel="stylesheet" href="/design-system/index.css">
+ * ============================================================
+ *
+ * File map:
+ *
+ *  tokens.css      All CSS custom properties (colors, type, spacing, etc.)
+ *                  Single source of truth. No hardcoded values anywhere else.
+ *
+ *  global.css      Browser reset, base element styles, body, scrollbar,
+ *                  selection, focus rings, skip-to-content, containers.
+ *
+ *  typography.css  All text role classes: .text-hero, .text-heading-xl,
+ *                  .text-metric, .text-eyebrow, .text-belief, etc.
+ *
+ *  glass.css       Glassmorphism component system: .glass-card,
+ *                  .glass-card--elevated, .glass-card--accent,
+ *                  .glass-card--metric, .nav--glass, .hero-depth.
+ *
+ *  motion.css      All @keyframes, .reveal system, .hero-animate,
+ *                  .stagger-children, .skeleton, .counter.
+ *
+ *  utilities.css   Single-responsibility layout classes: flex, grid,
+ *                  spacing, display, position, visibility.
+ *
+ *  primitives.css  Reusable UI components: buttons, tags, badges,
+ *                  nav, mobile menu, timeline, contact rows, footer.
+ * ============================================================
+ */
+
+@import './tokens.css';
+@import './global.css';
+@import './typography.css';
+@import './glass.css';
+@import './motion.css';
+@import './utilities.css';
+@import './primitives.css';
+
+/**
+ * ============================================================
+ * WHAT COMES AFTER THIS FILE
+ *
+ * Section-specific CSS files import this index and add only
+ * layout/composition styles unique to that section.
+ * They do NOT redefine colors, typography, or glass effects.
+ *
+ * Recommended section file structure:
+ *   sections/hero.css
+ *   sections/fwms.css
+ *   sections/impact.css
+ *   sections/about.css
+ *   sections/projects.css
+ *   sections/skills.css
+ *   sections/timeline.css
+ *   sections/github.css
+ *   sections/contact.css
+ * ============================================================
+ *
+ * REQUIRED HTML <head> SETUP
+ *
+ * <!-- Preconnect for font performance -->
+ * <link rel="preconnect" href="https://fonts.googleapis.com">
+ * <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ *
+ * <!-- Font load — subset to Latin, display=swap -->
+ * <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap&subset=latin" rel="stylesheet">
+ *
+ * <!-- Design system -->
+ * <link rel="stylesheet" href="/design-system/index.css">
+ *
+ * ============================================================
+ * REQUIRED JS SETUP (animations.js or main.js)
+ *
+ * 1. Hero load sequence:
+ *    document.body.classList.add('hero--loaded')
+ *    — Call on DOMContentLoaded
+ *    — Use sessionStorage to prevent re-animation on back navigation
+ *
+ * 2. Scroll reveal (IntersectionObserver):
+ *    const observer = new IntersectionObserver((entries) => {
+ *      entries.forEach(entry => {
+ *        if (entry.isIntersecting) {
+ *          entry.target.classList.add('reveal--visible')
+ *          observer.unobserve(entry.target)  // fires once only
+ *        }
+ *      })
+ *    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' })
+ *    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+ *
+ * 3. Nav scroll state:
+ *    window.addEventListener('scroll', () => {
+ *      document.querySelector('.nav').classList.toggle(
+ *        'nav--scrolled', window.scrollY > 80
+ *      )
+ *    }, { passive: true })
+ *
+ * 4. Counter animation:
+ *    — Elements with [data-counter] attribute
+ *    — Triggered by IntersectionObserver (separate from reveal observer)
+ *    — Reads data-counter (target), data-suffix, data-duration
+ *    — CRITICAL: HTML must contain the real value as text content
+ *      BEFORE JS replaces it, so non-JS users see the real number
+ *    — Example: <span class="counter metric-card__value"
+ *                     data-counter="19200" data-suffix="+">19,200+</span>
+ *
+ * 5. Mobile menu:
+ *    — Hamburger toggles .mobile-menu--open on .mobile-menu
+ *    — Focus trap within .mobile-menu when open
+ *    — ESC key closes the menu
+ *    — Close on nav link click
+ *
+ * 6. Clipboard copy:
+ *    — Elements with [data-copy-target] attribute
+ *    — On click: navigator.clipboard.writeText(target)
+ *    — Add .copy-btn--copied class for 2s, then remove
+ *
+ * 7. SVG diagram animation:
+ *    — IntersectionObserver on .svg-diagram
+ *    — Adds .svg-diagram--animate class on intersection
+ *    — Lines animate via CSS stroke-dashoffset
+ *
+ * ============================================================
+ * CONTENT INTEGRITY REQUIREMENTS
+ * These must be verified before any deployment:
+ *
+ * ✗ REMOVE: "Google Data Analytics Professional Certificate — Coursera 2024"
+ *   (fabricated — not in resume)
+ * ✗ REMOVE: "PostgreSQL for Everybody — University of Michigan 2023"
+ *   (fabricated — not in resume)
+ * ✓ KEEP ONLY: "Cloud Computing Fundamentals — NPTEL (2025)"
+ *
+ * ✗ REMOVE: Hardcoded GitHub stats (500+ Contributions, 12 Repositories)
+ *   Use GitHub API or remove the stats entirely
+ *
+ * ✗ FIX: BCA entry — replace "University/College Name · City"
+ *   with "BCA — Hindustan College of Arts & Science, Chennai | CGPA: 7.96"
+ *
+ * ✗ FIX: Family Finance Tracker "Live App →" link
+ *   Currently: https://github.com/Nithish-kumar-git
+ *   Should be: https://family-finance-tracker-pearl.vercel.app
+ *
+ * ✗ REMOVE: Docker, GCP from Skills (not in resume)
+ *
+ * ✗ FIX: OG image path — use /og-image.jpg (relative) not external domain
+ * ============================================================
+ */

@@ -1,0 +1,328 @@
+/**
+ * ============================================================
+ * TYPOGRAPHY SYSTEM — typography.css
+ * Nithish Kumar V Portfolio Design System v2.0
+ *
+ * Font stack: Inter (display + body) · JetBrains Mono (metrics, code)
+ * Load via <link> in <head> before this file:
+ *
+ * <link rel="preconnect" href="https://fonts.googleapis.com">
+ * <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ * <link href="https://fonts.googleapis.com/css2?
+ *   family=Inter:wght@300;400;500;600&
+ *   family=JetBrains+Mono:wght@400;500&
+ *   display=swap&subset=latin" rel="stylesheet">
+ *
+ * All type roles are defined as classes here.
+ * Do not use raw h1/h2/etc for styling — use these classes.
+ * ============================================================
+ */
+
+/* ────────────────────────────────────────────
+ * EYEBROW / SECTION LABEL
+ * Used above every section heading.
+ * Format: "Featured Work" or "01 — About" (only when content is truly sequential)
+ * ──────────────────────────────────────────── */
+.text-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* Accent variant — used for the FWMS featured section eyebrow only */
+.text-eyebrow--accent {
+  color: var(--color-accent);
+  opacity: 0.8;
+}
+
+/* ────────────────────────────────────────────
+ * HERO HEADLINE
+ * Used once. H1 only.
+ * ──────────────────────────────────────────── */
+.text-hero {
+  font-family: var(--font-sans);
+  font-size: var(--text-hero);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+/* Word emphasis within hero headline — slightly lighter weight for cadence */
+.text-hero em {
+  font-style: normal;
+  font-weight: var(--weight-light);
+  color: var(--color-text-secondary);
+}
+
+/* ────────────────────────────────────────────
+ * SECTION HEADINGS
+ * ──────────────────────────────────────────── */
+.text-heading-xl {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--color-text-primary);
+}
+
+.text-heading-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text-primary);
+}
+
+.text-heading-md {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text-primary);
+}
+
+.text-heading-sm {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-base);
+  color: var(--color-text-primary);
+}
+
+/* ────────────────────────────────────────────
+ * METRIC DISPLAY
+ * JetBrains Mono. Used for all large numbers:
+ * impact metrics, FWMS metric cards, GPA.
+ * ──────────────────────────────────────────── */
+.text-metric {
+  font-family: var(--font-mono);
+  font-size: var(--text-metric);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Suffix/prefix character on metrics (+, k, %, etc.) */
+.text-metric__suffix {
+  font-size: var(--text-xl);
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* Metric label beneath the number */
+.text-metric__label {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  letter-spacing: var(--tracking-base);
+  margin-top: var(--space-2);
+}
+
+/* ────────────────────────────────────────────
+ * BODY TEXT
+ * ──────────────────────────────────────────── */
+
+/* Lead paragraph — used for the first paragraph in About */
+.text-lead {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+
+/* Standard body */
+.text-body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
+  color: var(--color-text-secondary);
+}
+
+/* Caption / metadata */
+.text-caption {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+}
+
+/* ────────────────────────────────────────────
+ * INLINE CODE / TECHNICAL LABEL
+ * ──────────────────────────────────────────── */
+.text-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-accent);
+  background: var(--color-accent-muted);
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+}
+
+/* ────────────────────────────────────────────
+ * BELIEF STATEMENTS
+ * Used in About section for the three principles.
+ * Styled with a leading quotation visual cue.
+ * ──────────────────────────────────────────── */
+.text-belief {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  padding-left: var(--space-5);
+  border-left: 2px solid var(--color-accent-border);
+  font-style: italic;
+}
+
+.text-belief:not(:last-child) {
+  margin-bottom: var(--space-5);
+}
+
+/* ────────────────────────────────────────────
+ * PROJECT DESCRIPTION
+ * Used inside project cards — slightly tighter than body
+ * ──────────────────────────────────────────── */
+.text-project-desc {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+
+/* ────────────────────────────────────────────
+ * NAVIGATION LINKS
+ * ──────────────────────────────────────────── */
+.text-nav-link {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-base);
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.text-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent);
+  transition: width var(--transition-base);
+}
+
+.text-nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.text-nav-link:hover::after,
+.text-nav-link[aria-current="page"]::after {
+  width: 100%;
+}
+
+.text-nav-link[aria-current="page"] {
+  color: var(--color-text-primary);
+}
+
+/* ────────────────────────────────────────────
+ * SECTION DESCRIPTOR
+ * One-line subheading beneath section titles
+ * ──────────────────────────────────────────── */
+.text-descriptor {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-3);
+}
+
+/* ────────────────────────────────────────────
+ * TIMELINE LABELS
+ * Date/year display in Timeline section
+ * ──────────────────────────────────────────── */
+.text-timeline-date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ────────────────────────────────────────────
+ * FOOTER TEXT
+ * ──────────────────────────────────────────── */
+.text-footer {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--color-text-muted);
+}
+
+.text-footer-brand {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* ────────────────────────────────────────────
+ * COLOUR MODIFIERS
+ * Apply to any text class for colour override.
+ * ──────────────────────────────────────────── */
+.text-primary   { color: var(--color-text-primary) !important; }
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-muted     { color: var(--color-text-muted) !important; }
+.text-accent    { color: var(--color-accent) !important; }
+.text-success   { color: var(--color-success-text) !important; }
+.text-warning   { color: var(--color-warning-text) !important; }
+.text-danger    { color: var(--color-danger-text) !important; }
+
+/* ────────────────────────────────────────────
+ * WEIGHT MODIFIERS
+ * ──────────────────────────────────────────── */
+.font-light    { font-weight: var(--weight-light) !important; }
+.font-regular  { font-weight: var(--weight-regular) !important; }
+.font-medium   { font-weight: var(--weight-medium) !important; }
+.font-semibold { font-weight: var(--weight-semibold) !important; }
+.font-mono     { font-family: var(--font-mono) !important; }
+
+/* ────────────────────────────────────────────
+ * ALIGNMENT MODIFIERS
+ * ──────────────────────────────────────────── */
+.text-left   { text-align: left; }
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* ────────────────────────────────────────────
+ * RESPONSIVE TYPE — HEADING SCALE
+ * Headings naturally use token values which are
+ * overridden at mobile via token overrides in tokens.css.
+ * No additional overrides needed here — tokens handle it.
+ * ──────────────────────────────────────────── */

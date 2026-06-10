@@ -1,0 +1,380 @@
+/**
+ * ============================================================
+ * MOTION SYSTEM — motion.css
+ * Nithish Kumar V Portfolio Design System v2.0
+ *
+ * Architecture:
+ * - All keyframes defined here (CSS only)
+ * - Reveal animations use .reveal + .reveal--visible toggled by JS
+ * - Counter animations driven by JS (see counter.js) — CSS provides fallback
+ * - Reduced motion: global override in global.css handles ALL animations
+ *
+ * JS Requirements:
+ * - IntersectionObserver watching elements with .reveal class
+ * - Adding .reveal--visible class on intersection
+ * - Observer threshold: 0.12, rootMargin: "0px 0px -60px 0px"
+ * - Fires once: { once: true } equivalent (unobserve after firing)
+ *
+ * Usage:
+ * <div class="reveal reveal--up">...</div>
+ * <div class="reveal reveal--up" style="--reveal-delay: 120ms">...</div>
+ * ============================================================
+ */
+
+/* ────────────────────────────────────────────
+ * KEYFRAME DEFINITIONS
+ * ──────────────────────────────────────────── */
+
+/* Fade + translate up (primary reveal) */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade + translate down */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade + translate left */
+@keyframes fadeSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade + translate right */
+@keyframes fadeSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pure fade */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scale in (used for modal, mobile menu open) */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ────────────────────────────────────────────
+ * HERO PAGE-LOAD SEQUENCE
+ * One-time animation on first page load only.
+ * JS adds .hero--loaded to <body> on load.
+ * Elements stagger using --hero-delay custom property.
+ * ──────────────────────────────────────────── */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+body.hero--loaded .hero-animate {
+  animation: fadeSlideUp var(--duration-reveal) var(--ease-out) forwards;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+/* Stagger delays for hero child elements */
+.hero-animate:nth-child(1) { --hero-delay: 80ms; }
+.hero-animate:nth-child(2) { --hero-delay: 180ms; }
+.hero-animate:nth-child(3) { --hero-delay: 280ms; }
+.hero-animate:nth-child(4) { --hero-delay: 380ms; }
+.hero-animate:nth-child(5) { --hero-delay: 460ms; }
+.hero-animate:nth-child(6) { --hero-delay: 540ms; }
+
+/* ────────────────────────────────────────────
+ * SCROLL REVEAL SYSTEM
+ * Base state: hidden. JS adds .reveal--visible.
+ *
+ * Variants:
+ *   .reveal--up       fade + translateY (default)
+ *   .reveal--left     fade + translateX from left
+ *   .reveal--right    fade + translateX from right
+ *   .reveal--fade     opacity only (for ambient elements)
+ *
+ * Delay override: style="--reveal-delay: 120ms"
+ * ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-reveal);
+  transition-timing-function: var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Direction-specific initial states */
+.reveal--up    { transform: translateY(20px); }
+.reveal--left  { transform: translateX(-20px); }
+.reveal--right { transform: translateX(20px); }
+.reveal--fade  { transform: none; }
+.reveal--scale { transform: scale(0.97); }
+
+/* Visible state — added by IntersectionObserver */
+.reveal--visible {
+  opacity: 1;
+  transform: none !important;
+}
+
+/* ────────────────────────────────────────────
+ * STAGGER CHILDREN
+ * Apply to a parent to stagger child .reveal elements.
+ * Children inherit staggered --reveal-delay.
+ *
+ * Usage: <ul class="stagger-children">
+ *          <li class="reveal reveal--up">...</li>
+ *        </ul>
+ * ──────────────────────────────────────────── */
+.stagger-children .reveal:nth-child(1)  { --reveal-delay: 0ms; }
+.stagger-children .reveal:nth-child(2)  { --reveal-delay: 80ms; }
+.stagger-children .reveal:nth-child(3)  { --reveal-delay: 160ms; }
+.stagger-children .reveal:nth-child(4)  { --reveal-delay: 240ms; }
+.stagger-children .reveal:nth-child(5)  { --reveal-delay: 320ms; }
+.stagger-children .reveal:nth-child(6)  { --reveal-delay: 400ms; }
+.stagger-children .reveal:nth-child(7)  { --reveal-delay: 480ms; }
+.stagger-children .reveal:nth-child(8)  { --reveal-delay: 560ms; }
+
+/* Fast stagger (for tags, pills, small elements) */
+.stagger-children--fast .reveal:nth-child(1) { --reveal-delay: 0ms; }
+.stagger-children--fast .reveal:nth-child(2) { --reveal-delay: 50ms; }
+.stagger-children--fast .reveal:nth-child(3) { --reveal-delay: 100ms; }
+.stagger-children--fast .reveal:nth-child(4) { --reveal-delay: 150ms; }
+.stagger-children--fast .reveal:nth-child(5) { --reveal-delay: 200ms; }
+.stagger-children--fast .reveal:nth-child(6) { --reveal-delay: 250ms; }
+
+/* ────────────────────────────────────────────
+ * COUNTER ANIMATION
+ * The visible number in HTML is the real value (fallback).
+ * JS replaces it with the animated counter.
+ * CSS provides the post-count state styling.
+ *
+ * Data attributes required:
+ *   data-counter="19200"     — target number
+ *   data-suffix="+"          — appended after number
+ *   data-duration="1200"     — animation duration in ms (optional)
+ * ──────────────────────────────────────────── */
+.counter {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* State when counter has completed (JS adds this) */
+.counter--done {
+  /* No visual change — just a hook for potential future styling */
+}
+
+/* ────────────────────────────────────────────
+ * AMBIENT HERO BACKGROUND ANIMATION
+ * Very slow, very subtle. Applied to the hero
+ * radial gradient overlay element only.
+ * Must be imperceptible at rest — only noticed
+ * on careful inspection.
+ * ──────────────────────────────────────────── */
+@keyframes ambientDrift {
+  0%   {
+    opacity: 0.07;
+    transform: scale(1) translate(0%, 0%);
+  }
+  33%  {
+    opacity: 0.05;
+    transform: scale(1.04) translate(1%, -1%);
+  }
+  66%  {
+    opacity: 0.08;
+    transform: scale(0.98) translate(-1%, 1%);
+  }
+  100% {
+    opacity: 0.07;
+    transform: scale(1) translate(0%, 0%);
+  }
+}
+
+.hero-ambient {
+  animation: ambientDrift 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ────────────────────────────────────────────
+ * NAV TRANSITION
+ * ──────────────────────────────────────────── */
+.nav {
+  transition:
+    background-color var(--duration-slow) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out),
+    backdrop-filter var(--duration-slow) var(--ease-out);
+}
+
+/* ────────────────────────────────────────────
+ * MOBILE MENU ANIMATIONS
+ * ──────────────────────────────────────────── */
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menuSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.mobile-menu--open {
+  animation: menuSlideIn 250ms var(--ease-out) forwards;
+}
+
+.mobile-menu--closing {
+  animation: menuSlideOut 180ms var(--ease-out) forwards;
+}
+
+/* ────────────────────────────────────────────
+ * SVG DRAW ANIMATION
+ * For the FWMS architecture diagram lines.
+ * Apply to SVG <path> or <line> elements.
+ * JS adds .svg-diagram--animate to the parent SVG
+ * when it enters the viewport.
+ * ──────────────────────────────────────────── */
+.svg-diagram .animated-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  pathLength: 1;
+}
+
+.svg-diagram--animate .animated-line {
+  animation: svgDraw 800ms var(--ease-out) forwards;
+}
+
+/* Stagger SVG lines */
+.svg-diagram--animate .animated-line:nth-child(1) { animation-delay: 0ms; }
+.svg-diagram--animate .animated-line:nth-child(2) { animation-delay: 150ms; }
+.svg-diagram--animate .animated-line:nth-child(3) { animation-delay: 300ms; }
+.svg-diagram--animate .animated-line:nth-child(4) { animation-delay: 450ms; }
+
+@keyframes svgDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ────────────────────────────────────────────
+ * LOADING / SKELETON STATES
+ * Used if GitHub stats are fetched live.
+ * ──────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated) 25%,
+    var(--color-bg-overlay) 50%,
+    var(--color-bg-elevated) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+  color: transparent;
+  user-select: none;
+}
+
+.skeleton--text {
+  height: 1em;
+  width: 60%;
+  border-radius: var(--radius-xs);
+}
+
+.skeleton--heading {
+  height: 1.5em;
+  width: 40%;
+}
+
+.skeleton--rect {
+  width: 100%;
+  height: 120px;
+}
+
+/* ────────────────────────────────────────────
+ * COPY FEEDBACK ANIMATION
+ * For the email "Copied!" toast state
+ * ──────────────────────────────────────────── */
+@keyframes copyFeedback {
+  0%   { opacity: 0; transform: translateY(-4px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  75%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.copy-feedback {
+  animation: copyFeedback 2000ms var(--ease-out) forwards;
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────
+ * FOCUS RING ANIMATION
+ * Subtle pulse on focused interactive elements
+ * ──────────────────────────────────────────── */
+@keyframes focusPulse {
+  0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+  70%  { box-shadow: 0 0 0 6px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* Applied optionally — not on all focus states by default */
+.focus-pulse:focus-visible {
+  animation: focusPulse 0.6s var(--ease-out);
+}
+
+/* ────────────────────────────────────────────
+ * BUTTON HOVER SHIMMER
+ * The 1px border shimmer on primary CTA hover.
+ * Applied as a ::after pseudo on .btn--primary.
+ * See primitives.css for full button spec.
+ * ──────────────────────────────────────────── */
+@keyframes borderShimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}

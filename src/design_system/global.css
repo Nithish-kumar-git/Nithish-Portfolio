@@ -1,0 +1,297 @@
+/**
+ * ============================================================
+ * GLOBAL STYLES — global.css
+ * Nithish Kumar V Portfolio Design System v2.0
+ * Import order: tokens.css → global.css → all others
+ * ============================================================
+ */
+
+/* ────────────────────────────────────────────
+ * BOX MODEL RESET
+ * ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ────────────────────────────────────────────
+ * ROOT
+ * ──────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 24px);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-loose);
+  color: var(--color-text-secondary);
+  background-color: var(--color-bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ────────────────────────────────────────────
+ * CUSTOM SCROLLBAR
+ * Chromium only — Firefox uses scrollbar-color below
+ * ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-subtle);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-default) var(--color-bg-base);
+}
+
+/* ────────────────────────────────────────────
+ * TEXT SELECTION
+ * ──────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-accent-muted);
+  color: var(--color-text-primary);
+}
+
+::-moz-selection {
+  background-color: var(--color-accent-muted);
+  color: var(--color-text-primary);
+}
+
+/* ────────────────────────────────────────────
+ * TYPOGRAPHY BASE
+ * Full type scale in typography.css.
+ * These are semantic element defaults only.
+ * ──────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-normal);
+}
+
+h1 { font-size: var(--text-hero); letter-spacing: var(--tracking-tight); }
+h2 { font-size: var(--text-3xl); letter-spacing: var(--tracking-snug); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--leading-loose);
+  max-width: 68ch; /* Optimal reading width */
+}
+
+/* ────────────────────────────────────────────
+ * LINKS
+ * ──────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-text-primary);
+}
+
+/* External links — visited state does not change color (stays consistent) */
+a:visited {
+  color: inherit;
+}
+
+/* ────────────────────────────────────────────
+ * LISTS
+ * ──────────────────────────────────────────── */
+ul, ol {
+  list-style: none;
+}
+
+/* ────────────────────────────────────────────
+ * MEDIA
+ * ──────────────────────────────────────────── */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* ────────────────────────────────────────────
+ * FORM ELEMENTS
+ * ──────────────────────────────────────────── */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ────────────────────────────────────────────
+ * FOCUS — Global focus ring
+ * Never suppress focus without a replacement.
+ * ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove focus ring for mouse users only */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ────────────────────────────────────────────
+ * SKIP TO CONTENT
+ * Visually hidden until focused via keyboard
+ * ──────────────────────────────────────────── */
+.skip-to-content {
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: var(--z-toast);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-accent);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-md);
+  transform: translateY(-120%);
+  transition: transform var(--transition-base);
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* ────────────────────────────────────────────
+ * LAYOUT CONTAINERS
+ * ──────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: calc(var(--content-max-width) + (var(--content-padding-x) * 2));
+  margin-inline: auto;
+  padding-inline: var(--content-padding-x);
+}
+
+.container--narrow {
+  max-width: calc(760px + (var(--content-padding-x) * 2));
+  margin-inline: auto;
+  padding-inline: var(--content-padding-x);
+}
+
+/* ────────────────────────────────────────────
+ * SECTION BASE
+ * Applied to every <section> on the page.
+ * ──────────────────────────────────────────── */
+section {
+  padding-block: var(--section-spacing);
+  position: relative;
+}
+
+/* Alternate section backgrounds — applied manually, not auto-alternating */
+section.section--subtle {
+  background-color: var(--color-bg-subtle);
+}
+
+/* ────────────────────────────────────────────
+ * DIVIDERS
+ * ──────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border-subtle);
+  margin-block: var(--space-8);
+}
+
+/* ────────────────────────────────────────────
+ * CODE
+ * ──────────────────────────────────────────── */
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* ────────────────────────────────────────────
+ * REDUCE MOTION — GLOBAL
+ * This rule overrides all animation in the system.
+ * Every animation must have a valid static state.
+ * ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ────────────────────────────────────────────
+ * PRINT
+ * ──────────────────────────────────────────── */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}

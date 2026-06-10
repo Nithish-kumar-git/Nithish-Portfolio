@@ -1,0 +1,310 @@
+/**
+ * ============================================================
+ * GLASSMORPHISM SYSTEM — glass.css
+ * Nithish Kumar V Portfolio Design System v2.0
+ *
+ * CRITICAL REQUIREMENT: Glass effects only work when background
+ * content is visible behind the card. Every glass component
+ * MUST have a parent with a background layer (.glass-context)
+ * or an explicit background pattern/gradient behind it.
+ *
+ * Without background content, backdrop-filter renders as a
+ * plain dark rectangle — indistinguishable from a flat card.
+ *
+ * Implementation checklist:
+ * ✓ Parent has .glass-context (provides the visual depth layer)
+ * ✓ Card has position: relative and z-index above the context
+ * ✓ -webkit-backdrop-filter mirrors backdrop-filter (Safari)
+ * ✓ No heavy transform animations on the same element as
+ *   backdrop-filter (compositing cost — animate a child instead)
+ * ============================================================
+ */
+
+/* ────────────────────────────────────────────
+ * GLASS CONTEXT
+ * Wrap glass cards in this. It provides the background
+ * depth that the blur operates on. Without this,
+ * glassmorphism is visually meaningless.
+ * ──────────────────────────────────────────── */
+.glass-context {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Background depth layer — rendered behind glass cards */
+.glass-context::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 20% 60%,
+      rgba(110, 86, 207, 0.06) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 30%,
+      rgba(110, 86, 207, 0.04) 0%,
+      transparent 60%
+    );
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────
+ * GLASS CARD — PRIMARY
+ * Standard card: project cards, skill groups,
+ * about aside, GitHub panel.
+ * ──────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--card-padding);
+  position: relative;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+  will-change: transform;
+}
+
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ────────────────────────────────────────────
+ * GLASS CARD — ELEVATED
+ * Higher visual weight: metric cards, FWMS panels,
+ * featured project card baseline.
+ * ──────────────────────────────────────────── */
+.glass-card--elevated {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--card-padding);
+  box-shadow: var(--glass-shadow-elevated), var(--glass-inset-highlight);
+  position: relative;
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-slow),
+    transform var(--transition-base);
+  will-change: transform;
+}
+
+.glass-card--elevated:hover {
+  background: var(--glass-bg-elevated-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl), var(--glass-inset-highlight);
+}
+
+/* ────────────────────────────────────────────
+ * GLASS CARD — ACCENT (FWMS Featured)
+ * Used exactly once: the FWMS showcase card.
+ * Adds accent-colored border glow.
+ * ──────────────────────────────────────────── */
+.glass-card--accent {
+  background: var(--glass-bg-elevated);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--color-accent-border);
+  border-radius: var(--radius-xl);
+  padding: var(--card-padding);
+  box-shadow:
+    0 0 0 1px var(--color-accent-glow),
+    var(--glass-shadow-elevated),
+    var(--glass-inset-highlight);
+  position: relative;
+  transition:
+    border-color var(--transition-slow),
+    box-shadow var(--transition-slow),
+    transform var(--transition-base);
+  will-change: transform;
+}
+
+.glass-card--accent:hover {
+  border-color: rgba(110, 86, 207, 0.50);
+  box-shadow:
+    0 0 0 1px var(--color-accent-glow-strong),
+    var(--shadow-accent),
+    var(--glass-shadow-elevated),
+    var(--glass-inset-highlight);
+  transform: translateY(-4px);
+}
+
+/* Accent radial glow behind FWMS card */
+.glass-card--accent::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse 100% 60% at 50% 0%,
+    var(--color-accent-glow) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  pointer-events: none;
+  border-radius: var(--radius-xl);
+}
+
+/* ────────────────────────────────────────────
+ * GLASS CARD — METRIC
+ * Compact cards for the FWMS 2×2 metric grid
+ * and impact metrics strip. No hover transform
+ * (they're in a grid, hover should be subtle).
+ * ──────────────────────────────────────────── */
+.glass-card--metric {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  transition:
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.glass-card--metric:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+}
+
+/* ────────────────────────────────────────────
+ * GLASS NAVIGATION
+ * Applied to <nav> after scrolling past hero.
+ * The .nav--scrolled class is added via JS.
+ * ──────────────────────────────────────────── */
+.nav--glass {
+  background: var(--color-bg-scrim);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border-bottom: 1px solid var(--glass-border);
+  transition:
+    background var(--transition-slow),
+    border-color var(--transition-slow),
+    backdrop-filter var(--transition-slow);
+}
+
+/* Transparent state (on hero) */
+.nav--transparent {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+/* ────────────────────────────────────────────
+ * GLASS MODAL / MOBILE MENU OVERLAY
+ * ──────────────────────────────────────────── */
+.glass-overlay {
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+}
+
+/* ────────────────────────────────────────────
+ * GLASS TOOLTIP
+ * Small floating tooltip on hover states
+ * ──────────────────────────────────────────── */
+.glass-tooltip {
+  background: var(--color-bg-overlay);
+  backdrop-filter: var(--glass-blur-light);
+  -webkit-backdrop-filter: var(--glass-blur-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+}
+
+/* ────────────────────────────────────────────
+ * HERO DEPTH LAYER
+ * Background depth for the hero section.
+ * Applied to the hero <section> element's ::before.
+ * This is what the hero glass elements blur against.
+ * ──────────────────────────────────────────── */
+.hero-depth {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-depth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 50% 30%,
+      rgba(110, 86, 207, 0.07) 0%,
+      transparent 65%
+    );
+}
+
+/* Optional: subtle dot grid for texture (applied via class) */
+.hero-depth--grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  mask-image: radial-gradient(
+    ellipse 80% 80% at 50% 50%,
+    black 40%,
+    transparent 100%
+  );
+}
+
+/* ────────────────────────────────────────────
+ * GRACEFUL DEGRADATION
+ * Browsers that don't support backdrop-filter
+ * (rare in 2026, but correct to handle).
+ * ──────────────────────────────────────────── */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card,
+  .glass-card--elevated,
+  .glass-card--accent,
+  .glass-card--metric {
+    background: var(--color-bg-elevated);
+    border-color: var(--color-border-default);
+  }
+
+  .nav--glass {
+    background: rgba(10, 10, 15, 0.97);
+  }
+}
+
+/* ────────────────────────────────────────────
+ * DIAGNOSTIC CLASS
+ * Add .glass-debug to any glass card during
+ * development to visualize the blur area.
+ * Remove before production.
+ * ──────────────────────────────────────────── */
+.glass-debug {
+  outline: 2px dashed rgba(110, 86, 207, 0.5);
+  outline-offset: -2px;
+}
