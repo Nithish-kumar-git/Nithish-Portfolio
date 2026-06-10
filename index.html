@@ -122,7 +122,7 @@
     <!-- ═══════════════════════════════════════
          FWMS SHOWCASE
     ═══════════════════════════════════════ -->
-    <section id="fwms" class="section">
+    <section id="fwms" class="section glass-context">
       <div class="container">
 
         <div class="section-header reveal reveal--up">
@@ -153,7 +153,16 @@
               <div class="fwms-architecture-panel">
                 <span class="section-eyebrow">System Architecture</span>
                 <div class="fwms-architecture">
-                  <img src="/src/assets/fwms-diagram.svg" alt="FWMS Architecture: PostgreSQL → FastAPI → React with 4-tier RBAC" />
+                  <div class="arch-flow">
+                    <span class="arch-node">PostgreSQL</span>
+                    <span class="arch-arrow">→</span>
+                    <span class="arch-node">SQLAlchemy ORM</span>
+                    <span class="arch-arrow">→</span>
+                    <span class="arch-node">FastAPI</span>
+                    <span class="arch-arrow">→</span>
+                    <span class="arch-node">React + TypeScript</span>
+                  </div>
+                  <p class="arch-caption">22-table schema · 4-tier RBAC · 30+ REST endpoints</p>
                 </div>
               </div>
             </div>
@@ -273,9 +282,9 @@
         <div class="impact-item reveal reveal--up">
           <div class="metric-card metric-card--strip">
             <span class="metric-card__value">
-              <span class="counter" data-counter="5">5</span>
+              <span class="counter" data-counter="15">15</span>
             </span>
-            <span class="metric-card__label">Asset classes tracked</span>
+            <span class="metric-card__label">KPIs per faculty member</span>
           </div>
         </div>
 
@@ -294,7 +303,7 @@
     <!-- ═══════════════════════════════════════
          ABOUT
     ═══════════════════════════════════════ -->
-    <section id="about" class="section">
+    <section id="about" class="section glass-context">
       <div class="container">
 
         <div class="section-header reveal reveal--up">
@@ -307,11 +316,16 @@
           <div class="about-content reveal reveal--up">
             <p class="text-body">I find genuine satisfaction in untangling messy data and real organizational constraints to build systems that work. For me, the most rewarding part isn't just writing the code — it's defining the KPI that drives a real decision. Seeing the FWMS actively adopted by my department to govern faculty workload validated my belief that engineering must serve business reality. As I look toward graduation, I'm seeking a role where I can continue building analytics solutions that bridge the gap between complex data and clear decisions.</p>
 
-            <ul class="belief-list">
-              <li class="belief-item">"A system is only as good as the business question it was built to answer."</li>
-              <li class="belief-item">"Data without a defined KPI is just storage."</li>
-              <li class="belief-item">"The best architecture is the one no one has to explain to a new team member."</li>
-            </ul>
+            <div class="info-cards">
+              <div class="info-card">
+                <span class="info-card-label">What I'm building toward</span>
+                <p>Seeking a data analyst or business analyst role where I can design KPI frameworks, build reporting pipelines, and connect database outputs to real business decisions.</p>
+              </div>
+              <div class="info-card">
+                <span class="info-card-label">Currently</span>
+                <p>Finishing MCA at HITS Chennai · CGPA 8.96 · Available June 2026</p>
+              </div>
+            </div>
           </div>
 
           <div class="reveal reveal--up" style="--reveal-delay: 80ms;">
@@ -351,7 +365,7 @@
     <!-- ═══════════════════════════════════════
          SELECTED PROJECTS
     ═══════════════════════════════════════ -->
-    <section id="projects" class="section">
+    <section id="projects" class="section glass-context">
       <div class="container">
 
         <div class="section-header reveal reveal--up">
@@ -485,7 +499,7 @@
     <!-- ═══════════════════════════════════════
          SKILLS
     ═══════════════════════════════════════ -->
-    <section id="skills" class="section">
+    <section id="skills" class="section glass-context">
       <div class="container">
 
         <div class="section-header reveal reveal--up">

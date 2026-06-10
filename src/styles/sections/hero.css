@@ -5,10 +5,13 @@
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
-  padding-top: var(--nav-height);
+  padding-block: 0;
+  padding-top: 80px;
 }
 
 /* Subtle background glow */
