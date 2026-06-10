@@ -374,122 +374,85 @@
 
         <div class="projects-grid stagger-children">
 
-          <!-- FWMS — Featured -->
-          <div class="glass-context reveal reveal--up">
-            <div class="glass-card project-card project-card--featured">
-              <div class="project-header">
-                <div>
-                  <span class="status-badge status-badge--institutional" style="margin-bottom: 8px; display: inline-flex;">
-                    <span class="status-dot status-dot--institutional"></span>
-                    Institutional Deployment
-                  </span>
-                  <h3 class="project-title">Faculty Workload Management System</h3>
-                </div>
-                <span class="role-badge">Lead Builder</span>
+          <!-- FWMS -->
+          <article class="project-card project-card--featured glass-card--elevated">
+            <div class="project-card__header">
+              <div class="project-card__badges">
+                <span class="badge badge--live">● Institutional Deployment</span>
+                <span class="badge badge--role">Lead Builder</span>
               </div>
-
-              <p class="text-body">Automated course allocation and workload governance for 50+ faculty at HITS Chennai — a 22-table PostgreSQL system with analytics, RBAC, KPI reporting, and Excel export.</p>
-
-              <div class="project-facts">
-                <span class="tag tag--neutral">19,200+ offerings</span>
-                <span class="tag tag--neutral">4-tier RBAC</span>
-                <span class="tag tag--neutral">15 KPIs/faculty</span>
-              </div>
-
-              <div class="project-footer">
-                <div class="project-tech">
-                  <span class="tag tag--tech">PostgreSQL</span>
-                  <span class="tag tag--tech">FastAPI</span>
-                  <span class="tag tag--tech">React</span>
-                  <span class="tag tag--tech">TypeScript</span>
-                  <span class="tag tag--tech">SQLAlchemy</span>
-                </div>
-              </div>
-
-              <div class="project-links">
-                <a href="https://github.com/Nithish-kumar-git/FWMS" class="link-row" target="_blank" rel="noopener">
-                  View on GitHub <span class="link-row__arrow">→</span>
-                </a>
+              <h3 class="project-card__title">Faculty Workload Management System</h3>
+              <p class="project-card__subtitle">PostgreSQL analytics platform — deployed and in active use at HITS Chennai</p>
+            </div>
+            <div class="project-card__body">
+              <p class="project-card__desc">Designed and built a 22-table relational database system to automate course allocation and workload governance for 50+ faculty across 4 academic programs. The system computes 15 KPIs per faculty member, enforces 4-tier RBAC, and replaced a fully manual process that had no audit trail or fairness metric.</p>
+              <div class="project-card__impact">
+                <div class="impact-stat"><span class="impact-stat__num">19,200+</span><span class="impact-stat__label">offerings automated</span></div>
+                <div class="impact-stat"><span class="impact-stat__num">50+</span><span class="impact-stat__label">faculty served</span></div>
+                <div class="impact-stat"><span class="impact-stat__num">22</span><span class="impact-stat__label">DB tables</span></div>
+                <div class="impact-stat"><span class="impact-stat__num">15</span><span class="impact-stat__label">KPIs / faculty</span></div>
               </div>
             </div>
-          </div>
+            <div class="project-card__tech">
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">SQLAlchemy</span>
+            </div>
+            <div class="project-card__links">
+              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+            </div>
+          </article>
 
           <!-- Family Finance Tracker -->
-          <div class="glass-context reveal reveal--up">
-            <div class="glass-card project-card">
-              <div class="project-header">
-                <div>
-                  <span class="status-badge status-badge--live" style="margin-bottom: 8px; display: inline-flex;">
-                    <span class="status-dot status-dot--live"></span>
-                    Live
-                  </span>
-                  <h3 class="project-title">Family Finance Tracker</h3>
-                </div>
-                <span class="role-badge">Lead Builder</span>
+          <article class="project-card glass-card">
+            <div class="project-card__header">
+              <div class="project-card__badges">
+                <span class="badge badge--live">● Live</span>
+                <span class="badge badge--role">Lead Builder</span>
               </div>
-
-              <p class="text-body">An AI-powered family finance PWA integrating Google Gemini for SMS-based expense parsing, multi-user budgeting, and portfolio tracking across 5 asset classes. Live and in active use.</p>
-
-              <div class="project-facts">
-                <span class="tag tag--neutral">Google Gemini AI</span>
-                <span class="tag tag--neutral">5 asset classes</span>
-                <span class="tag tag--neutral">PWA + offline</span>
-              </div>
-
-              <div class="project-footer">
-                <div class="project-tech">
-                  <span class="tag tag--tech">React</span>
-                  <span class="tag tag--tech">FastAPI</span>
-                  <span class="tag tag--tech">PostgreSQL</span>
-                  <span class="tag tag--tech">Gemini API</span>
-                  <span class="tag tag--tech">Recharts</span>
-                </div>
-              </div>
-
-              <div class="project-links">
-                <a href="https://family-finance-tracker-pearl.vercel.app" class="link-row" target="_blank" rel="noopener">
-                  Live App <span class="link-row__arrow">→</span>
-                </a>
-                <a href="https://github.com/Nithish-kumar-git/Family-Finance-Tracker" class="link-row" target="_blank" rel="noopener">
-                  GitHub <span class="link-row__arrow">→</span>
-                </a>
-              </div>
+              <h3 class="project-card__title">Family Finance Tracker</h3>
+              <p class="project-card__subtitle">AI-powered PWA for household finance management</p>
             </div>
-          </div>
+            <div class="project-card__body">
+              <p class="project-card__desc">A progressive web app integrating Google Gemini AI to parse SMS-based expense messages into structured transactions. Supports multi-user budgeting, portfolio tracking across 5 asset classes, and offline-first operation. Live and used by real users.</p>
+            </div>
+            <div class="project-card__tech">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Gemini API</span>
+              <span class="tech-tag">Recharts</span>
+            </div>
+            <div class="project-card__links">
+              <a href="https://family-finance-tracker-pearl.vercel.app" class="card-link card-link--primary" target="_blank" rel="noopener">Live App →</a>
+              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </article>
 
           <!-- VaxVault -->
-          <div class="glass-context reveal reveal--up">
-            <div class="glass-card project-card">
-              <div class="project-header">
-                <div>
-                  <h3 class="project-title">VaxVault — Vaccination Reminder System</h3>
-                </div>
-                <span class="role-badge">Contributor</span>
+          <article class="project-card glass-card">
+            <div class="project-card__header">
+              <div class="project-card__badges">
+                <span class="badge badge--role">Contributor</span>
               </div>
-
-              <p class="text-body">A vaccination reminder platform with multi-profile scheduling, cron-based automated email notifications, and a KPI dashboard. Key contribution: data validation rules and scheduling conflict detection logic covering 8+ identified edge cases.</p>
-
-              <div class="project-facts">
-                <span class="tag tag--neutral">3-tier cron jobs</span>
-                <span class="tag tag--neutral">8+ edge cases identified</span>
-              </div>
-
-              <div class="project-footer">
-                <div class="project-tech">
-                  <span class="tag tag--tech">Node.js</span>
-                  <span class="tag tag--tech">Express</span>
-                  <span class="tag tag--tech">MongoDB</span>
-                  <span class="tag tag--tech">React</span>
-                </div>
-              </div>
-
-              <div class="project-links">
-                <a href="https://github.com/Nithish-kumar-git" class="link-row" target="_blank" rel="noopener">
-                  GitHub <span class="link-row__arrow">→</span>
-                </a>
-              </div>
+              <h3 class="project-card__title">VaxVault — Vaccination Reminder System</h3>
+              <p class="project-card__subtitle">Multi-profile scheduling with automated email notifications</p>
             </div>
-          </div>
+            <div class="project-card__body">
+              <p class="project-card__desc">Contributed data validation rules and scheduling conflict detection logic to a vaccination reminder platform with cron-based automated emails and a KPI dashboard. Identified and resolved 8+ edge cases in the scheduling engine.</p>
+            </div>
+            <div class="project-card__tech">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Express</span>
+              <span class="tech-tag">MongoDB</span>
+              <span class="tech-tag">React</span>
+            </div>
+            <div class="project-card__links">
+              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+          </article>
 
         </div>
       </div>
@@ -509,9 +472,9 @@
         <div class="skills-grid stagger-children">
 
           <div class="glass-context reveal reveal--up">
-            <div class="glass-card skill-category">
-              <h3 class="skill-category-title">Analytics &amp; Data</h3>
-              <div class="skill-tags">
+            <div class="skill-group">
+              <h3 class="skill-group__title">Analytics &amp; Data</h3>
+              <div class="skill-group__tags">
                 <span class="tag tag--tech">Data Modeling &amp; SQL</span>
                 <span class="tag tag--tech">KPI Design</span>
                 <span class="tag tag--tech">Business Analysis</span>
@@ -521,9 +484,9 @@
           </div>
 
           <div class="glass-context reveal reveal--up">
-            <div class="glass-card skill-category">
-              <h3 class="skill-category-title">Backend</h3>
-              <div class="skill-tags">
+            <div class="skill-group">
+              <h3 class="skill-group__title">Backend</h3>
+              <div class="skill-group__tags">
                 <span class="tag tag--tech">Python / FastAPI</span>
                 <span class="tag tag--tech">PostgreSQL</span>
                 <span class="tag tag--tech">Node.js / Express</span>
@@ -533,9 +496,9 @@
           </div>
 
           <div class="glass-context reveal reveal--up">
-            <div class="glass-card skill-category">
-              <h3 class="skill-category-title">Frontend</h3>
-              <div class="skill-tags">
+            <div class="skill-group">
+              <h3 class="skill-group__title">Frontend</h3>
+              <div class="skill-group__tags">
                 <span class="tag tag--tech">React / Vite</span>
                 <span class="tag tag--tech">TypeScript</span>
                 <span class="tag tag--tech">Vanilla CSS / JS</span>
@@ -545,9 +508,9 @@
           </div>
 
           <div class="glass-context reveal reveal--up">
-            <div class="glass-card skill-category">
-              <h3 class="skill-category-title">Tools &amp; Integrations</h3>
-              <div class="skill-tags">
+            <div class="skill-group">
+              <h3 class="skill-group__title">Tools &amp; Integrations</h3>
+              <div class="skill-group__tags">
                 <span class="tag tag--tech">Git / GitHub</span>
                 <span class="tag tag--tech">Supabase</span>
                 <span class="tag tag--tech">Google Gemini AI</span>
