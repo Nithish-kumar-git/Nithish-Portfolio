@@ -308,66 +308,68 @@
 
         <div class="section-eyebrow">ABOUT</div>
 
-        <div class="about-layout">
-          <div class="about-layout__text">
-            <h2 class="section-title">Building systems that answer
-            organizational questions</h2>
-
-            <p class="about-bio">
-              I find genuine satisfaction in untangling messy data and real
-              organizational constraints to build systems that work. For me,
-              the most rewarding part isn't just writing the code — it's
-              defining the KPI that drives a real decision. Seeing the FWMS
-              actively adopted by my department to govern faculty workload
-              validated my belief that engineering must serve business
-              reality. As I look toward graduation, I'm seeking a role where
-              I can continue building analytics solutions that bridge the
-              gap between complex data and clear decisions.
-            </p>
-
-            <div class="about-card">
-              <p class="about-card__label">WHAT I'M BUILDING TOWARD</p>
-              <p class="about-card__text">Seeking a data analyst or business
-              analyst role where I can design KPI frameworks, build reporting
-              pipelines, and connect database outputs to real business
-              decisions.</p>
-            </div>
-
-            <div class="about-card">
-              <p class="about-card__label">CURRENTLY</p>
-              <p class="about-card__text">Finishing MCA at HITS Chennai ·
-              CGPA 8.96 · Available June 2026</p>
-            </div>
-
-            <div class="about-meta">
-              <div class="about-meta__item">
-                <p class="about-meta__label">LOCATION</p>
-                <p class="about-meta__value">Chennai, India</p>
-              </div>
-              <div class="about-meta__item">
-                <p class="about-meta__label">STATUS</p>
-                <p class="about-meta__value">Available June 2026</p>
-              </div>
-              <div class="about-meta__item">
-                <p class="about-meta__label">DEGREE</p>
-                <p class="about-meta__value">MCA · HITS Chennai · 8.96 GPA</p>
-              </div>
-              <div class="about-meta__item">
-                <p class="about-meta__label">INTERESTS</p>
-                <p class="about-meta__value">Database design · Business analytics</p>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="about-layout__photo">
+        <div class="about-split">
+          <div class="about-split__photo">
             <img
               src="/images/nithish.jpg"
               alt="Nithish Kumar V"
-              class="about-photo"
+              class="about-portrait"
               onerror="this.parentElement.style.display='none'"
             >
-            <span class="about-name-tag">Nithish Kumar V</span>
+            <div class="about-portrait__caption">
+              <span class="about-portrait__name">Nithish Kumar V</span>
+              <span class="about-portrait__role">Analytical Systems Builder</span>
+            </div>
+          </div>
+
+          <div class="about-split__content">
+            <h2 class="about-heading">
+              I don't just write code.<br>
+              I answer business questions<br>
+              with data systems.
+            </h2>
+
+            <p class="about-bio">
+              I find genuine satisfaction in untangling messy data and real
+              organizational constraints to build systems that actually get
+              used. For me, the most rewarding part isn't the code — it's
+              defining the KPI that drives a real decision. Seeing the FWMS
+              adopted by my department to govern faculty workload across
+              HITS Chennai validated everything I believe about how
+              engineering should serve business reality.
+            </p>
+
+            <div class="about-cards-row">
+              <div class="about-card">
+                <p class="about-card__label">SEEKING</p>
+                <p class="about-card__text">Data Analyst · Business Analyst
+                · Full Stack roles from June 2026</p>
+              </div>
+              <div class="about-card">
+                <p class="about-card__label">CURRENTLY</p>
+                <p class="about-card__text">MCA · HITS Chennai
+                · CGPA 8.96</p>
+              </div>
+            </div>
+
+            <div class="about-facts">
+              <div class="about-fact">
+                <span class="about-fact__label">Location</span>
+                <span class="about-fact__value">Chennai, India</span>
+              </div>
+              <div class="about-fact">
+                <span class="about-fact__label">Available</span>
+                <span class="about-fact__value">June 2026</span>
+              </div>
+              <div class="about-fact">
+                <span class="about-fact__label">Education</span>
+                <span class="about-fact__value">MCA + BCA, Hindustan Group</span>
+              </div>
+              <div class="about-fact">
+                <span class="about-fact__label">Focus</span>
+                <span class="about-fact__value">Data · Analytics · Systems</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -380,111 +382,125 @@
     <section id="projects" class="section glass-context">
       <div class="container">
 
-        <div class="section-header reveal reveal--up">
-          <span class="section-eyebrow">Work</span>
-          <h2 class="section-title">Selected Projects</h2>
-        </div>
+        <div class="section-eyebrow">WORK</div>
+        <h2 class="section-title">Selected Projects</h2>
 
-        <div class="projects-grid stagger-children">
-
-          <!-- FWMS -->
-          <article class="project-card project-card--featured glass-card--elevated">
-            <div class="project-card__header">
-              <div class="project-card__badges">
-                <span class="badge badge--live">● Institutional Deployment</span>
-                <span class="badge badge--role">Lead Builder</span>
-              </div>
-              <h3 class="project-card__title">Faculty Workload Management System</h3>
-              <p class="project-card__subtitle">PostgreSQL analytics platform — deployed and in active use at HITS Chennai</p>
+        <!-- FWMS FEATURED — HORIZONTAL LAYOUT -->
+        <div class="project-featured">
+          <div class="project-featured__media">
+            <div class="project-featured__badge-row">
+              <span class="badge badge--live">● Institutional Deployment</span>
+              <span class="badge badge--role">Lead Builder</span>
             </div>
-            <div class="project-card__body">
-              <p class="project-card__desc">Designed and built a 22-table relational database system to automate course allocation and workload governance for 50+ faculty across 4 academic programs. The system computes 15 KPIs per faculty member, enforces 4-tier RBAC, and replaced a fully manual process that had no audit trail or fairness metric.</p>
-              <div class="project-card__impact">
-                <div class="impact-stat"><span class="impact-stat__num">19,200+</span><span class="impact-stat__label">offerings automated</span></div>
-                <div class="impact-stat"><span class="impact-stat__num">50+</span><span class="impact-stat__label">faculty served</span></div>
-                <div class="impact-stat"><span class="impact-stat__num">22</span><span class="impact-stat__label">DB tables</span></div>
-                <div class="impact-stat"><span class="impact-stat__num">15</span><span class="impact-stat__label">KPIs / faculty</span></div>
+            <div class="project-featured__screens">
+              <img src="/images/fwms-1.png" alt="FWMS Dashboard"
+                class="project-featured__img project-featured__img--main"
+                onerror="this.style.display='none'">
+              <img src="/images/fwms-2.png" alt="FWMS Faculty View"
+                class="project-featured__img project-featured__img--secondary"
+                onerror="this.style.display='none'">
+            </div>
+          </div>
+          <div class="project-featured__info">
+            <h3 class="project-featured__title">Faculty Workload<br>Management System</h3>
+            <p class="project-featured__desc">
+              Designed and built a 22-table PostgreSQL platform that
+              replaced a fully manual course allocation process at HITS
+              Chennai. Computes 15 KPIs per faculty member, enforces
+              4-tier RBAC, and classifies each faculty as Overloaded,
+              Balanced, or Underloaded. Deployed and in active institutional
+              use across 4 academic programs serving 50+ faculty.
+            </p>
+            <div class="project-featured__stats">
+              <div class="fstat">
+                <span class="fstat__n">19,200+</span>
+                <span class="fstat__l">offerings automated</span>
               </div>
-              <div class="project-card__screenshots">
-                <img src="/images/dashboard.png"
-                     alt="FWMS Dashboard"
-                     onerror="this.style.display='none'">
-                <img src="/images/workload.png"
-                     alt="FWMS Workload"
-                     onerror="this.style.display='none'">
+              <div class="fstat">
+                <span class="fstat__n">50+</span>
+                <span class="fstat__l">faculty served</span>
+              </div>
+              <div class="fstat">
+                <span class="fstat__n">22</span>
+                <span class="fstat__l">DB tables</span>
+              </div>
+              <div class="fstat">
+                <span class="fstat__n">15</span>
+                <span class="fstat__l">KPIs / faculty</span>
               </div>
             </div>
-            <div class="project-card__tech">
+            <div class="project-featured__stack">
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">SQLAlchemy</span>
               <span class="tech-tag">React</span>
               <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">SQLAlchemy</span>
             </div>
-            <div class="project-card__links">
-              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
-              <button class="card-link card-link--primary"
-                onclick="openModal('modal-fwms')">View Details →</button>
+            <div class="project-featured__links">
+              <button class="btn-detail"
+                onclick="openModal('modal-fwms')">Full Case Study →</button>
+              <a href="https://github.com/Nithish-kumar-git"
+                class="card-link" target="_blank">GitHub →</a>
             </div>
-          </article>
+          </div>
+        </div>
 
-          <!-- Family Finance Tracker -->
-          <article class="project-card glass-card">
-            <div class="project-card__header">
+        <!-- SECONDARY PROJECTS — 2 COLUMN GRID -->
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <div class="project-card__top">
               <div class="project-card__badges">
                 <span class="badge badge--live">● Live</span>
                 <span class="badge badge--role">Lead Builder</span>
               </div>
-              <h3 class="project-card__title">Family Finance Tracker</h3>
-              <p class="project-card__subtitle">AI-powered PWA for household finance management</p>
+              <img src="/images/fft-1.png" alt="Family Finance Tracker"
+                class="project-card__thumb"
+                onerror="this.style.display='none'">
             </div>
-            <div class="project-card__body">
-              <p class="project-card__desc">A progressive web app integrating Google Gemini AI to parse SMS-based expense messages into structured transactions. Supports multi-user budgeting, portfolio tracking across 5 asset classes, and offline-first operation. Live and used by real users.</p>
-              <div class="project-card__screenshots">
-                <img src="/images/preferences.png"
-                     alt="Family Finance Tracker"
-                     onerror="this.style.display='none'">
-              </div>
-            </div>
-            <div class="project-card__tech">
+            <h3 class="project-card__title">Family Finance Tracker</h3>
+            <p class="project-card__desc">AI-powered PWA using Google Gemini
+            to parse SMS expenses into structured transactions. Multi-user
+            budgeting, 5 asset classes, offline-first. Live and in active
+            use.</p>
+            <div class="project-card__stack">
               <span class="tech-tag">React</span>
               <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">Gemini API</span>
-              <span class="tech-tag">Recharts</span>
+              <span class="tech-tag">PWA</span>
             </div>
             <div class="project-card__links">
-              <a href="https://family-finance-tracker-pearl.vercel.app" class="card-link card-link--primary" target="_blank" rel="noopener">Live App →</a>
-              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
-              <button class="card-link card-link--primary"
-                onclick="openModal('modal-fft')">View Details →</button>
+              <a href="https://family-finance-tracker-pearl.vercel.app"
+                class="btn-detail" target="_blank">Live App →</a>
+              <button class="card-link"
+                onclick="openModal('modal-fft')">Details →</button>
             </div>
-          </article>
+          </div>
 
-          <!-- VaxVault -->
-          <article class="project-card glass-card">
-            <div class="project-card__header">
+          <div class="project-card">
+            <div class="project-card__top">
               <div class="project-card__badges">
                 <span class="badge badge--role">Contributor</span>
               </div>
-              <h3 class="project-card__title">VaxVault — Vaccination Reminder System</h3>
-              <p class="project-card__subtitle">Multi-profile scheduling with automated email notifications</p>
             </div>
-            <div class="project-card__body">
-              <p class="project-card__desc">Contributed data validation rules and scheduling conflict detection logic to a vaccination reminder platform with cron-based automated emails and a KPI dashboard. Identified and resolved 8+ edge cases in the scheduling engine.</p>
-            </div>
-            <div class="project-card__tech">
+            <h3 class="project-card__title">VaxVault</h3>
+            <p class="project-card__desc">Vaccination reminder platform
+            with multi-profile scheduling and cron-based automated emails.
+            Contributed conflict detection logic resolving 8+ edge cases
+            in the scheduling engine.</p>
+            <div class="project-card__stack">
               <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">Express</span>
               <span class="tech-tag">MongoDB</span>
+              <span class="tech-tag">Express</span>
               <span class="tech-tag">React</span>
             </div>
             <div class="project-card__links">
-              <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
-              <button class="card-link card-link--primary"
-                onclick="openModal('modal-vaxvault')">View Details →</button>
+              <a href="https://github.com/Nithish-kumar-git"
+                class="card-link" target="_blank">GitHub →</a>
+              <button class="card-link"
+                onclick="openModal('modal-vaxvault')">Details →</button>
             </div>
-          </article>
+          </div>
 
         </div>
       </div>
