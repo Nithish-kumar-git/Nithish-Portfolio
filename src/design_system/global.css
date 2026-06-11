@@ -684,7 +684,7 @@ section.hero,
 
 .about-layout {
   display: grid;
-  grid-template-columns: 1fr 160px;
+  grid-template-columns: 1fr 220px;
   gap: 3rem;
   align-items: start;
 }
@@ -698,8 +698,8 @@ section.hero,
   padding-top: 0.5rem;
 }
 .about-photo {
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   object-position: center top;
   border-radius: 50%;
