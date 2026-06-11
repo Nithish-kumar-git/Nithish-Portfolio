@@ -670,3 +670,41 @@ section.hero,
   line-height: 1.6;
   margin: 0;
 }
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-layout__photo {
+    order: -1;
+  }
+}
+.about-layout__photo {
+  position: sticky;
+  top: 100px;
+}
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+.about-photo:hover {
+  filter: grayscale(0%);
+}
+.about-bio {
+  color: #94A3B8;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}

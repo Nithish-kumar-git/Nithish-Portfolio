@@ -306,58 +306,74 @@
     <section id="about" class="section glass-context">
       <div class="container">
 
-        <div class="section-header reveal reveal--up">
-          <span class="section-eyebrow">About</span>
-          <h2 class="section-title">Building systems that answer organizational questions</h2>
-        </div>
-
-        <div class="about-grid">
-
-          <div class="about-content reveal reveal--up">
-            <p class="text-body">I find genuine satisfaction in untangling messy data and real organizational constraints to build systems that work. For me, the most rewarding part isn't just writing the code — it's defining the KPI that drives a real decision. Seeing the FWMS actively adopted by my department to govern faculty workload validated my belief that engineering must serve business reality. As I look toward graduation, I'm seeking a role where I can continue building analytics solutions that bridge the gap between complex data and clear decisions.</p>
-
+        <div class="about-layout">
+          <div class="about-layout__text">
+            <div class="section-eyebrow">ABOUT</div>
+            <h2 class="section-title">Building systems that answer organizational questions</h2>
+            <p class="about-bio">
+              I find genuine satisfaction in untangling messy data and real
+              organizational constraints to build systems that work. For me,
+              the most rewarding part isn't just writing the code — it's
+              defining the KPI that drives a real decision. Seeing the FWMS
+              actively adopted by my department to govern faculty workload
+              validated my belief that engineering must serve business reality.
+              As I look toward graduation, I'm seeking a role where I can
+              continue building analytics solutions that bridge the gap between
+              complex data and clear decisions.
+            </p>
             <div class="about-card">
               <p class="about-card__label">WHAT I'M BUILDING TOWARD</p>
-              <p class="about-card__text">Seeking a data analyst or business analyst role where I can design KPI frameworks, build reporting pipelines, and connect database outputs to real business decisions.</p>
+              <p class="about-card__text">Seeking a data analyst or business
+              analyst role where I can design KPI frameworks, build reporting
+              pipelines, and connect database outputs to real business
+              decisions.</p>
             </div>
-
             <div class="about-card">
               <p class="about-card__label">CURRENTLY</p>
-              <p class="about-card__text">Finishing MCA at HITS Chennai · CGPA 8.96 · Available June 2026</p>
+              <p class="about-card__text">Finishing MCA at HITS Chennai ·
+              CGPA 8.96 · Available June 2026</p>
             </div>
           </div>
+          <div class="about-layout__photo">
+            <img
+              src="/images/nithish.jpg"
+              alt="Nithish Kumar V"
+              class="about-photo"
+              onerror="this.parentElement.style.display='none'"
+            >
+          </div>
+        </div>
 
-          <div class="reveal reveal--up" style="--reveal-delay: 80ms;">
-            <div class="glass-context">
-              <div class="glass-card">
-                <div class="about-sidebar">
-                  <div class="about-sidebar__row">
-                    <span class="about-sidebar__label">Location</span>
-                    <span class="about-sidebar__value">Chennai, India</span>
-                  </div>
-                  <div class="about-sidebar__row">
-                    <span class="about-sidebar__label">Status</span>
-                    <span class="about-sidebar__value">Available June 2026</span>
-                  </div>
-                  <div class="about-sidebar__row">
-                    <span class="about-sidebar__label">Degree</span>
-                    <span class="about-sidebar__value">MCA, HITS Chennai — <span style="font-family: var(--font-mono);">8.96 GPA</span></span>
-                  </div>
-                  <div class="about-sidebar__row">
-                    <span class="about-sidebar__label">Interests</span>
-                    <span class="about-sidebar__value">Database design, Business analytics</span>
-                  </div>
-                  <div class="about-sidebar__row">
-                    <a href="mailto:its.nithishnk@gmail.com" class="about-sidebar__link">
-                      Email <span>→</span>
-                    </a>
-                  </div>
+        <div class="reveal reveal--up" style="--reveal-delay: 80ms;">
+          <div class="glass-context">
+            <div class="glass-card">
+              <div class="about-sidebar">
+                <div class="about-sidebar__row">
+                  <span class="about-sidebar__label">Location</span>
+                  <span class="about-sidebar__value">Chennai, India</span>
+                </div>
+                <div class="about-sidebar__row">
+                  <span class="about-sidebar__label">Status</span>
+                  <span class="about-sidebar__value">Available June 2026</span>
+                </div>
+                <div class="about-sidebar__row">
+                  <span class="about-sidebar__label">Degree</span>
+                  <span class="about-sidebar__value">MCA, HITS Chennai — <span style="font-family: var(--font-mono);">8.96 GPA</span></span>
+                </div>
+                <div class="about-sidebar__row">
+                  <span class="about-sidebar__label">Interests</span>
+                  <span class="about-sidebar__value">Database design, Business analytics</span>
+                </div>
+                <div class="about-sidebar__row">
+                  <a href="mailto:its.nithishnk@gmail.com" class="about-sidebar__link">
+                    Email <span>→</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+
       </div>
     </section>
 
@@ -393,11 +409,11 @@
                 <div class="impact-stat"><span class="impact-stat__num">15</span><span class="impact-stat__label">KPIs / faculty</span></div>
               </div>
               <div class="project-card__screenshots">
-                <img src="/images/fwms-dashboard.png"
+                <img src="/images/dashboard.png"
                      alt="FWMS Dashboard"
                      onerror="this.style.display='none'">
-                <img src="/images/fwms-analytics.png"
-                     alt="FWMS Analytics"
+                <img src="/images/workload.png"
+                     alt="FWMS Workload"
                      onerror="this.style.display='none'">
               </div>
             </div>
@@ -425,6 +441,11 @@
             </div>
             <div class="project-card__body">
               <p class="project-card__desc">A progressive web app integrating Google Gemini AI to parse SMS-based expense messages into structured transactions. Supports multi-user budgeting, portfolio tracking across 5 asset classes, and offline-first operation. Live and used by real users.</p>
+              <div class="project-card__screenshots">
+                <img src="/images/preferences.png"
+                     alt="Family Finance Tracker"
+                     onerror="this.style.display='none'">
+              </div>
             </div>
             <div class="project-card__tech">
               <span class="tech-tag">React</span>
