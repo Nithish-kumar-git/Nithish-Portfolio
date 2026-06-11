@@ -423,6 +423,8 @@
             </div>
             <div class="project-card__links">
               <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">View on GitHub →</a>
+              <button class="card-link card-link--primary"
+                onclick="openModal('modal-fwms')">View Details →</button>
             </div>
           </article>
 
@@ -454,6 +456,8 @@
             <div class="project-card__links">
               <a href="https://family-finance-tracker-pearl.vercel.app" class="card-link card-link--primary" target="_blank" rel="noopener">Live App →</a>
               <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
+              <button class="card-link card-link--primary"
+                onclick="openModal('modal-fft')">View Details →</button>
             </div>
           </article>
 
@@ -477,6 +481,8 @@
             </div>
             <div class="project-card__links">
               <a href="https://github.com/Nithish-kumar-git" class="card-link" target="_blank" rel="noopener">GitHub →</a>
+              <button class="card-link card-link--primary"
+                onclick="openModal('modal-vaxvault')">View Details →</button>
             </div>
           </article>
 
@@ -679,5 +685,137 @@
     </footer>
 
     <script type="module" src="/src/main.js"></script>
-  </body>
+
+<!-- PROJECT MODALS -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+
+<!-- FWMS Modal -->
+<div class="modal" id="modal-fwms">
+  <button class="modal__close" onclick="closeModal()">✕</button>
+  <div class="modal__header">
+    <span class="badge badge--live">● Institutional Deployment</span>
+    <h2 class="modal__title">Faculty Workload Management System</h2>
+    <p class="modal__subtitle">PostgreSQL analytics platform · HITS Chennai · Lead Builder</p>
+  </div>
+  <div class="modal__body">
+    <div class="modal__section">
+      <h3 class="modal__section-title">The Problem</h3>
+      <p>HITS Chennai manually allocated courses to 50+ faculty across 4 academic programs — 150+ courses, thousands of offerings — with no systematic way to measure fairness, track overload, or audit decisions. Department heads had no data to answer: "Is this faculty member overloaded?"</p>
+    </div>
+    <div class="modal__section">
+      <h3 class="modal__section-title">What I Built</h3>
+      <p>A 22-table PostgreSQL platform with a FastAPI backend and React frontend. The system automates course-to-faculty allocation, computes 15 KPIs per faculty member (Teaching Contact Hours, workload index, course diversity score), enforces 4-tier RBAC (Admin → HoD → Faculty → Viewer), generates Excel reports, and classifies each faculty as Overloaded, Balanced, or Underloaded based on TCH vs institutional norms.</p>
+    </div>
+    <div class="modal__impact-grid">
+      <div class="impact-stat">
+        <span class="impact-stat__num">19,200+</span>
+        <span class="impact-stat__label">Course offerings automated</span>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat__num">50+</span>
+        <span class="impact-stat__label">Faculty served</span>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat__num">22</span>
+        <span class="impact-stat__label">Database tables</span>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat__num">15</span>
+        <span class="impact-stat__label">KPIs per faculty</span>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat__num">30+</span>
+        <span class="impact-stat__label">API endpoints</span>
+      </div>
+      <div class="impact-stat">
+        <span class="impact-stat__num">4-tier</span>
+        <span class="impact-stat__label">Access control</span>
+      </div>
+    </div>
+    <div class="modal__section">
+      <h3 class="modal__section-title">Technical Decisions</h3>
+      <p>Chose PostgreSQL over MongoDB because workload governance requires relational integrity — faculty, courses, departments, and offerings all have enforced foreign key relationships. SQLAlchemy ORM abstracts the query layer while keeping raw SQL available for complex KPI aggregations. FastAPI was chosen for automatic OpenAPI docs, which the department uses internally.</p>
+    </div>
+    <div class="modal__screenshots">
+      <img src="/images/fwms-1.png" alt="FWMS Dashboard" onerror="this.style.display='none'">
+      <img src="/images/fwms-2.png" alt="FWMS Faculty List" onerror="this.style.display='none'">
+    </div>
+    <div class="modal__tech">
+      <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">SQLAlchemy</span>
+      <span class="tech-tag">React</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">Python</span>
+    </div>
+  </div>
+  <div class="modal__footer">
+    <a href="https://github.com/Nithish-kumar-git" target="_blank" class="card-link--primary">View on GitHub →</a>
+  </div>
+</div>
+
+<!-- FFT Modal -->
+<div class="modal" id="modal-fft">
+  <button class="modal__close" onclick="closeModal()">✕</button>
+  <div class="modal__header">
+    <span class="badge badge--live">● Live</span>
+    <h2 class="modal__title">Family Finance Tracker</h2>
+    <p class="modal__subtitle">AI-powered PWA · Vercel · Lead Builder</p>
+  </div>
+  <div class="modal__body">
+    <div class="modal__section">
+      <h3 class="modal__section-title">The Problem</h3>
+      <p>Families receive dozens of expense SMS messages daily but manually logging each transaction into a budget app is tedious and error-prone. Most finance apps require manual entry and don't support multi-user household budgets.</p>
+    </div>
+    <div class="modal__section">
+      <h3 class="modal__section-title">What I Built</h3>
+      <p>A PWA that uses Google Gemini AI to parse raw SMS expense messages into structured transactions automatically. Supports multiple family members, categorized budgeting, portfolio tracking across 5 asset classes (equity, debt, gold, real estate, cash), Recharts visualizations, and full offline operation via service workers.</p>
+    </div>
+    <div class="modal__screenshots">
+      <img src="/images/fft-1.png" alt="FFT Dashboard" onerror="this.style.display='none'">
+    </div>
+    <div class="modal__tech">
+      <span class="tech-tag">React</span>
+      <span class="tech-tag">FastAPI</span>
+      <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">Gemini API</span>
+      <span class="tech-tag">Recharts</span>
+      <span class="tech-tag">PWA</span>
+    </div>
+  </div>
+  <div class="modal__footer">
+    <a href="https://family-finance-tracker-pearl.vercel.app" target="_blank" class="card-link--primary">Live App →</a>
+    <a href="https://github.com/Nithish-kumar-git" target="_blank" class="card-link">GitHub →</a>
+  </div>
+</div>
+
+<!-- VaxVault Modal -->
+<div class="modal" id="modal-vaxvault">
+  <button class="modal__close" onclick="closeModal()">✕</button>
+  <div class="modal__header">
+    <span class="badge badge--role">Contributor</span>
+    <h2 class="modal__title">VaxVault</h2>
+    <p class="modal__subtitle">Vaccination Reminder System · Contributor</p>
+  </div>
+  <div class="modal__body">
+    <div class="modal__section">
+      <h3 class="modal__section-title">Contribution</h3>
+      <p>Built data validation rules and scheduling conflict detection logic for a vaccination reminder platform. The system supports multi-profile scheduling with 3-tier cron jobs for automated email reminders and a KPI dashboard.</p>
+    </div>
+    <div class="modal__section">
+      <h3 class="modal__section-title">Key Work</h3>
+      <p>Identified and resolved 8+ edge cases in the scheduling engine where overlapping vaccination schedules caused silent failures — no error was thrown but reminders were silently dropped. Wrote conflict detection logic that validates scheduling rules before persisting to MongoDB.</p>
+    </div>
+    <div class="modal__tech">
+      <span class="tech-tag">Node.js</span>
+      <span class="tech-tag">Express</span>
+      <span class="tech-tag">MongoDB</span>
+      <span class="tech-tag">React</span>
+    </div>
+  </div>
+  <div class="modal__footer">
+    <a href="https://github.com/Nithish-kumar-git" target="_blank" class="card-link--primary">GitHub →</a>
+  </div>
+</div>
+</body>
 </html>

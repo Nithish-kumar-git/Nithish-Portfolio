@@ -149,20 +149,19 @@ function initMobileMenu() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// 6. CLIPBOARD COPY
-// Elements with [data-copy-target]. Adds .copy-btn--copied for 2s.
+// 7. PROJECT MODALS
+// Opens detail modals for project cards.
 // ─────────────────────────────────────────────────────────────
-function initClipboardCopy() {
-  document.querySelectorAll('[data-copy-target]').forEach((btn) => {
-    btn.addEventListener('click', async () => {
-      const target = btn.dataset.copyTarget;
-      try {
-        await navigator.clipboard.writeText(target);
-        btn.classList.add('copy-btn--copied');
-        setTimeout(() => btn.classList.remove('copy-btn--copied'), 2000);
-      } catch {
-        // Clipboard API not available — silent fail
-      }
-    });
-  });
+function openModal(id) {
+  document.getElementById(id).classList.add('modal--open');
+  document.getElementById('modal-overlay').classList.add('modal-overlay--open');
+  document.body.style.overflow = 'hidden';
 }
+function closeModal() {
+  document.querySelectorAll('.modal').forEach(m => m.classList.remove('modal--open'));
+  document.getElementById('modal-overlay').classList.remove('modal-overlay--open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
