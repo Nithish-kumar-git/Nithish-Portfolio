@@ -120,124 +120,6 @@
     </section>
 
     <!-- ═══════════════════════════════════════
-         FWMS SHOWCASE
-    ═══════════════════════════════════════ -->
-    <section id="fwms" class="section glass-context">
-      <div class="container">
-
-        <div class="section-header reveal reveal--up">
-          <span class="section-eyebrow">Featured Work</span>
-          <h2 class="section-title">Faculty Workload Management System</h2>
-          <p class="section-descriptor">
-            A PostgreSQL analytics platform deployed for institutional workload governance
-            <span class="status-badge status-badge--institutional" style="margin-left: 12px;">
-              <span class="status-dot status-dot--institutional"></span>
-              Live at HITS Chennai
-            </span>
-          </p>
-        </div>
-
-        <!-- glass-context provides the depth layer that backdrop-filter blurs against -->
-        <div class="glass-context">
-          <div class="glass-card--accent fwms-card reveal reveal--up">
-
-            <!-- Problem + Architecture grid -->
-            <div class="fwms-grid">
-              <!-- Panel 1: Problem -->
-              <div class="fwms-problem">
-                <span class="section-eyebrow">The Problem</span>
-                <p class="text-body">The institution faced the challenge of manually allocating courses to 50+ faculty across 4 academic programs — 150+ courses, thousands of offerings — with no systematic way to measure fairness, track overload, or audit decisions.</p>
-              </div>
-
-              <!-- Panel 2: Architecture -->
-              <div class="fwms-architecture-panel">
-                <span class="section-eyebrow">System Architecture</span>
-                <div class="fwms-architecture">
-                  <div class="arch-flow">
-                    <span class="arch-node">PostgreSQL</span>
-                    <span class="arch-arrow">→</span>
-                    <span class="arch-node">SQLAlchemy ORM</span>
-                    <span class="arch-arrow">→</span>
-                    <span class="arch-node">FastAPI</span>
-                    <span class="arch-arrow">→</span>
-                    <span class="arch-node">React + TypeScript</span>
-                  </div>
-                  <p class="arch-caption">22-table schema · 4-tier RBAC · 30+ REST endpoints</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Panel 3: Metrics 2×2 grid -->
-            <div class="fwms-metrics stagger-children">
-              <div class="glass-card--metric glass-card reveal reveal--up">
-                <div class="metric-card metric-card--card">
-                  <span class="metric-card__value">
-                    <span class="counter" data-counter="19200" data-suffix="+">19,200+</span>
-                  </span>
-                  <span class="metric-card__label">Course offerings automated</span>
-                </div>
-              </div>
-              <div class="glass-card--metric glass-card reveal reveal--up">
-                <div class="metric-card metric-card--card">
-                  <span class="metric-card__value">
-                    <span class="counter" data-counter="50" data-suffix="+">50+</span>
-                  </span>
-                  <span class="metric-card__label">Faculty served across 4 programs</span>
-                </div>
-              </div>
-              <div class="glass-card--metric glass-card reveal reveal--up">
-                <div class="metric-card metric-card--card">
-                  <span class="metric-card__value">
-                    <span class="counter" data-counter="15">15</span>
-                  </span>
-                  <span class="metric-card__label">KPIs computed per faculty member</span>
-                </div>
-              </div>
-              <div class="glass-card--metric glass-card reveal reveal--up">
-                <div class="metric-card metric-card--card">
-                  <span class="metric-card__value">4-tier</span>
-                  <span class="metric-card__label">Access control hierarchy</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Panel 4: Workload Classification -->
-            <div class="fwms-classification reveal reveal--up">
-              <span class="section-eyebrow">Workload Classification Logic</span>
-              <div class="classification-display">
-                <div class="classification-item">
-                  <span class="tag tag--overloaded">Overloaded</span>
-                  <span class="classification-item__note">TCH exceeds 18-hour norm</span>
-                </div>
-                <div class="classification-item">
-                  <span class="tag tag--balanced">Balanced</span>
-                  <span class="classification-item__note">TCH within ±2 hours of norm</span>
-                </div>
-                <div class="classification-item">
-                  <span class="tag tag--underloaded">Underloaded</span>
-                  <span class="classification-item__note">TCH significantly below norm</span>
-                </div>
-              </div>
-              <p class="classification-footnote">This wasn't a technical output — it was a business decision about fairness, requiring explicit definition of what 'fair workload' means to the institution.</p>
-            </div>
-
-            <!-- Actions -->
-            <div class="project-links">
-              <a href="https://github.com/Nithish-kumar-git/FWMS" class="link-row" target="_blank" rel="noopener">
-                View on GitHub <span class="link-row__arrow">→</span>
-              </a>
-              <a href="#projects" class="link-row">
-                Read Technical Details <span class="link-row__arrow">→</span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
          IMPACT METRICS
     ═══════════════════════════════════════ -->
     <section id="impact" class="impact-section">
@@ -393,10 +275,10 @@
               <span class="badge badge--role">Lead Builder</span>
             </div>
             <div class="project-featured__screens">
-              <img src="/images/fwms-1.png" alt="FWMS Dashboard"
+              <img src="/images/dashboard.png" alt="FWMS Dashboard"
                 class="project-featured__img project-featured__img--main"
                 onerror="this.style.display='none'">
-              <img src="/images/fwms-2.png" alt="FWMS Faculty View"
+              <img src="/images/workload.png" alt="FWMS Faculty View"
                 class="project-featured__img project-featured__img--secondary"
                 onerror="this.style.display='none'">
             </div>
@@ -454,7 +336,7 @@
                 <span class="badge badge--live">● Live</span>
                 <span class="badge badge--role">Lead Builder</span>
               </div>
-              <img src="/images/fft-1.png" alt="Family Finance Tracker"
+              <img src="/images/preferences.png" alt="Family Finance Tracker"
                 class="project-card__thumb"
                 onerror="this.style.display='none'">
             </div>
