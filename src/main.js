@@ -77,9 +77,11 @@ function initCounters() {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
       const value = target * easeOut(progress);
-      el.textContent = isDecimal
-        ? value.toFixed(2) + suffix
-        : Math.round(value).toLocaleString() + suffix;
+      if (isDecimal) {
+        el.textContent = value.toFixed(2);
+      } else {
+        el.textContent = Math.round(value).toLocaleString() + suffix;
+      }
       if (progress < 1) requestAnimationFrame(tick);
       else el.classList.add('counter--done');
     };
