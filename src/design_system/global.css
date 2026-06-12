@@ -236,3 +236,15 @@ body.hero--loaded .hero-animate{opacity:1;transform:translateY(0)}
 .footer__bottom{margin-top:1rem}
 .footer__signature{font-size:0.72rem;color:rgba(71,85,105,0.5);font-style:italic}
 @media(max-width:480px){.hero-cta{flex-direction:column}.modal__impact-grid{grid-template-columns:repeat(2,1fr)}.modal__screenshots{grid-template-columns:1fr}.project-featured__stats{grid-template-columns:repeat(2,1fr)}}
+.section--certs{padding-block:3rem;background:var(--color-bg-subtle)}
+.certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+@media(max-width:768px){.certs-grid{grid-template-columns:1fr}}
+.cert-card-full{display:flex;align-items:center;gap:1.25rem;background:rgba(13,18,32,0.65);border:1px solid rgba(148,163,184,0.08);border-radius:14px;padding:1.25rem 1.5rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s}
+.cert-card-full:hover{border-color:rgba(14,165,233,0.2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+.cert-card-full__icon{font-size:1.4rem;flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(14,165,233,0.07);border-radius:10px;border:1px solid rgba(14,165,233,0.1)}
+.cert-card-full__body{display:flex;flex-direction:column;gap:0.2rem;flex:1;min-width:0}
+.cert-card-full__name{font-size:0.9rem;font-weight:600;color:var(--color-text-primary);line-height:1.35}
+.cert-card-full__issuer{font-size:0.75rem;color:var(--color-accent);line-height:1.4}
+.cert-card-full__meta{font-size:0.72rem;color:var(--color-text-muted);font-family:var(--font-mono)}
+.cert-card-full__badge{flex-shrink:0;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:999px;background:rgba(14,165,233,0.1);color:#38BDF8;border:1px solid rgba(14,165,233,0.2);white-space:nowrap}
+.cert-card-full__badge--event{background:rgba(168,85,247,0.08);color:#C084FC;border-color:rgba(168,85,247,0.2)}
