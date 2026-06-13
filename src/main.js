@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCounters();
   initClipboardCopy();
+  initCarousels();
 });
 
 function initHero() {
@@ -135,6 +136,58 @@ function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   if (overlay) overlay.classList.remove('modal-overlay--open');
   document.body.style.overflow = '';
+}
+
+function initCarousels() {
+  document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+    const track = carousel.querySelector('.carousel__track');
+    const imgs = Array.from(carousel.querySelectorAll('.carousel__img'));
+    const dotsWrap = carousel.querySelector('.carousel__dots');
+    const prevBtn = carousel.querySelector('.carousel__btn--prev');
+    const nextBtn = carousel.querySelector('.carousel__btn--next');
+    let index = 0;
+
+    imgs.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'carousel__dot' + (i === 0 ? ' carousel__dot--active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsWrap.children);
+
+    function goTo(i) {
+      index = (i + imgs.length) % imgs.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, di) => d.classList.toggle('carousel__dot--active', di === index));
+    }
+
+    prevBtn.addEventListener('click', () => goTo(index - 1));
+    nextBtn.addEventListener('click', () => goTo(index + 1));
+
+    imgs.forEach((img) => img.addEventListener('click', () => openLightbox(img.src, img.alt)));
+  });
+}
+
+function openLightbox(src, alt) {
+  let lightbox = document.querySelector('.lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+      <button class="lightbox__close" aria-label="Close">×</button>
+      <img class="lightbox__img" src="" alt="" />
+    `;
+    document.body.appendChild(lightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox__close')) {
+        lightbox.classList.remove('lightbox--active');
+      }
+    });
+  }
+  lightbox.querySelector('.lightbox__img').src = src;
+  lightbox.querySelector('.lightbox__img').alt = alt;
+  lightbox.classList.add('lightbox--active');
 }
 
 window.openModal = openModal;
