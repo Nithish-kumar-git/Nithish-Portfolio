@@ -58,7 +58,7 @@ The DOM contains:
   "Bachelor of Science (Computer Science) — University/College Name · City"
 
 This is the literal placeholder text from the template. It was never replaced.
-Your actual degree is: "BCA — Hindustan College of Arts & Science, Chennai | CGPA: 7.96"
+Your actual degree is: "BCA — Hindustan College of Arts & Science, Chennai | CGPA: 8.20"
 
 A recruiter seeing "University/College Name · City" will close the tab. It signals
 either (a) carelessness, or (b) that you didn't actually build this yourself and
