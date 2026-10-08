@@ -146,6 +146,21 @@
 </div>
 </div>
 </div>
+<div class="project-card glass-context reveal reveal--up" style="--reveal-delay:200ms">
+<div class="project-card__inner">
+<div class="project-card__header">
+<div class="project-card__badges"><span class="badge badge--live">● Live</span><span class="badge badge--role">Lead Builder</span></div>
+<img src="/images/chit-dashboard-mockup.jpg" alt="Chit Fund Analytics – dashboard preview" class="project-card__thumb" loading="lazy" onerror="this.style.display='none'">
+</div>
+<h3 class="project-card__title">Chit Fund Analytics</h3>
+<p class="project-card__desc">Authenticated financial tracking platform for chit funds. Append-only ledger, explicit verification states, ROI safety gates, and Excel / audit exports — built on Supabase with row-level security throughout.</p>
+<div class="project-card__stack"><span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Vercel</span></div>
+<div class="project-card__links">
+<a href="https://chitfund-analytics.vercel.app" class="btn btn--primary btn--sm" target="_blank" rel="noopener">Live App →</a>
+<button class="btn btn--ghost btn--sm" onclick="openModal('modal-chitfund')">Details</button>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -469,6 +484,35 @@
 <div class="modal__tech"><span class="tech-tag">React</span><span class="tech-tag">FastAPI</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Gemini API</span><span class="tech-tag">Recharts</span><span class="tech-tag">PWA</span></div>
 </div>
 <div class="modal__footer"><a href="https://family-finance-tracker-pearl.vercel.app" target="_blank" class="btn btn--primary btn--sm">Live App →</a><a href="https://github.com/Nithish-kumar-git" target="_blank" class="btn btn--ghost btn--sm">GitHub →</a></div>
+</div>
+
+<div class="modal" id="modal-chitfund">
+<button class="modal__close" onclick="closeModal()" aria-label="Close">✕</button>
+<div class="modal__header"><span class="badge badge--live">● Live · Authenticated</span><h2 class="modal__title">Chit Fund Analytics</h2><p class="modal__subtitle">Next.js · Supabase · Vercel · Lead Builder</p></div>
+<div class="modal__body">
+<div class="modal__section"><h3 class="modal__section-title">The Problem</h3><p>Managing chit fund finances with spreadsheets creates a single point of failure — no audit trail, no verification layer, and no way to catch silent mismatches between expected and actual payments.</p></div>
+<div class="modal__section"><h3 class="modal__section-title">What I Built</h3><p>An authenticated financial tracking platform that separates source information, expected state, explicit human verification, and actual ledger transactions into distinct layers. Verification states (VERIFIED_FORMULA, CONFIRM_SOURCE, MANUAL_OVERRIDE, FLAGGED_MISMATCH) ensure no mismatch is silently overwritten. ROI calculations are gated by completion, completeness, and verification requirements.</p></div>
+<div class="modal__section"><h3 class="modal__section-title">Financial Safety Model</h3><p>Expected payment ≠ actual payment. Auction date ≠ payment date. Installment savings ≠ profit. Active cash flow ≠ profit. Every calculation chains from the append-only ledger — there is no shortcut from source data to reported ROI.</p></div>
+<div class="modal__impact-grid">
+<div class="impact-stat"><span class="impact-stat__num">5</span><span class="impact-stat__label">Verification states</span></div>
+<div class="impact-stat"><span class="impact-stat__num">501</span><span class="impact-stat__label">Tests passing</span></div>
+<div class="impact-stat"><span class="impact-stat__num">RLS</span><span class="impact-stat__label">Row-level security</span></div>
+<div class="impact-stat"><span class="impact-stat__num">3</span><span class="impact-stat__label">Live chits tracked</span></div>
+</div>
+<div class="carousel" data-carousel>
+    <div class="carousel__track">
+      <img src="/images/chit-dashboard-mockup.jpg" alt="Chit Fund Analytics – dashboard (illustrative mockup)" class="carousel__img" loading="lazy" onerror="this.style.display='none'">
+      <img src="/images/chit-detail-mockup.jpg" alt="Chit Fund Analytics – chit detail (illustrative mockup)" class="carousel__img" loading="lazy" onerror="this.style.display='none'">
+      <img src="/images/chit-verification-mockup.jpg" alt="Chit Fund Analytics – verification queue (illustrative mockup)" class="carousel__img" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <button class="carousel__btn carousel__btn--prev" aria-label="Previous image">‹</button>
+    <button class="carousel__btn carousel__btn--next" aria-label="Next image">›</button>
+    <div class="carousel__dots"></div>
+  </div>
+<p style="font-size:0.75rem;color:#94A3B8;margin-top:-0.5rem;margin-bottom:1rem;">Illustrative UI previews — fictional demo data.</p>
+<div class="modal__tech"><span class="tech-tag">Next.js</span><span class="tech-tag">TypeScript</span><span class="tech-tag">React</span><span class="tech-tag">Supabase</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Tailwind CSS</span><span class="tech-tag">Vercel</span><span class="tech-tag">GitHub Actions</span></div>
+</div>
+<div class="modal__footer"><a href="https://chitfund-analytics.vercel.app" target="_blank" rel="noopener" class="btn btn--primary btn--sm">Live App →</a><a href="https://github.com/Nithish-kumar-git/chitfund-analytics" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">GitHub →</a></div>
 </div>
 
 <div class="modal" id="modal-vaxvault">
