@@ -49,6 +49,7 @@
 @import './motion.css';
 @import './utilities.css';
 @import './primitives.css';
+@import '../styles/sections/projects.css';
 
 /**
  * ============================================================
