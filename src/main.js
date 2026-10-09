@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initClipboardCopy();
   initCarousels();
-  initCardReels();
+
 });
 
 function initHero() {
@@ -191,50 +191,6 @@ function openLightbox(src, alt) {
   lightbox.classList.add('lightbox--active');
 }
 
-
-function initCardReels() {
-  document.querySelectorAll('[data-reel]').forEach((reel, reelIndex) => {
-    const slides = Array.from(reel.querySelectorAll('.card-reel__slide'));
-    const dots   = Array.from(reel.querySelectorAll('.card-reel__dot'));
-    if (slides.length <= 1) return;
-
-    let current = 0;
-    let timer   = null;
-
-    function goTo(i) {
-      slides[current].classList.remove('card-reel__slide--active');
-      dots[current]?.classList.remove('card-reel__dot--active');
-      current = (i + slides.length) % slides.length;
-      slides[current].classList.add('card-reel__slide--active');
-      dots[current]?.classList.add('card-reel__dot--active');
-    }
-
-    function start() {
-      if (timer) return;
-      timer = setInterval(() => goTo(current + 1), 3500);
-    }
-
-    function stop() {
-      clearInterval(timer);
-      timer = null;
-    }
-
-    reel.addEventListener('mouseenter', stop);
-    reel.addEventListener('mouseleave', start);
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        stop();
-        goTo(i);
-        start();
-      });
-    });
-
-    // Stagger start times so cards don't all flip simultaneously
-    setTimeout(start, reelIndex * 1100);
-  });
-}
 
 window.openModal = openModal;
 window.closeModal = closeModal;
