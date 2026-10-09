@@ -195,37 +195,19 @@ function openLightbox(src, alt) {
 
 function initCardPeek() {
   document.querySelectorAll('[data-peek]').forEach((peek, peekIdx) => {
-    const slides = Array.from(peek.querySelectorAll('.card-peek__main'));
-    const dots   = Array.from(peek.querySelectorAll('.card-peek__dot'));
-    if (slides.length <= 1) return;
+    const imgs = Array.from(peek.querySelectorAll('.card-peek__img'));
+    const dots = Array.from(peek.querySelectorAll('.card-peek__dot'));
+    if (imgs.length <= 1) return;
 
     let current = 0;
-    let timer   = null;
+    let timer = null;
 
     function goTo(i) {
-      slides[current].classList.remove('card-peek__slide--active');
-      slides[current].style.display = 'block';
-      slides[current].style.opacity = '0';
+      imgs[current].classList.remove('card-peek__img--active');
       dots[current]?.classList.remove('card-peek__dot--active');
-
-      current = (i + slides.length) % slides.length;
-
-      slides[current].style.display = 'block';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          slides[current].classList.add('card-peek__slide--active');
-          dots[current]?.classList.add('card-peek__dot--active');
-        });
-      });
-
-      slides.forEach((s, si) => {
-        if (si !== current) {
-          s.addEventListener('transitionend', function hide() {
-            if (si !== current) s.style.display = 'none';
-            s.removeEventListener('transitionend', hide);
-          }, { once: true });
-        }
-      });
+      current = (i + imgs.length) % imgs.length;
+      imgs[current].classList.add('card-peek__img--active');
+      dots[current]?.classList.add('card-peek__dot--active');
     }
 
     function start() {
@@ -238,12 +220,10 @@ function initCardPeek() {
       timer = null;
     }
 
-    // Ensure only the first slide is visible initially
-    slides.forEach((s, i) => {
-      s.style.display = i === 0 ? 'block' : 'none';
-      s.style.opacity = i === 0 ? '1'     : '0';
+    // Initialise: only first image visible
+    imgs.forEach((img, i) => {
+      img.style.opacity = i === 0 ? '1' : '0';
     });
-    slides[0].classList.add('card-peek__slide--active');
 
     // Dot clicks
     dots.forEach((dot, i) => {
@@ -255,12 +235,11 @@ function initCardPeek() {
       });
     });
 
-    // Pause on hover
     peek.addEventListener('mouseenter', stop);
     peek.addEventListener('mouseleave', start);
 
-    // Stagger start so cards don't flip simultaneously
-    setTimeout(start, peekIdx * 1200);
+    // Stagger so cards don't all flip at the same moment
+    setTimeout(start, peekIdx * 1300);
   });
 }
 

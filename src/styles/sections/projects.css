@@ -130,90 +130,56 @@
   }
 }
 
-/* ── Card Peek ───────────────────────────────────────────────────────────────────── */
-/* Composed image area: large main shot + 2 stacked thumbs, like FWMS.  */
-/* Main image auto-rotates (JS). Right column is always static.          */
-
+/* ── Card Peek — full-width fade carousel on project cards ────────── */
 .card-peek {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 210px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.07);
-  background: var(--color-bg-elevated);
-  margin-bottom: 0.5rem;
+  background: #0f172a;
+  margin-bottom: 0.75rem;
   flex-shrink: 0;
 }
 
-/* Badge row overlaid on top-left of image area */
+/* Badge row overlaid top-left */
 .card-peek__badge-row {
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
   display: flex;
   gap: 0.4rem;
-  flex-wrap: wrap;
-  z-index: 4;
+  z-index: 5;
 }
 
-/* __screens: contains main images (absolutely stacked) + side column */
-.card-peek__screens {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* Main images: stacked in left 3/5, crossfade on rotation */
-.card-peek__main {
+/* All images fill the full card-peek area and stack */
+.card-peek__img {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: calc(100% * 3 / 5);
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top left;
-  display: block;
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+  display: block;
 }
 
-.card-peek__main.card-peek__slide--active {
+.card-peek__img--active {
   opacity: 1;
 }
 
-/* Right column: two stacked thumbs in right 2/5 */
-.card-peek__side {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: calc(100% * 2 / 5);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.card-peek__thumb {
-  flex: 1;
-  width: 100%;
-  object-fit: cover;
-  object-position: top left;
-  display: block;
-  min-height: 0;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Dots indicator centred under main image */
+/* Dots row centred at bottom */
 .card-peek__dots {
   position: absolute;
-  bottom: 0.4rem;
-  left: calc(100% * 3 / 10);
+  bottom: 0.5rem;
+  left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 0.35rem;
-  z-index: 4;
+  z-index: 5;
 }
 
 .card-peek__dot {
@@ -226,14 +192,14 @@
 }
 
 .card-peek__dot--active {
-  background: var(--color-accent);
+  background: #0ea5e9;
   transform: scale(1.4);
 }
 
-/* Subtle zoom on card hover */
-.project-card:hover .card-peek__main,
-.project-card:hover .card-peek__thumb {
+/* Subtle zoom on card hover (on the active image only) */
+.project-card:hover .card-peek__img--active {
   transform: scale(1.03);
+  transition: opacity 0.9s ease, transform 0.6s ease;
 }
 
 /* ── Card Hover — subtle lift only ──────────────────────────── */
