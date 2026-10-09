@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initClipboardCopy();
   initCarousels();
   initCardReels();
-  initHoverEffects();
 });
 
 function initHero() {
@@ -194,13 +193,13 @@ function openLightbox(src, alt) {
 
 
 function initCardReels() {
-  document.querySelectorAll('[data-reel]').forEach((reel) => {
+  document.querySelectorAll('[data-reel]').forEach((reel, reelIndex) => {
     const slides = Array.from(reel.querySelectorAll('.card-reel__slide'));
     const dots   = Array.from(reel.querySelectorAll('.card-reel__dot'));
-    if (slides.length <= 1) return; // single slide = no autoplay needed
+    if (slides.length <= 1) return;
 
     let current = 0;
-    let timer = null;
+    let timer   = null;
 
     function goTo(i) {
       slides[current].classList.remove('card-reel__slide--active');
@@ -211,18 +210,18 @@ function initCardReels() {
     }
 
     function start() {
+      if (timer) return;
       timer = setInterval(() => goTo(current + 1), 3500);
     }
 
     function stop() {
       clearInterval(timer);
+      timer = null;
     }
 
-    // Pause on hover, resume on leave
     reel.addEventListener('mouseenter', stop);
     reel.addEventListener('mouseleave', start);
 
-    // Dot click
     dots.forEach((dot, i) => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -232,54 +231,8 @@ function initCardReels() {
       });
     });
 
-    // Stagger start by card index to avoid all cards switching simultaneously
-    const cardIndex = [...document.querySelectorAll('[data-reel]')].indexOf(reel);
-    setTimeout(start, cardIndex * 1200);
-  });
-}
-
-function initHoverEffects() {
-  // 3D tilt on .tilt-card elements
-  document.querySelectorAll('.tilt-card').forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const cx   = rect.left + rect.width  / 2;
-      const cy   = rect.top  + rect.height / 2;
-      const dx   = (e.clientX - cx) / (rect.width  / 2); // -1 to 1
-      const dy   = (e.clientY - cy) / (rect.height / 2); // -1 to 1
-      const rx   = -dy * 7;  // max 7deg tilt
-      const ry   =  dx * 7;
-      card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-
-  // Glow cursor follow on .glow-follow elements
-  document.querySelectorAll('.glow-follow').forEach((el) => {
-    el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width)  * 100;
-      const y = ((e.clientY - rect.top)  / rect.height) * 100;
-      el.style.setProperty('--glow-x', `${x}%`);
-      el.style.setProperty('--glow-y', `${y}%`);
-    });
-  });
-
-  // Magnetic buttons — subtle cursor attraction
-  document.querySelectorAll('.magnetic-btn').forEach((btn) => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const cx   = rect.left + rect.width  / 2;
-      const cy   = rect.top  + rect.height / 2;
-      const dx   = (e.clientX - cx) * 0.25;
-      const dy   = (e.clientY - cy) * 0.25;
-      btn.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
+    // Stagger start times so cards don't all flip simultaneously
+    setTimeout(start, reelIndex * 1100);
   });
 }
 
