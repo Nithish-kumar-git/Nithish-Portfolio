@@ -378,3 +378,124 @@ body.hero--loaded .hero-animate {
   from { background-position: 200% center; }
   to   { background-position: -200% center; }
 }
+
+
+/* ────────────────────────────────────────────
+ * 3D TILT — applied via JS on mousemove
+ * CSS defines the transition smoothing only.
+ * JS sets --rotateX and --rotateY via inline style.
+ * ──────────────────────────────────────────── */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+  will-change: transform;
+}
+
+.tilt-card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(14, 165, 233, 0.18);
+}
+
+/* Inner layer lifts forward in 3D space */
+.tilt-card .tilt-layer {
+  transform: translateZ(12px);
+  transform-style: preserve-3d;
+  transition: transform 0.15s var(--ease-out);
+}
+
+/* ────────────────────────────────────────────
+ * GLOW CURSOR TRAIL
+ * A radial gradient that follows the mouse
+ * on glass cards — CSS variable updated by JS.
+ * ──────────────────────────────────────────── */
+.glow-follow {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-follow::before {
+  content: '';
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.13) 0%, transparent 70%);
+  transform: translate(var(--glow-x, -200%), var(--glow-y, -200%)) translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.glow-follow:hover::before {
+  opacity: 1;
+}
+
+/* ────────────────────────────────────────────
+ * MAGNETIC BUTTON
+ * Subtle translate follows cursor near the btn.
+ * CSS defines the snap-back transition.
+ * JS sets --mag-x and --mag-y.
+ * ──────────────────────────────────────────── */
+.magnetic-btn {
+  transition: transform 0.25s var(--ease-spring);
+  will-change: transform;
+}
+
+/* ────────────────────────────────────────────
+ * SHIMMER BORDER on .glass-context cards
+ * A rotating conic gradient border on hover.
+ * ──────────────────────────────────────────── */
+@keyframes rotateBorder {
+  from { --border-angle: 0deg; }
+  to   { --border-angle: 360deg; }
+}
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.shimmer-border {
+  position: relative;
+}
+
+.shimmer-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 70%,
+    rgba(14, 165, 233, 0.6) 80%,
+    rgba(56, 189, 248, 0.8) 85%,
+    rgba(14, 165, 233, 0.6) 90%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: rotateBorder 3s linear infinite;
+}
+
+.shimmer-border:hover::after {
+  opacity: 1;
+}
+
+/* ────────────────────────────────────────────
+ * FLOATING BADGE PULSE
+ * The ● Live badge pulses subtly.
+ * ──────────────────────────────────────────── */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.badge--live {
+  animation: livePulse 2s ease-in-out infinite;
+}
