@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initClipboardCopy();
   initCarousels();
+  initCardPeek();
 
 });
 
@@ -191,6 +192,77 @@ function openLightbox(src, alt) {
   lightbox.classList.add('lightbox--active');
 }
 
+
+function initCardPeek() {
+  document.querySelectorAll('[data-peek]').forEach((peek, peekIdx) => {
+    const slides = Array.from(peek.querySelectorAll('.card-peek__main'));
+    const dots   = Array.from(peek.querySelectorAll('.card-peek__dot'));
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let timer   = null;
+
+    function goTo(i) {
+      slides[current].classList.remove('card-peek__slide--active');
+      slides[current].style.display = 'block';
+      slides[current].style.opacity = '0';
+      dots[current]?.classList.remove('card-peek__dot--active');
+
+      current = (i + slides.length) % slides.length;
+
+      slides[current].style.display = 'block';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          slides[current].classList.add('card-peek__slide--active');
+          dots[current]?.classList.add('card-peek__dot--active');
+        });
+      });
+
+      slides.forEach((s, si) => {
+        if (si !== current) {
+          s.addEventListener('transitionend', function hide() {
+            if (si !== current) s.style.display = 'none';
+            s.removeEventListener('transitionend', hide);
+          }, { once: true });
+        }
+      });
+    }
+
+    function start() {
+      if (timer) return;
+      timer = setInterval(() => goTo(current + 1), 3500);
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    // Ensure only the first slide is visible initially
+    slides.forEach((s, i) => {
+      s.style.display = i === 0 ? 'block' : 'none';
+      s.style.opacity = i === 0 ? '1'     : '0';
+    });
+    slides[0].classList.add('card-peek__slide--active');
+
+    // Dot clicks
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        stop();
+        goTo(i);
+        start();
+      });
+    });
+
+    // Pause on hover
+    peek.addEventListener('mouseenter', stop);
+    peek.addEventListener('mouseleave', start);
+
+    // Stagger start so cards don't flip simultaneously
+    setTimeout(start, peekIdx * 1200);
+  });
+}
 
 window.openModal = openModal;
 window.closeModal = closeModal;

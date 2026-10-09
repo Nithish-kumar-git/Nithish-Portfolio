@@ -121,18 +121,25 @@
 <div class="projects-grid">
 <div class="project-card glass-context reveal reveal--up">
 <div class="project-card__inner card-hover">
-<div class="project-card__header">
-<div class="project-card__badges"><span class="badge badge--live">● Live</span><span class="badge badge--role">Lead Builder</span></div>
-<div class="card-peek">
-  <img src="/images/fft-dashboard.png" alt="FFT – Dashboard overview"
-       class="card-peek__main" loading="lazy">
-  <div class="card-peek__stack">
-    <img src="/images/fft-expenses.png" alt="FFT – Expense entry"
-         class="card-peek__thumb" loading="lazy">
-    <img src="/images/fft-chatbot.png"  alt="FFT – AI chatbot"
-         class="card-peek__thumb" loading="lazy">
+<div class="card-peek" data-peek>
+  <div class="card-peek__badge-row">
+    <span class="badge badge--live">● Live</span>
+    <span class="badge badge--role">Lead Builder</span>
   </div>
-</div>
+  <div class="card-peek__screens">
+    <img src="/images/fft-dashboard.png"  alt="FFT – Dashboard"  class="card-peek__main card-peek__slide--active" loading="lazy" data-peek-idx="0">
+    <img src="/images/fft-expenses.png"   alt="FFT – Expenses"   class="card-peek__main" loading="lazy" data-peek-idx="1" style="display:none">
+    <img src="/images/fft-chatbot.png"    alt="FFT – AI Chatbot" class="card-peek__main" loading="lazy" data-peek-idx="2" style="display:none">
+    <div class="card-peek__side">
+      <img src="/images/fft-expenses.png"  alt="FFT – Expenses"  class="card-peek__thumb" loading="lazy">
+      <img src="/images/fft-chatbot.png"   alt="FFT – AI Chatbot" class="card-peek__thumb" loading="lazy">
+    </div>
+  </div>
+  <div class="card-peek__dots">
+    <span class="card-peek__dot card-peek__dot--active"></span>
+    <span class="card-peek__dot"></span>
+    <span class="card-peek__dot"></span>
+  </div>
 </div>
 <h3 class="project-card__title">Family Finance Tracker</h3>
 <p class="project-card__desc">AI-powered PWA using Google Gemini to parse SMS expense messages into structured transactions. Multi-user budgeting across 5 asset classes with Recharts visualizations and offline support.</p>
@@ -146,18 +153,25 @@
 
 <div class="project-card glass-context reveal reveal--up" style="--reveal-delay:100ms">
 <div class="project-card__inner card-hover">
-<div class="project-card__header">
-<div class="project-card__badges"><span class="badge badge--live">● Live</span><span class="badge badge--role">Lead Builder</span></div>
-<div class="card-peek">
-  <img src="/images/chit-sc-dashboard.png" alt="Chit Fund – Financial Overview"
-       class="card-peek__main" loading="lazy">
-  <div class="card-peek__stack">
-    <img src="/images/chit-sc-rounds.png" alt="Chit Fund – Round detail"
-         class="card-peek__thumb" loading="lazy">
-    <img src="/images/chit-sc-detail.png" alt="Chit Fund – Chit structure"
-         class="card-peek__thumb" loading="lazy">
+<div class="card-peek" data-peek>
+  <div class="card-peek__badge-row">
+    <span class="badge badge--live">● Live</span>
+    <span class="badge badge--role">Lead Builder</span>
   </div>
-</div>
+  <div class="card-peek__screens">
+    <img src="/images/chit-sc-dashboard.png" alt="Chit Fund – Overview"  class="card-peek__main card-peek__slide--active" loading="lazy" data-peek-idx="0">
+    <img src="/images/chit-sc-rounds.png"    alt="Chit Fund – Rounds"    class="card-peek__main" loading="lazy" data-peek-idx="1" style="display:none">
+    <img src="/images/chit-sc-detail.png"    alt="Chit Fund – Detail"    class="card-peek__main" loading="lazy" data-peek-idx="2" style="display:none">
+    <div class="card-peek__side">
+      <img src="/images/chit-sc-rounds.png" alt="Chit Fund – Rounds"  class="card-peek__thumb" loading="lazy">
+      <img src="/images/chit-sc-detail.png" alt="Chit Fund – Detail"  class="card-peek__thumb" loading="lazy">
+    </div>
+  </div>
+  <div class="card-peek__dots">
+    <span class="card-peek__dot card-peek__dot--active"></span>
+    <span class="card-peek__dot"></span>
+    <span class="card-peek__dot"></span>
+  </div>
 </div>
 <h3 class="project-card__title">Chit Fund Analytics</h3>
 <p class="project-card__desc">Authenticated financial tracking platform for chit funds. Append-only ledger, explicit verification states, ROI safety gates, and Excel / audit exports — built on Supabase with row-level security throughout.</p>
