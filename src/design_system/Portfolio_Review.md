@@ -1,4 +1,9 @@
 # Portfolio Review — nithish-portfolio-seven.vercel.app
+
+> Historical June 2026 design review. Current factual status, live links and
+> deployment boundaries are governed by `README.md` and
+> `docs/PORTFOLIO_HANDOFF.md`. Resolved items below are retained only as history.
+
 ## Roles: Apple Design Reviewer · Linear Design Reviewer · Senior Recruiter · Senior Product Designer
 ## Date: June 2026 | Competing against top 5% of junior candidates
 
@@ -68,21 +73,13 @@ didn't even review it before sharing.
 
 ---
 
-### HIGH-1: FAMILY FINANCE TRACKER LIVE LINK GOES TO GITHUB
+### HIGH-1: FINORA LIVE LINK — RESOLVED
 **Severity: 🟠 High — Destroys the portfolio's most valuable proof point**
 
-The "Live App →" button for Family Finance Tracker links to:
-  https://github.com/Nithish-kumar-git
-
-The actual live URL is:
-  https://family-finance-tracker-pearl.vercel.app
-
-This is the only live production application in the portfolio. The entire PRD 
-strategy was built around "Live links are proof; seeing is believing." A recruiter 
-clicking "Live App" and landing on a GitHub profile is a conversion failure at the 
-most critical moment.
-
-**Fix:** Change href to https://family-finance-tracker-pearl.vercel.app
+The interactive Finora frontend is
+`https://scintillating-donut-a597ff.netlify.app/`. The Vercel host is the separate
+backend/API and must not be used as the portfolio's Live App link. The current
+portfolio source now points both Finora live-app buttons to the Netlify frontend.
 
 ---
 
@@ -338,7 +335,7 @@ implementations without explicit mobile-first CSS.
 1. 🔴 Remove fabricated certifications → replace with NPTEL only
 2. 🔴 Remove or fix hardcoded GitHub stats → API or delete
 3. 🔴 Fix BCA education entry → correct institution name
-4. 🔴 Fix Family Finance Tracker live link → actual Vercel URL
+4. ✅ Finora live link points to the Netlify frontend, not the backend API
 5. 🟠 Remove Docker, GCP from skills
 6. 🟠 Fix counter HTML fallback values
 7. 🟠 Fix OG image path

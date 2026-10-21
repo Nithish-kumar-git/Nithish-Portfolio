@@ -20,7 +20,7 @@
   <!-- Access Layer -->
   <rect class="layer-box" x="40" y="20" width="320" height="40" />
   <text class="layer-text" x="200" y="38" text-anchor="middle">Access Layer</text>
-  <text class="sub-text" x="200" y="52" text-anchor="middle">4-tier RBAC (Faculty / Coord / HOD / Admin)</text>
+  <text class="sub-text" x="200" y="52" text-anchor="middle">3 roles (Faculty / Coordinator / HOD)</text>
 
   <line class="conn-line" x1="200" y1="60" x2="200" y2="80" />
   <circle class="accent-dot" cx="200" cy="70" r="3" />
