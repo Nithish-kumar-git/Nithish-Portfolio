@@ -31,21 +31,22 @@ dark, component-heavy presentation with a premium light-first interface.
   text actions now have 44px minimum touch targets, and following a mobile-menu
   link preserves the destination focus instead of returning it to the menu
   button. The browser-rendering limitation above still applies.
-- Final QA also confirmed that no local renderer is available in this execution
-  environment: Playwright, Puppeteer and a DevTools client are absent, while an
-  installed headless Chrome can initialize an isolated profile but emits no
-  local-server screenshots. This is an environment limitation, not rendered
-  approval; retain the manual desktop/mobile review before release.
-- A project-local Playwright runner now exists at `scripts/visual-qa.mjs` and is
-  available as `npm run qa:visual`. It starts Vite, generates 1440px/390px
-  screenshots, checks loaded images, horizontal overflow, console/request
-  failures, keyboard skip-link/menu/dialog behavior and reduced motion. The
-  pinned `@playwright/test` development dependency and its browser setup are
-  described in README. Its first run in this sandbox reached Vite's ready state
-  and launched bundled Chromium, but navigation to `127.0.0.1:5173` failed with
-  `net::ERR_NETWORK_ACCESS_DENIED`; no screenshots or rendered approval were
-  produced. This must be rerun in a local environment where Chromium is allowed
-  to access loopback before a release.
+- A project-local Playwright runner exists at `scripts/visual-qa.mjs` and is
+  available as `npm run qa:visual`. It checks loopback capability before
+  starting Vite, generates 1440px/390px screenshots when permitted, and checks
+  loaded images, horizontal overflow, console/request failures, keyboard
+  skip-link/menu/dialog behavior and reduced motion. It records child-process
+  lifecycle events, Vite stdout/stderr, and port checks in the ignored
+  `artifacts/visual-qa/diagnostics.json` file.
+- The runner lifecycle diagnosis verified that this execution runtime can bind
+  an ephemeral `127.0.0.1` server but denies its own connection with `EACCES`.
+  In the Vite diagnostic run, Vite printed its normal ready message, remained
+  alive with no stderr, and exited only after the runner sent `SIGTERM`.
+  Therefore the limitation is the runtime's local-network policy, not Vite,
+  child-process spawning, host configuration, or an occupied port. Chromium
+  similarly fails with `net::ERR_NETWORK_ACCESS_DENIED`. No screenshots or
+  rendered approval were produced; rerun from a normal local terminal/browser
+  environment and inspect both screenshots before release.
 
 Before a push to `main`, review the local commit/diff, open the Vite preview at
 desktop and mobile widths, confirm keyboard menu and dialog behavior, and then

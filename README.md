@@ -77,11 +77,14 @@ npm run preview
 
 ## Local visual QA
 
-The repository includes a Playwright-based local QA runner. It starts Vite on
+The repository includes a Playwright-based local QA runner. It first confirms
+that the active runtime can make a loopback connection, then starts Vite on
 `127.0.0.1:5173`, captures full-page desktop (1440px) and mobile (390px)
 screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
 loading, horizontal overflow, console/network failures, keyboard navigation,
-dialog focus return and reduced-motion handling.
+dialog focus return and reduced-motion handling. It writes
+`artifacts/visual-qa/diagnostics.json` on both success and failure, including
+the Vite child lifecycle, output and local-port checks.
 
 After `npm ci`, install the development browser once in the project-local
 Playwright location, then run the check:
@@ -92,11 +95,15 @@ npx playwright install chromium
 npm run qa:visual
 ```
 
-The runner was added for repeatable visual QA. In the current sandbox it starts
-the local server and launches Chromium, but browser navigation to the loopback
-server is denied with `net::ERR_NETWORK_ACCESS_DENIED`; no visual pass is
-claimed from that environment. Run it from a normal local terminal/browser
-environment before release and inspect both generated screenshots.
+The current Codex execution runtime cannot connect to its own loopback server:
+an ephemeral Node server binds successfully, but its local client is denied with
+`EACCES`. In a lifecycle diagnostic run, Vite printed its normal ready message,
+remained alive with no stderr, and exited only after the runner sent `SIGTERM`.
+This is a local runtime-network restriction rather than a Vite lifecycle or
+port-configuration failure. It prevents Chromium from navigating to the local
+server (`net::ERR_NETWORK_ACCESS_DENIED`), so no visual pass is claimed here.
+Run the command from a normal local terminal/browser environment and inspect
+both generated screenshots before release.
 
 There are no runtime environment variables or automated test script in this repository. The content-only closeout uses the production build plus link/image checks.
 

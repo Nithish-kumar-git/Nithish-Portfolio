@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
+import net from 'node:net';
 import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
@@ -8,16 +9,104 @@ const outputDir = resolve(root, 'artifacts', 'visual-qa');
 const baseUrl = 'http://127.0.0.1:5173/';
 const viteEntry = resolve(root, 'node_modules', 'vite', 'bin', 'vite.js');
 const browsersDir = resolve(root, 'node_modules', 'playwright-core', '.local-browsers');
-const server = spawn(process.execPath, [viteEntry, '--host', '127.0.0.1'], {
-  cwd: root,
-  stdio: ['ignore', 'pipe', 'pipe'],
-  windowsHide: true,
-});
-
+let server;
 let serverOutput = '';
 let serverError = '';
-server.stdout.on('data', (chunk) => { serverOutput += chunk; });
-server.stderr.on('data', (chunk) => { serverError += chunk; });
+const diagnostics = {
+  baseUrl,
+  startedAt: new Date().toISOString(),
+  lifecycle: [],
+  socketChecks: [],
+};
+
+function recordLifecycle(event, details = {}) {
+  diagnostics.lifecycle.push({ at: new Date().toISOString(), event, ...details });
+}
+
+function probePort(port = 5173) {
+  return new Promise((resolveProbe) => {
+    const socket = net.createConnection({ host: '127.0.0.1', port });
+    const finish = (state, details = {}) => {
+      socket.destroy();
+      resolveProbe({ state, ...details });
+    };
+    socket.setTimeout(1_000);
+    socket.once('connect', () => finish('listening'));
+    socket.once('timeout', () => finish('timed-out'));
+    socket.once('error', (error) => finish('unavailable', { code: error.code, message: error.message }));
+  });
+}
+
+function verifyLoopbackCapability() {
+  return new Promise((resolveCheck) => {
+    const testServer = net.createServer();
+    let client;
+    let settled = false;
+    const finish = (result) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeout);
+      client?.destroy();
+      if (testServer.listening) {
+        testServer.close(() => resolveCheck(result));
+      } else {
+        resolveCheck(result);
+      }
+    };
+    const timeout = setTimeout(() => finish({ state: 'timed-out' }), 1_500);
+    testServer.once('error', (error) => finish({ state: 'bind-failed', code: error.code, message: error.message }));
+    testServer.listen(0, '127.0.0.1', () => {
+      const address = testServer.address();
+      client = net.createConnection({ host: '127.0.0.1', port: address.port });
+      client.once('connect', () => finish({ state: 'available', address }));
+      client.once('error', (error) => finish({
+        state: 'connection-failed', address, code: error.code, message: error.message,
+      }));
+    });
+  });
+}
+
+function processState() {
+  if (!server) return { started: false };
+  let alive = false;
+  try {
+    process.kill(server.pid, 0);
+    alive = true;
+  } catch (error) {
+    if (error.code !== 'ESRCH') throw error;
+  }
+  return { pid: server.pid, alive, exitCode: server.exitCode, signalCode: server.signalCode };
+}
+
+async function captureSocketState(stage) {
+  const socket = await probePort();
+  diagnostics.socketChecks.push({ at: new Date().toISOString(), stage, socket, process: processState() });
+  return socket;
+}
+
+async function writeDiagnostics(error) {
+  if (error) diagnostics.failure = { message: error.message, stack: error.stack };
+  diagnostics.serverOutput = serverOutput;
+  diagnostics.serverError = serverError;
+  diagnostics.finishedAt = new Date().toISOString();
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(resolve(outputDir, 'diagnostics.json'), `${JSON.stringify(diagnostics, null, 2)}\n`);
+}
+
+function startServer() {
+  server = spawn(process.execPath, [viteEntry, '--host', '127.0.0.1', '--port', '5173', '--strictPort'], {
+    cwd: root,
+    stdio: ['ignore', 'pipe', 'pipe'],
+    windowsHide: true,
+  });
+  recordLifecycle('spawn-requested', { pid: server.pid, args: server.spawnargs });
+  server.once('spawn', () => recordLifecycle('spawn', processState()));
+  server.once('error', (error) => recordLifecycle('error', { code: error.code, message: error.message }));
+  server.once('exit', (code, signal) => recordLifecycle('exit', { code, signal }));
+  server.once('close', (code, signal) => recordLifecycle('close', { code, signal }));
+  server.stdout.on('data', (chunk) => { serverOutput += chunk; });
+  server.stderr.on('data', (chunk) => { serverError += chunk; });
+}
 
 function fail(message) {
   throw new Error(`${message}\nVite output:\n${serverOutput}\n${serverError}`);
@@ -25,11 +114,23 @@ function fail(message) {
 
 async function waitForServer() {
   const deadline = Date.now() + 15_000;
+  let readyAt;
   while (Date.now() < deadline) {
-    if (server.exitCode !== null) fail(`Vite exited with code ${server.exitCode}.`);
-    if (/Local:\s+http:\/\/127\.0\.0\.1:5173\//.test(serverOutput)) return;
+    if (server.exitCode !== null || server.signalCode !== null) {
+      await captureSocketState('vite-exited');
+      fail(`Vite exited with code ${server.exitCode} and signal ${server.signalCode}.`);
+    }
+    if (/Local:\s+http:\/\/127\.0\.0\.1:5173\//.test(serverOutput)) {
+      readyAt ??= Date.now();
+      const socket = await captureSocketState('vite-reported-ready');
+      if (socket.state === 'listening') return;
+      if (Date.now() - readyAt >= 1_000) {
+        fail(`Vite reported ready but port 5173 is not accepting connections (${socket.code ?? socket.state}).`);
+      }
+    }
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 150));
   }
+  await captureSocketState('wait-timeout');
   fail('Timed out waiting for Vite at 127.0.0.1:5173.');
 }
 
@@ -73,6 +174,15 @@ async function openPage(browser, viewport, events) {
 
 async function run() {
   await mkdir(outputDir, { recursive: true });
+  diagnostics.loopbackControl = await verifyLoopbackCapability();
+  if (diagnostics.loopbackControl.state !== 'available') {
+    fail(`This runtime cannot connect to its own loopback server (${diagnostics.loopbackControl.code ?? diagnostics.loopbackControl.state}).`);
+  }
+  const portBeforeStart = await captureSocketState('before-vite-start');
+  if (portBeforeStart.state === 'listening') {
+    fail('Port 5173 already accepts connections before Visual QA starts; the runner will not replace that process.');
+  }
+  startServer();
   await waitForServer();
 
   const events = { consoleErrors: [], pageErrors: [], failedRequests: [] };
@@ -160,8 +270,19 @@ async function run() {
   }
 }
 
+let runError;
 try {
   await run();
+} catch (error) {
+  runError = error;
+  if (server) await captureSocketState('run-failure');
+  throw error;
 } finally {
-  server.kill();
+  if (server && server.exitCode === null && server.signalCode === null) {
+    recordLifecycle('termination-requested', processState());
+    server.kill();
+  }
+  await new Promise((resolveDelay) => setTimeout(resolveDelay, 250));
+  if (server) await captureSocketState('after-cleanup');
+  await writeDiagnostics(runError);
 }
