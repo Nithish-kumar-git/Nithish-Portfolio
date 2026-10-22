@@ -57,6 +57,6 @@ There are no runtime environment variables or automated test script in this repo
 
 ## Deployment
 
-Vercel reports the production portfolio deployment as `READY` from commit `9e4a469f152803f1779f02edb74e8a7551914caa`. A read-only HTTP check returned `200` on 21 October 2026. After future pushes, verify the resulting deployment before changing this record.
+Vercel reports the production portfolio deployment as `READY` from commit `3f34599d3dcf1931a963e2aa5afc27612d672946`. A read-only HTTP check returned `200` on 22 October 2026. After future pushes, verify the resulting deployment before changing this record.
 
 See [docs/PORTFOLIO_HANDOFF.md](docs/PORTFOLIO_HANDOFF.md) for repository state, validation evidence and the safe resumption boundary.

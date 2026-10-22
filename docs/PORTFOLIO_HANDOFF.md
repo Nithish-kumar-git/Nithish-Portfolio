@@ -1,6 +1,42 @@
 # Portfolio website — maintenance handoff
 
-Updated 21 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
+Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
+
+## 22 October 2026 deployment verification
+
+This bounded, read-only verification did not change Vercel settings, deploy,
+push, install dependencies, or touch any linked-project repository.
+
+| Item | Verified value |
+| --- | --- |
+| Active branch / HEAD | `main` / `3f34599d3dcf1931a963e2aa5afc27612d672946` |
+| Remote synchronization | `origin/main` at the same commit; zero ahead, zero behind |
+| Checked worktree | Clean; no modified or untracked files |
+| Vercel production deployment | `READY`, `dpl_G4jPZ9v8uZEBvAzSdfuxYSGp6PES`, target `production` |
+| Deployment source | Git `main` at `3f34599d3dcf1931a963e2aa5afc27612d672946` |
+| Public URL check | `https://nithish-portfolio-seven.vercel.app/` returned `200` |
+| Provider project metadata | Vite framework, configured Node `24.x`; no local Vercel manifest or CI workflow is present |
+
+The live HTML identifies the site as **Nithish Kumar V — Analytics Systems
+Builder**, uses `/favicon.svg`, and presents the current Finora, FWMS, Chit Fund
+Analytics and Evidence-Grounded RAG descriptions. The Finora **Live App** link
+targets the Netlify frontend (`scintillating-donut-a597ff.netlify.app`), not the
+Vercel API host. Read-only requests confirmed `200` responses for the favicon,
+portrait, FWMS, Finora and Chit Fund representative images. No resume retrieval
+was attempted because it is not needed for deployment verification.
+
+The production deployment is therefore current with the documentation/content
+commit `3f34599d`; the prior `9e4a469f` deployment is an available rollback
+candidate, not the live version. `node_modules` is absent in this checkout, so a
+local `npm run build` was intentionally **not run** and no dependency install was
+performed. Vercel's `READY` production metadata confirms its hosted build, but it
+does not replace a repeatable local-build check.
+
+README was updated to correct its public deployment SHA and verification date.
+Before any future push, run `npm ci` and `npm run build` in a clean disposable
+checkout, review the exact diff, then verify the resulting Vercel deployment SHA,
+state and public page. With no pending content change, the portfolio may remain
+frozen after this documentation update is published.
 
 ## Repository and Git state
 
