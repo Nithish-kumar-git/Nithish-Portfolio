@@ -20,7 +20,11 @@ function setMenu(open, returnFocus = true) {
 }
 
 menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
-mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false, false)));
+mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+  setMenu(false, false);
+  if (!link.hash) return;
+  document.querySelector(link.hash)?.focus({ preventScroll: true });
+}));
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
 });

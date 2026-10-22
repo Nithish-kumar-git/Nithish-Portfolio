@@ -147,14 +147,53 @@ function trackPage(page, events) {
   page.on('requestfailed', (request) => events.failedRequests.push({
     url: request.url(), error: request.failure()?.errorText ?? 'unknown',
   }));
+  page.on('response', (response) => {
+    if (response.request().resourceType() === 'image') {
+      events.imageResponses.push({ url: response.url(), status: response.status(), statusText: response.statusText() });
+    }
+  });
 }
 
 async function imageState(page) {
   return page.locator('img').evaluateAll((images) => images.map((image) => ({
-    src: image.getAttribute('src'), alt: image.alt,
+    src: image.getAttribute('src'), currentSrc: image.currentSrc, alt: image.alt,
     loaded: image.complete && image.naturalWidth > 0,
-    width: image.naturalWidth, height: image.naturalHeight,
+    naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
+    loading: image.loading,
+    inViewport: (() => {
+      const rect = image.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < innerHeight && rect.right > 0 && rect.left < innerWidth;
+    })(),
   })));
+}
+
+async function loadImages(page) {
+  const images = page.locator('img');
+  const count = await images.count();
+  for (let index = 0; index < count; index += 1) {
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded();
+    await image.evaluate((element) => new Promise((resolveImage) => {
+      if (element.complete) {
+        resolveImage();
+        return;
+      }
+      element.addEventListener('load', resolveImage, { once: true });
+      element.addEventListener('error', resolveImage, { once: true });
+    }));
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+  return imageState(page);
+}
+
+async function revealPage(page) {
+  const elements = page.locator('.reveal');
+  const count = await elements.count();
+  for (let index = 0; index < count; index += 1) {
+    await elements.nth(index).scrollIntoViewIfNeeded();
+  }
+  await page.waitForTimeout(100);
+  await page.evaluate(() => window.scrollTo(0, 0));
 }
 
 async function overflowState(page) {
@@ -190,7 +229,7 @@ async function run() {
   startServer();
   await waitForServer();
 
-  const events = { consoleErrors: [], pageErrors: [], failedRequests: [] };
+  const events = { consoleErrors: [], pageErrors: [], failedRequests: [], imageResponses: [] };
   const chromiumDirectory = (await readdir(browsersDir, { withFileTypes: true }))
     .find((entry) => entry.isDirectory() && entry.name.startsWith('chromium-'))?.name;
   if (!chromiumDirectory) throw new Error('Project-local Playwright Chromium was not installed.');
@@ -206,7 +245,9 @@ async function run() {
 
   try {
     const desktop = await openPage(browser, { width: 1440, height: 1200 }, events);
-    results.desktop.images = await imageState(desktop.page);
+    results.desktop.initialImages = await imageState(desktop.page);
+    results.desktop.images = await loadImages(desktop.page);
+    await revealPage(desktop.page);
     results.desktop.overflow = await overflowState(desktop.page);
     await assert(!results.desktop.overflow.hasOverflow, 'Desktop page has horizontal overflow.');
     await assert(results.desktop.images.every((image) => image.loaded), 'One or more desktop images failed to load.');
@@ -223,7 +264,9 @@ async function run() {
     await desktop.context.close();
 
     const mobile = await openPage(browser, { width: 390, height: 844 }, events);
-    results.mobile.images = await imageState(mobile.page);
+    results.mobile.initialImages = await imageState(mobile.page);
+    results.mobile.images = await loadImages(mobile.page);
+    await revealPage(mobile.page);
     results.mobile.overflow = await overflowState(mobile.page);
     await assert(!results.mobile.overflow.hasOverflow, 'Mobile page has horizontal overflow.');
     await assert(results.mobile.images.every((image) => image.loaded), 'One or more mobile images failed to load.');
@@ -265,11 +308,20 @@ async function run() {
     results.events.consoleErrors = [...new Set(results.events.consoleErrors)];
     results.events.pageErrors = [...new Set(results.events.pageErrors)];
     results.events.failedRequests = results.events.failedRequests.filter((request, index, all) => index === all.findIndex((candidate) => candidate.url === request.url));
+    results.events.imageResponses = results.events.imageResponses.filter((response, index, all) => index === all.findIndex((candidate) => candidate.url === response.url));
     await assert(results.events.consoleErrors.length === 0, `Console errors: ${results.events.consoleErrors.join('; ')}`);
     await assert(results.events.pageErrors.length === 0, `Page errors: ${results.events.pageErrors.join('; ')}`);
     await assert(results.events.failedRequests.length === 0, `Failed requests: ${results.events.failedRequests.map((request) => request.url).join(', ')}`);
     await writeFile(resolve(outputDir, 'results.json'), `${JSON.stringify(results, null, 2)}\n`);
     console.log(`Visual QA passed. Screenshots: ${results.screenshots.join(', ')}`);
+  } catch (error) {
+    results.failure = { message: error.message, stack: error.stack };
+    results.events.consoleErrors = [...new Set(results.events.consoleErrors)];
+    results.events.pageErrors = [...new Set(results.events.pageErrors)];
+    results.events.failedRequests = results.events.failedRequests.filter((request, index, all) => index === all.findIndex((candidate) => candidate.url === request.url));
+    results.events.imageResponses = results.events.imageResponses.filter((response, index, all) => index === all.findIndex((candidate) => candidate.url === response.url));
+    await writeFile(resolve(outputDir, 'results.json'), `${JSON.stringify(results, null, 2)}\n`);
+    throw error;
   } finally {
     await browser.close();
   }

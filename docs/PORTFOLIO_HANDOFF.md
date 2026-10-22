@@ -38,16 +38,21 @@ dark, component-heavy presentation with a premium light-first interface.
   skip-link/menu/dialog behavior and reduced motion. It records child-process
   lifecycle events, Vite stdout/stderr, and port checks in the ignored
   `artifacts/visual-qa/diagnostics.json` file.
-- The Codex sandbox executor can bind an ephemeral `127.0.0.1` server but
-  denies its own connection with `EACCES`; its Chromium process similarly fails
-  with `net::ERR_NETWORK_ACCESS_DENIED`. A normal PowerShell run, however,
-  passed the loopback control and found port 5173 listening while Vite remained
-  alive. That run exposed a runner defect: ANSI color codes split the printed
-  `:5173` URL, so the readiness pattern timed out despite the live socket. The
-  runner now removes ANSI codes before matching and retains the lifecycle
-  diagnostics. Rerun in the normal local terminal/browser environment and
-  inspect the generated screenshots before release; no rendered approval is
-  claimed yet.
+- A normal local PowerShell run completed the Playwright QA against the local
+  light-first redesign. It generated and reviewed the ignored
+  `artifacts/visual-qa/desktop-1440.png` and `mobile-390.png` screenshots.
+  All four genuine images returned HTTP `200`; Finora and Chit Fund begin as
+  native lazy images outside the 390px viewport and load correctly after the
+  runner scrolls them into view. Both viewports have no horizontal overflow,
+  and the run recorded no console errors, page errors or failed requests.
+- The same run passed dialog focus return, skip-link focus, mobile-menu Escape
+  focus return, mobile-navigation destination focus and reduced-motion checks.
+  The runner now strips ANSI color codes from Vite readiness output, preserves
+  partial results on failures, and scrolls reveal sections before full-page
+  capture. `main` and mobile-menu anchor destinations are programmatically
+  focusable, fixing the two confirmed focus defects. The sandbox loopback
+  restriction remains environment-specific and is not evidence against this
+  successful local run.
 
 Before a push to `main`, review the local commit/diff, open the Vite preview at
 desktop and mobile widths, confirm keyboard menu and dialog behavior, and then

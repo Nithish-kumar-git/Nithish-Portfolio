@@ -95,14 +95,14 @@ npx playwright install chromium
 npm run qa:visual
 ```
 
-The Codex sandbox executor currently cannot connect to its own loopback server:
-an ephemeral Node server binds successfully, but its local client is denied with
-`EACCES`. A normal PowerShell run did allow loopback and confirmed that Vite was
-listening on port 5173. Its earlier timeout was caused by ANSI color codes inside
-Vite's printed URL, which the runner now strips before matching readiness. This
-does not constitute a visual pass: rerun the command from that normal local
-terminal/browser environment and inspect both generated screenshots before
-release.
+A normal local PowerShell run completed visual QA successfully. It captured and
+reviewed the light-first redesign at 1440px and 390px, loaded all four genuine
+images (including lazy-loaded project captures), found no horizontal overflow,
+console errors, page errors or failed requests, and passed keyboard/dialog/menu
+and reduced-motion checks. The runner strips ANSI color codes from Vite's ready
+message, scrolls native lazy images into view before asserting their load state,
+and saves partial results when a future run fails. Its ignored screenshot and
+JSON artifacts remain the evidence for each run.
 
 There are no runtime environment variables or automated test script in this repository. The content-only closeout uses the production build plus link/image checks.
 
