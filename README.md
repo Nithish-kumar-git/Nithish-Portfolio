@@ -104,6 +104,13 @@ message, scrolls native lazy images into view before asserting their load state,
 and saves partial results when a future run fails. Its ignored screenshot and
 JSON artifacts remain the evidence for each run.
 
+## Dependency security
+
+The development-only Vite toolchain was updated to `vite@8.1.6` on 23 October
+2026. Its patched dependency tree resolves `postcss@8.5.31`, `nanoid@3.3.20`
+and `source-map-js@1.2.2`; `npm audit` reported zero vulnerabilities after a
+clean `npm ci`, build and visual-QA run.
+
 There are no runtime environment variables or automated test script in this repository. The content-only closeout uses the production build plus link/image checks.
 
 ## Deployment

@@ -23,14 +23,15 @@ dark, component-heavy presentation with a premium light-first interface.
 - Read-only checks confirmed `200` responses for the Finora, FWMS and Chit Fund
   public URLs, plus current `main` refs for all four source repositories. RAG
   remains source-only, without a public deployment.
-- `npm ci` and `npm run build` completed in this portfolio checkout. The build
-  produced the static Vite assets successfully. A local browser automation
-  endpoint could not reach the machine-local dev server, so desktop and mobile
-  visual review remains a manual pre-release check; no deployment was started.
-- Focused static QA corrected two mobile accessibility details: project/contact
-  text actions now have 44px minimum touch targets, and following a mobile-menu
-  link preserves the destination focus instead of returning it to the menu
-  button. The browser-rendering limitation above still applies.
+- A clean `npm ci`, `npm run build`, JavaScript syntax checks and `git diff
+  --check` completed successfully. Rendered local QA reviewed the desktop and
+  mobile redesign, so visual review is no longer an outstanding pre-release
+  limitation.
+- The development-only Vite toolchain was updated from `8.0.16` to `8.1.6` to
+  remediate the prior audit findings. It resolves patched `postcss@8.5.31`,
+  `nanoid@3.3.20` and `source-map-js@1.2.2`; a follow-up `npm audit` reported
+  zero vulnerabilities. The dependency update passed clean installation,
+  production build and rendered visual QA.
 - A project-local Playwright runner exists at `scripts/visual-qa.mjs` and is
   available as `npm run qa:visual`. It checks loopback capability before
   starting Vite, generates 1440px/390px screenshots when permitted, and checks
