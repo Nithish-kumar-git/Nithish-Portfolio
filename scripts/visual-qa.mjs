@@ -251,6 +251,11 @@ async function run() {
     results.desktop.overflow = await overflowState(desktop.page);
     await assert(!results.desktop.overflow.hasOverflow, 'Desktop page has horizontal overflow.');
     await assert(results.desktop.images.every((image) => image.loaded), 'One or more desktop images failed to load.');
+    await assert(await desktop.page.locator('#education').count() === 1, 'Education section is missing.');
+    await assert(await desktop.page.getByText('CGPA 8.96 / 10', { exact: true }).count() === 1, 'Verified MCA CGPA is missing.');
+    await desktop.page.locator('.project--featured').hover();
+    await desktop.page.locator('[data-dialog="fwms-dialog"]').focus();
+    results.interactions.projectCardHoverAndFocus = 'passed';
     await desktop.page.screenshot({ path: resolve(outputDir, 'desktop-1440.png'), fullPage: true });
     results.screenshots.push('desktop-1440.png');
 
@@ -293,6 +298,24 @@ async function run() {
     await workLink.click();
     await assert(await mobile.page.locator('#work').evaluate((section) => document.activeElement === section), 'Mobile navigation did not move focus to its destination.');
     results.interactions.mobileNavigationFocus = 'passed';
+
+    const projectTrack = mobile.page.locator('[data-carousel-track]');
+    const carouselNext = mobile.page.locator('[data-carousel-next]');
+    await projectTrack.scrollIntoViewIfNeeded();
+    const carouselBefore = await projectTrack.evaluate((track) => ({
+      scrollLeft: track.scrollLeft, scrollWidth: track.scrollWidth, clientWidth: track.clientWidth,
+    }));
+    await assert(carouselBefore.scrollWidth > carouselBefore.clientWidth, 'Mobile project carousel is not horizontally scrollable.');
+    await carouselNext.focus();
+    await carouselNext.press('Enter');
+    await mobile.page.waitForTimeout(350);
+    const carouselAfter = await projectTrack.evaluate((track) => track.scrollLeft);
+    await assert(carouselAfter > carouselBefore.scrollLeft, 'Mobile project carousel next control did not advance.');
+    await projectTrack.focus();
+    await projectTrack.press('ArrowRight');
+    await mobile.page.waitForTimeout(350);
+    await assert(await projectTrack.evaluate((track) => track.scrollLeft) >= carouselAfter, 'Mobile project carousel did not respond to ArrowRight.');
+    results.interactions.mobileProjectCarousel = 'passed';
 
     const reducedContext = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     const reducedPage = await reducedContext.newPage();

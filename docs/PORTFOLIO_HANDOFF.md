@@ -2,6 +2,34 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Local luxury refinement — 23 October 2026 (not pushed or deployed)
+
+- The refinement is isolated on local branch `feature/luxury-education-projects`,
+  created from the clean, verified release tip `b00aa39`. `main`, `origin/main`
+  and the Vercel production site were not changed.
+- The light-first visual system now uses warm ivory, charcoal and restrained
+  champagne-bronze accents. It retains the existing portrait and authentic
+  FWMS, Finora and Chit Fund dashboard captures; the source-only RAG project
+  remains a clearly labelled workflow representation rather than a fabricated
+  product screenshot.
+- A semantic Education section records MCA — Hindustan Institute of Technology
+  & Science, Chennai — CGPA 8.96 / 10, expected 2026; BCA — Hindustan College
+  of Arts & Science, Chennai — CGPA 7.96 / 10, 2024; HSC — AEHSS-2, Chennai —
+  85.86%, 2021; and SSC — AECS-2, Chennai — 80.40%, 2019. The included resume
+  was visually checked as the authority; it resolves the former page conflict
+  by confirming 8.96 rather than 8.97 for the MCA.
+- Supporting project cards are now a responsive, scroll-snap carousel with
+  labelled previous/next buttons, keyboard Left/Right operation and native
+  touch scrolling. It has no autoplay. The visual QA runner exercises this
+  behaviour in addition to desktop/mobile screenshots, lazy image loading,
+  overflow, hover/focus, skip link, mobile-menu Escape/focus return, dialog
+  focus return, reduced motion, console errors and failed requests.
+- Local Playwright QA captured and visually reviewed ignored
+  `artifacts/visual-qa/desktop-1440.png` and `mobile-390.png` on this branch.
+  It recorded no horizontal overflow, console errors, page errors or failed
+  requests; all portrait and project images loaded with HTTP 200 after native
+  lazy-loading was triggered.
+
 ## Release verification — 23 October 2026
 
 - The reviewed redesign and security update were pushed to `origin/main` as

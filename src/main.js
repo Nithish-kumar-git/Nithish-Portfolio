@@ -33,6 +33,37 @@ const updateHeader = () => header?.classList.toggle('site-header--raised', windo
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
+document.querySelectorAll('[data-project-carousel]').forEach((carousel) => {
+  const track = carousel.querySelector('[data-carousel-track]');
+  const previous = carousel.querySelector('[data-carousel-previous]');
+  const next = carousel.querySelector('[data-carousel-next]');
+  if (!track || !previous || !next) return;
+
+  const updateControls = () => {
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    previous.disabled = track.scrollLeft <= 1;
+    next.disabled = track.scrollLeft >= maxScroll - 1;
+  };
+  const move = (direction) => {
+    const card = track.querySelector('.project');
+    const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+    const distance = (card?.getBoundingClientRect().width || track.clientWidth * 0.8) + gap;
+    track.scrollBy({ left: distance * direction, behavior: motionQuery.matches ? 'auto' : 'smooth' });
+  };
+
+  previous.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  track.addEventListener('scroll', updateControls, { passive: true });
+  track.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      move(event.key === 'ArrowLeft' ? -1 : 1);
+    }
+  });
+  new ResizeObserver(updateControls).observe(track);
+  updateControls();
+});
+
 if (!motionQuery.matches) {
   const observer = new IntersectionObserver((entries, currentObserver) => {
     entries.forEach((entry) => {

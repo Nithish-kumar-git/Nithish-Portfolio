@@ -5,10 +5,17 @@ A static portfolio for data analytics, full-stack engineering and applied AI wor
 ## Interface refresh
 
 The current interface is a light-first, editorial portfolio with warm-neutral
-surfaces, restrained blue accents and selective frosted navigation. It retains
+surfaces, restrained champagne-bronze accents and selective frosted navigation. It retains
 the static Vite architecture while adding responsive navigation, keyboard-safe
 project dialogs, a visible focus treatment, reduced-motion support and stable
 image dimensions.
+
+The current local refinement branch adds a concise Education section and a
+user-controlled, scroll-snap rail for the three supporting project cards. The
+rail has labelled previous/next controls, keyboard Left/Right support and touch
+scrolling; it does not autoplay. Academic values were checked against the
+included resume: the MCA CGPA is **8.96 / 10** (expected 2026), not the former
+8.97 value shown in an earlier hero summary.
 
 The work section uses genuine project imagery where it is available:
 
@@ -82,7 +89,7 @@ that the active runtime can make a loopback connection, then starts Vite on
 `127.0.0.1:5173`, captures full-page desktop (1440px) and mobile (390px)
 screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
 loading, horizontal overflow, console/network failures, keyboard navigation,
-dialog focus return and reduced-motion handling. It writes
+dialog focus return, mobile project-rail controls and reduced-motion handling. It writes
 `artifacts/visual-qa/diagnostics.json` on both success and failure, including
 the Vite child lifecycle, output and local-port checks.
 
