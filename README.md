@@ -115,6 +115,11 @@ There are no runtime environment variables or automated test script in this repo
 
 ## Deployment
 
-Vercel reports the production portfolio deployment as `READY` from commit `3f34599d3dcf1931a963e2aa5afc27612d672946`. A read-only HTTP check returned `200` on 22 October 2026. After future pushes, verify the resulting deployment before changing this record.
+The approved redesign was released on 23 October 2026 from commit
+`e56aee942f2de30affa8ad6f47bf321bd3e0c809`. Vercel deployment
+`dpl_88bhcwSa6Fjdm8WFfhrhdVik29fC` completed with status `READY` and the
+production URL served the redesigned page. Read-only desktop and 390px mobile
+smoke checks confirmed navigation, image loading and no horizontal overflow or
+browser/network errors.
 
 See [docs/PORTFOLIO_HANDOFF.md](docs/PORTFOLIO_HANDOFF.md) for repository state, validation evidence and the safe resumption boundary.

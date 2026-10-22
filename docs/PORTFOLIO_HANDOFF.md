@@ -2,6 +2,20 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Release verification — 23 October 2026
+
+- The reviewed redesign and security update were pushed to `origin/main` as
+  `e56aee942f2de30affa8ad6f47bf321bd3e0c809`; the remote ref was verified to
+  match exactly after the push.
+- Vercel production deployment `dpl_88bhcwSa6Fjdm8WFfhrhdVik29fC` is `READY`
+  for that exact commit. The public production URL
+  `https://nithish-portfolio-seven.vercel.app/` was inspected read-only in
+  desktop Chrome and at a 390px viewport.
+- The live smoke check confirmed the light-first redesign, HTTP `200` responses
+  for the homepage and representative images, loaded portrait/FWMS/Finora/Chit
+  screenshots, no horizontal overflow, working mobile-menu Escape behavior,
+  and no captured browser or request errors.
+
 ## 22 October 2026 interface redesign (not deployed)
 
 The portfolio was redesigned locally from the clean `main` checkout at
