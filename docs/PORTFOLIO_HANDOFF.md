@@ -31,6 +31,11 @@ dark, component-heavy presentation with a premium light-first interface.
   text actions now have 44px minimum touch targets, and following a mobile-menu
   link preserves the destination focus instead of returning it to the menu
   button. The browser-rendering limitation above still applies.
+- Final QA also confirmed that no local renderer is available in this execution
+  environment: Playwright, Puppeteer and a DevTools client are absent, while an
+  installed headless Chrome can initialize an isolated profile but emits no
+  local-server screenshots. This is an environment limitation, not rendered
+  approval; retain the manual desktop/mobile review before release.
 
 Before a push to `main`, review the local commit/diff, open the Vite preview at
 desktop and mobile widths, confirm keyboard menu and dialog behavior, and then
