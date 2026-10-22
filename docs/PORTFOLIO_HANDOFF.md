@@ -38,15 +38,16 @@ dark, component-heavy presentation with a premium light-first interface.
   skip-link/menu/dialog behavior and reduced motion. It records child-process
   lifecycle events, Vite stdout/stderr, and port checks in the ignored
   `artifacts/visual-qa/diagnostics.json` file.
-- The runner lifecycle diagnosis verified that this execution runtime can bind
-  an ephemeral `127.0.0.1` server but denies its own connection with `EACCES`.
-  In the Vite diagnostic run, Vite printed its normal ready message, remained
-  alive with no stderr, and exited only after the runner sent `SIGTERM`.
-  Therefore the limitation is the runtime's local-network policy, not Vite,
-  child-process spawning, host configuration, or an occupied port. Chromium
-  similarly fails with `net::ERR_NETWORK_ACCESS_DENIED`. No screenshots or
-  rendered approval were produced; rerun from a normal local terminal/browser
-  environment and inspect both screenshots before release.
+- The Codex sandbox executor can bind an ephemeral `127.0.0.1` server but
+  denies its own connection with `EACCES`; its Chromium process similarly fails
+  with `net::ERR_NETWORK_ACCESS_DENIED`. A normal PowerShell run, however,
+  passed the loopback control and found port 5173 listening while Vite remained
+  alive. That run exposed a runner defect: ANSI color codes split the printed
+  `:5173` URL, so the readiness pattern timed out despite the live socket. The
+  runner now removes ANSI codes before matching and retains the lifecycle
+  diagnostics. Rerun in the normal local terminal/browser environment and
+  inspect the generated screenshots before release; no rendered approval is
+  claimed yet.
 
 Before a push to `main`, review the local commit/diff, open the Vite preview at
 desktop and mobile widths, confirm keyboard menu and dialog behavior, and then

@@ -95,15 +95,14 @@ npx playwright install chromium
 npm run qa:visual
 ```
 
-The current Codex execution runtime cannot connect to its own loopback server:
+The Codex sandbox executor currently cannot connect to its own loopback server:
 an ephemeral Node server binds successfully, but its local client is denied with
-`EACCES`. In a lifecycle diagnostic run, Vite printed its normal ready message,
-remained alive with no stderr, and exited only after the runner sent `SIGTERM`.
-This is a local runtime-network restriction rather than a Vite lifecycle or
-port-configuration failure. It prevents Chromium from navigating to the local
-server (`net::ERR_NETWORK_ACCESS_DENIED`), so no visual pass is claimed here.
-Run the command from a normal local terminal/browser environment and inspect
-both generated screenshots before release.
+`EACCES`. A normal PowerShell run did allow loopback and confirmed that Vite was
+listening on port 5173. Its earlier timeout was caused by ANSI color codes inside
+Vite's printed URL, which the runner now strips before matching readiness. This
+does not constitute a visual pass: rerun the command from that normal local
+terminal/browser environment and inspect both generated screenshots before
+release.
 
 There are no runtime environment variables or automated test script in this repository. The content-only closeout uses the production build plus link/image checks.
 

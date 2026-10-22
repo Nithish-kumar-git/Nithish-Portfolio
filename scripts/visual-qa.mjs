@@ -9,6 +9,7 @@ const outputDir = resolve(root, 'artifacts', 'visual-qa');
 const baseUrl = 'http://127.0.0.1:5173/';
 const viteEntry = resolve(root, 'node_modules', 'vite', 'bin', 'vite.js');
 const browsersDir = resolve(root, 'node_modules', 'playwright-core', '.local-browsers');
+const ansiPattern = /\u001B\[[0-?]*[ -/]*[@-~]/g;
 let server;
 let serverOutput = '';
 let serverError = '';
@@ -112,6 +113,10 @@ function fail(message) {
   throw new Error(`${message}\nVite output:\n${serverOutput}\n${serverError}`);
 }
 
+function plainServerOutput() {
+  return serverOutput.replace(ansiPattern, '');
+}
+
 async function waitForServer() {
   const deadline = Date.now() + 15_000;
   let readyAt;
@@ -120,7 +125,7 @@ async function waitForServer() {
       await captureSocketState('vite-exited');
       fail(`Vite exited with code ${server.exitCode} and signal ${server.signalCode}.`);
     }
-    if (/Local:\s+http:\/\/127\.0\.0\.1:5173\//.test(serverOutput)) {
+    if (/Local:\s+http:\/\/127\.0\.0\.1:5173\//.test(plainServerOutput())) {
       readyAt ??= Date.now();
       const socket = await captureSocketState('vite-reported-ready');
       if (socket.state === 'listening') return;
