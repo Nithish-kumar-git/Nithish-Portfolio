@@ -75,6 +75,29 @@ npm run build
 npm run preview
 ```
 
+## Local visual QA
+
+The repository includes a Playwright-based local QA runner. It starts Vite on
+`127.0.0.1:5173`, captures full-page desktop (1440px) and mobile (390px)
+screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
+loading, horizontal overflow, console/network failures, keyboard navigation,
+dialog focus return and reduced-motion handling.
+
+After `npm ci`, install the development browser once in the project-local
+Playwright location, then run the check:
+
+```powershell
+$env:PLAYWRIGHT_BROWSERS_PATH = '0'
+npx playwright install chromium
+npm run qa:visual
+```
+
+The runner was added for repeatable visual QA. In the current sandbox it starts
+the local server and launches Chromium, but browser navigation to the loopback
+server is denied with `net::ERR_NETWORK_ACCESS_DENIED`; no visual pass is
+claimed from that environment. Run it from a normal local terminal/browser
+environment before release and inspect both generated screenshots.
+
 There are no runtime environment variables or automated test script in this repository. The content-only closeout uses the production build plus link/image checks.
 
 ## Deployment
