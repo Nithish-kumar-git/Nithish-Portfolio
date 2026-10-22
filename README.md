@@ -2,6 +2,28 @@
 
 A static portfolio for data analytics, full-stack engineering and applied AI work. It is built with semantic HTML, CSS, vanilla JavaScript and Vite, and deployed on Vercel.
 
+## Interface refresh
+
+The current interface is a light-first, editorial portfolio with warm-neutral
+surfaces, restrained blue accents and selective frosted navigation. It retains
+the static Vite architecture while adding responsive navigation, keyboard-safe
+project dialogs, a visible focus treatment, reduced-motion support and stable
+image dimensions.
+
+The work section uses genuine project imagery where it is available:
+
+- FWMS: HOD recruiter-demo dashboard capture.
+- Finora: synthetic-household production dashboard capture.
+- Chit Fund Analytics: illustrative dashboard capture using fictional data.
+- Evidence-Grounded RAG: no screenshot is represented as a product capture. It
+  is a local-only demo with no public deployment, so its card uses a clearly
+  labelled workflow representation instead.
+
+Project links are intentionally explicit: live applications are labelled as
+such, repository links are labelled **Source**, and the RAG project has only a
+source link. Claims and release limitations are maintained in the project cards
+and dialogs rather than being implied by visual polish.
+
 [![Portfolio](https://img.shields.io/badge/Live_portfolio-Vercel-0EA5E9?logo=vercel)](https://nithish-portfolio-seven.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Nithish--kumar--git-181717?logo=github)](https://github.com/Nithish-kumar-git)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-nithishkumar246-0A66C2?logo=linkedin)](https://www.linkedin.com/in/nithishkumar246/)
