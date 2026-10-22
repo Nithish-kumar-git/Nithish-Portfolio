@@ -6,7 +6,7 @@ const mobileMenu = document.querySelector('[data-mobile-menu]');
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 let lastMenuTrigger = null;
 
-function setMenu(open) {
+function setMenu(open, returnFocus = true) {
   if (!menuToggle || !mobileMenu) return;
   menuToggle.setAttribute('aria-expanded', String(open));
   mobileMenu.hidden = !open;
@@ -14,13 +14,13 @@ function setMenu(open) {
   if (open) {
     lastMenuTrigger = menuToggle;
     mobileMenu.querySelector('a')?.focus();
-  } else {
+  } else if (returnFocus) {
     lastMenuTrigger?.focus();
   }
 }
 
 menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
-mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false, false)));
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
 });

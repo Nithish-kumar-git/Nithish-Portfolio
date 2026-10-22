@@ -27,6 +27,10 @@ dark, component-heavy presentation with a premium light-first interface.
   produced the static Vite assets successfully. A local browser automation
   endpoint could not reach the machine-local dev server, so desktop and mobile
   visual review remains a manual pre-release check; no deployment was started.
+- Focused static QA corrected two mobile accessibility details: project/contact
+  text actions now have 44px minimum touch targets, and following a mobile-menu
+  link preserves the destination focus instead of returning it to the menu
+  button. The browser-rendering limitation above still applies.
 
 Before a push to `main`, review the local commit/diff, open the Vite preview at
 desktop and mobile widths, confirm keyboard menu and dialog behavior, and then
