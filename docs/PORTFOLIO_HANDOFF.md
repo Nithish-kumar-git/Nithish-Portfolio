@@ -14,7 +14,7 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   product screenshot.
 - A semantic Education section records MCA — Hindustan Institute of Technology
   & Science, Chennai — CGPA 8.96 / 10, expected 2026; BCA — Hindustan College
-  of Arts & Science, Chennai — CGPA 7.96 / 10, 2024; HSC — AEHSS-2, Chennai —
+  of Arts & Science, Chennai — CGPA 8.20 / 10, 2024; HSC — AEHSS-2, Chennai —
   85.86%, 2021; and SSC — AECS-2, Chennai — 80.40%, 2019. The included resume
   was visually checked as the authority; it resolves the former page conflict
   by confirming 8.96 rather than 8.97 for the MCA.
@@ -35,12 +35,11 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   Escape/focus return and reduced motion. The four linked public destinations
   (FWMS, Finora, Chit Fund Analytics and the Evidence-Grounded RAG source)
   each returned HTTP 200 in a read-only check.
-- Release checklist discrepancy: the included resume is the available
-  authoritative source and states a BCA CGPA of **7.96 / 10**. A separate
-  release request expected 8.20 / 10. The feature branch deliberately keeps
-  7.96 and no value was invented. Resolve that factual conflict with an
-  updated authoritative source or explicit approval before an intentional
-  production release that must claim 8.20.
+- Academic-record discrepancy: the user explicitly confirmed the portfolio BCA
+  CGPA is **8.20 / 10** for release. The bundled resume still states **7.96 /
+  10** and was deliberately not altered because no authoritative
+  marksheet/transcript was supplied. Update the resume only after that source
+  is available; until then, the portfolio and resume values differ by record.
 
 ## Release verification — 23 October 2026
 

@@ -14,8 +14,10 @@ The current local refinement branch adds a concise Education section and a
 user-controlled, scroll-snap rail for the three supporting project cards. The
 rail has labelled previous/next controls, keyboard Left/Right support and touch
 scrolling; it does not autoplay. Academic values were checked against the
-included resume: the MCA CGPA is **8.96 / 10** (expected 2026), not the former
-8.97 value shown in an earlier hero summary.
+included resume and a user-confirmed academic correction: the MCA CGPA is
+**8.96 / 10** (expected 2026), not the former 8.97 value shown in an earlier
+hero summary. The portfolio's BCA CGPA is **8.20 / 10**; the bundled resume
+has not been changed and still requires a marksheet/transcript-backed update.
 
 The work section uses genuine project imagery where it is available:
 
