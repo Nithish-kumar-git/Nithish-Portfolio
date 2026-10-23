@@ -7,7 +7,8 @@ import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const outputDir = resolve(root, 'artifacts', 'visual-qa');
-const baseUrl = 'http://127.0.0.1:5173/';
+const baseUrl = process.env.PORTFOLIO_QA_BASE_URL || 'http://127.0.0.1:5173/';
+const usingExistingServer = Boolean(process.env.PORTFOLIO_QA_BASE_URL);
 const viteEntry = resolve(root, 'node_modules', 'vite', 'bin', 'vite.js');
 const browsersDir = resolve(root, 'node_modules', 'playwright-core', '.local-browsers');
 const ansiPattern = /\u001B\[[0-?]*[ -/]*[@-~]/g;
@@ -174,7 +175,7 @@ function trackPage(page, events) {
 }
 
 async function imageState(page) {
-  return page.locator('img').evaluateAll((images) => images.map((image) => ({
+  return page.locator('img[src]').evaluateAll((images) => images.map((image) => ({
     src: image.getAttribute('src'), currentSrc: image.currentSrc, alt: image.alt,
     loaded: image.complete && image.naturalWidth > 0,
     naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
@@ -187,7 +188,7 @@ async function imageState(page) {
 }
 
 async function loadImages(page) {
-  const images = page.locator('img');
+  const images = page.locator('img[src]');
   const count = await images.count();
   for (let index = 0; index < count; index += 1) {
     const image = images.nth(index);
@@ -228,25 +229,31 @@ async function assert(condition, message) {
 }
 
 async function openPage(browser, viewport, events, options = {}) {
-  const context = await browser.newContext({ viewport, ...options });
+  const { url = baseUrl, ...contextOptions } = options;
+  const context = await browser.newContext({ viewport, ...contextOptions });
   const page = await context.newPage();
   trackPage(page, events);
-  await page.goto(baseUrl, { waitUntil: 'networkidle' });
+  await page.goto(url, { waitUntil: 'networkidle' });
   return { context, page };
 }
 
 async function run() {
   await mkdir(outputDir, { recursive: true });
-  diagnostics.loopbackControl = await verifyLoopbackCapability();
-  if (diagnostics.loopbackControl.state !== 'available') {
-    fail(`This runtime cannot connect to its own loopback server (${diagnostics.loopbackControl.code ?? diagnostics.loopbackControl.state}).`);
+  diagnostics.usingExistingServer = usingExistingServer;
+  if (!usingExistingServer) {
+    diagnostics.loopbackControl = await verifyLoopbackCapability();
+    if (diagnostics.loopbackControl.state !== 'available') {
+      fail(`This runtime cannot connect to its own loopback server (${diagnostics.loopbackControl.code ?? diagnostics.loopbackControl.state}).`);
+    }
+    const portBeforeStart = await captureSocketState('before-vite-start');
+    if (portBeforeStart.state === 'listening') {
+      fail('Port 5173 already accepts connections before Visual QA starts; the runner will not replace that process.');
+    }
+    startServer();
+    await waitForServer();
+  } else {
+    recordLifecycle('using-configured-server', { baseUrl });
   }
-  const portBeforeStart = await captureSocketState('before-vite-start');
-  if (portBeforeStart.state === 'listening') {
-    fail('Port 5173 already accepts connections before Visual QA starts; the runner will not replace that process.');
-  }
-  startServer();
-  await waitForServer();
 
   const events = { consoleErrors: [], pageErrors: [], failedRequests: [], imageResponses: [] };
   const executablePath = await browserExecutable();
@@ -255,7 +262,7 @@ async function run() {
     headless: true,
     executablePath,
   });
-  const results = { baseUrl, screenshots: [], desktop: {}, tablet: {}, mobile: {}, interactions: {}, reducedMotion: {}, events };
+  const results = { baseUrl, screenshots: [], desktop: {}, tablet: {}, mobile: {}, caseStudies: {}, interactions: {}, reducedMotion: {}, events };
 
   try {
     const desktop = await openPage(browser, { width: 1440, height: 1200 }, events);
@@ -290,6 +297,56 @@ async function run() {
     await assert(await dialogTrigger.evaluate((trigger) => document.activeElement === trigger), 'Dialog did not restore focus to its trigger.');
     results.interactions.dialogFocusReturn = 'passed';
     await desktop.context.close();
+
+    const caseStudies = [
+      { key: 'fwms', title: 'Faculty Workload Management System', galleryCount: 4 },
+      { key: 'finora', title: 'Finora', galleryCount: 6 },
+      { key: 'chit', title: 'Chit Fund Analytics', galleryCount: 3 },
+      { key: 'rag', title: 'Evidence-Grounded RAG', galleryCount: 0 },
+    ];
+    for (const study of caseStudies) {
+      const view = await openPage(browser, { width: 1440, height: 1100 }, events, { url: `${baseUrl}case-study.html?project=${study.key}` });
+      const record = { images: await loadImages(view.page) };
+      record.overflow = await overflowState(view.page);
+      await assert(!record.overflow.hasOverflow, `${study.key} case study has horizontal overflow.`);
+      await assert(await view.page.getByRole('heading', { level: 1, name: study.title }).count() === 1, `${study.key} case study did not load directly.`);
+      if (study.galleryCount) {
+        const gallery = view.page.locator('[data-gallery]');
+        await assert(await gallery.count() === 1, `${study.key} case study gallery is missing.`);
+        await assert(await gallery.locator('[data-gallery-thumb]').count() === study.galleryCount, `${study.key} gallery thumbnail count is wrong.`);
+        record.galleryImages = await gallery.locator('img[src]').evaluateAll((images) => images.map((image) => ({
+          src: image.getAttribute('src'), loaded: image.complete && image.naturalWidth > 0,
+          naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight,
+        })));
+        await assert(record.galleryImages.every((image) => image.loaded), `${study.key} case study has an unloaded gallery image.`);
+        const image = gallery.locator('[data-gallery-image]');
+        const beforeSrc = await image.getAttribute('src');
+        await gallery.locator('[data-gallery-next]').click();
+        await assert(await image.getAttribute('src') !== beforeSrc, `${study.key} gallery next control did not advance.`);
+        await gallery.focus();
+        await gallery.press('ArrowLeft');
+        await assert(await image.getAttribute('src') === beforeSrc, `${study.key} gallery ArrowLeft control did not return.`);
+        const enlarge = gallery.locator('[data-enlarge]');
+        await enlarge.focus();
+        await enlarge.press('Enter');
+        await assert(await view.page.locator('[data-lightbox]').evaluate((dialog) => dialog.open), `${study.key} lightbox did not open.`);
+        await view.page.keyboard.press('Escape');
+        await assert(await enlarge.evaluate((trigger) => document.activeElement === trigger), `${study.key} lightbox did not restore focus.`);
+        record.gallery = 'next, keyboard navigation, thumbnail set and lightbox focus return passed';
+        await gallery.screenshot({ path: resolve(outputDir, `gallery-${study.key}-desktop-1440.png`) });
+        results.screenshots.push(`gallery-${study.key}-desktop-1440.png`);
+      } else {
+        await assert(await view.page.locator('.case-flow').count() === 1, 'RAG case study is missing its labelled implementation flow.');
+        record.gallery = 'no verified UI captures available; labelled workflow representation present';
+      }
+      if (study.key === 'fwms') {
+        await assert(await view.page.locator('a[href="https://fwms-recruiter-demo.vercel.app/"]').count() === 1, 'FWMS case study does not use the isolated recruiter demo URL.');
+      }
+      await view.page.screenshot({ path: resolve(outputDir, `case-${study.key}-desktop-1440.png`), fullPage: true });
+      results.screenshots.push(`case-${study.key}-desktop-1440.png`);
+      results.caseStudies[study.key] = record;
+      await view.context.close();
+    }
 
     const tablet = await openPage(browser, { width: 768, height: 1024 }, events);
     results.tablet.images = await loadImages(tablet.page);
@@ -364,6 +421,27 @@ async function run() {
     await mobile.page.waitForTimeout(350);
     await assert(await projectTrack.evaluate((track) => track.scrollLeft) < carouselAfterArrow, 'Mobile project carousel touch control did not move back.');
     results.interactions.mobileProjectCarousel = 'pointer, keyboard and touch passed';
+
+    const mobileCase = await openPage(browser, { width: 390, height: 844 }, events, { hasTouch: true, isMobile: true, url: `${baseUrl}case-study.html?project=fwms` });
+    results.caseStudies.fwms.mobileImages = await loadImages(mobileCase.page);
+    results.caseStudies.fwms.mobileOverflow = await overflowState(mobileCase.page);
+    await assert(!results.caseStudies.fwms.mobileOverflow.hasOverflow, 'Mobile FWMS case study has horizontal overflow.');
+    const mobileGallery = mobileCase.page.locator('[data-gallery]');
+    await mobileGallery.scrollIntoViewIfNeeded();
+    const mobileGalleryImages = await mobileGallery.locator('img[src]').evaluateAll((images) => images.map((image) => image.complete && image.naturalWidth > 0));
+    await assert(mobileGalleryImages.every(Boolean), 'Mobile FWMS case study has an unloaded gallery image.');
+    const mobileBefore = await mobileGallery.locator('[data-gallery-image]').getAttribute('src');
+    const nextBounds = await mobileGallery.locator('[data-gallery-next]').boundingBox();
+    await assert(nextBounds, 'Mobile case-study gallery next control is not visible.');
+    await mobileCase.page.touchscreen.tap(nextBounds.x + nextBounds.width / 2, nextBounds.y + nextBounds.height / 2);
+    await mobileCase.page.waitForTimeout(100);
+    await assert(await mobileGallery.locator('[data-gallery-image]').getAttribute('src') !== mobileBefore, 'Mobile case-study gallery touch control did not advance.');
+    await mobileCase.page.screenshot({ path: resolve(outputDir, 'case-fwms-mobile-390.png'), fullPage: true });
+    results.screenshots.push('case-fwms-mobile-390.png');
+    await mobileGallery.screenshot({ path: resolve(outputDir, 'gallery-fwms-mobile-390.png') });
+    results.screenshots.push('gallery-fwms-mobile-390.png');
+    results.caseStudies.fwms.mobileGallery = 'touch next control passed';
+    await mobileCase.context.close();
 
     const reducedContext = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     const reducedPage = await reducedContext.newPage();

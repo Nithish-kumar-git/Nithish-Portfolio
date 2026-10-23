@@ -2,6 +2,43 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Detailed case studies — 23 October 2026 (local release candidate)
+
+- `case-study.html` is a separately emitted Vite entry. It loads directly with
+  `?project=fwms`, `finora`, `chit` or `rag`; the homepage cards link to those
+  URLs while retaining concise quick-overview dialogs.
+- Asset/evidence inventory: FWMS uses four genuine recruiter-demo captures;
+  Finora uses six genuine synthetic-household captures; Chit Fund Analytics
+  uses three genuine app captures. Every capture is 1920×1080. RAG has no
+  verified UI capture in this checkout and therefore renders an explicitly
+  labelled implementation flow, not an invented gallery. Full provenance and
+  known gaps are in `docs/CASE_STUDY_AUDIT.md`.
+- Case-study content describes source-supported workflows, stacks, architecture,
+  testing evidence, trade-offs and limits. It preserves the isolated FWMS
+  recruiter-demo URL and source URL, Finora’s synthetic/device-local boundary,
+  Chit Fund’s review-required boundary, and RAG’s unverified live-integration
+  and no-public-deployment boundary.
+- Gallery interactions include prior/next controls, thumbnails, Arrow-key
+  navigation, touch-friendly controls, captions, descriptive main-image alt
+  text and a native-dialog lightbox with Escape and focus return. Gallery images
+  use `height:auto` plus a deliberate 16:9 frame after a real 390px review found
+  the HTML height attribute had produced an oversized stage.
+- Verified locally with system Chrome against the project-owned loopback Vite
+  server: desktop 1440px, tablet 768px and mobile 390px had no horizontal
+  overflow; all gallery assets loaded; FWMS/Finora/Chit gallery next/keyboard/
+  thumbnail/lightbox checks passed; FWMS mobile touch passed; all four direct
+  case-study URLs loaded; existing skip-link, dialog, mobile-menu, project-rail
+  and reduced-motion checks still passed. No console errors, page errors or
+  failed requests were recorded. The reviewed ignored screenshots include
+  `case-fwms-desktop-1440.png`, `case-finora-desktop-1440.png`,
+  `case-chit-desktop-1440.png`, `case-rag-desktop-1440.png` and
+  `gallery-fwms-mobile-390.png` under `artifacts/visual-qa/`.
+- `npm run build`, JavaScript syntax checks, `git diff --check` and `npm audit`
+  passed; the audit reported zero vulnerabilities. This candidate is local only:
+  it has not been committed, pushed or deployed. Before release, review the
+  exact diff, confirm `origin/main` remains at the reviewed base, then verify
+  the Vercel deployment’s Git commit and live case-study URLs.
+
 ## Project showcase refinement — 23 October 2026 (released)
 
 - The FWMS capture is a genuine 1920×1080 recruiter-demo dashboard image. Its

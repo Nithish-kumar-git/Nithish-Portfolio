@@ -33,6 +33,25 @@ such, repository links are labelled **Source**, and the RAG project has only a
 source link. Claims and release limitations are maintained in the project cards
 and dialogs rather than being implied by visual polish.
 
+## Detailed case studies
+
+Each concise project card now links to a directly shareable case study at
+`/case-study.html?project=fwms`, `finora`, `chit` or `rag`. The case-study
+page is a Vite multi-page entry, not a client-side route that depends on the
+homepage loading first.
+
+- FWMS has four genuine recruiter-demo captures; Finora has six genuine
+  synthetic-household captures; and Chit Fund Analytics has three genuine app
+  captures. Their galleries include captions, thumbnail selection, pointer and
+  keyboard controls, touch-friendly controls, and a focus-safe lightbox.
+- Evidence-Grounded RAG deliberately has no gallery: no verified UI capture is
+  available in this checkout, so it shows a clearly labelled implementation
+  flow instead of fictional imagery.
+- The homepage remains a summary. Its case-study links, as well as the visible
+  demo and source destinations, retain the project-specific boundaries.
+- `docs/CASE_STUDY_AUDIT.md` records every available visual asset, its evidence
+  boundary, and the certification evidence used by the portfolio.
+
 [![Portfolio](https://img.shields.io/badge/Live_portfolio-Vercel-0EA5E9?logo=vercel)](https://nithish-portfolio-seven.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Nithish--kumar--git-181717?logo=github)](https://github.com/Nithish-kumar-git)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-nithishkumar246-0A66C2?logo=linkedin)](https://www.linkedin.com/in/nithishkumar246/)
@@ -86,12 +105,13 @@ npm run preview
 
 ## Local visual QA
 
-The repository includes a Playwright-based local QA runner. It first confirms
-that the active runtime can make a loopback connection, then starts Vite on
+The repository includes a Playwright-based local QA runner. By default it first
+confirms that the active runtime can make a loopback connection, then starts Vite on
 `127.0.0.1:5173`, captures full-page desktop (1440px), tablet (768px) and mobile (390px)
 screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
 loading, horizontal overflow, console/network failures, keyboard navigation,
-dialog focus return, mouse/keyboard/touch project-rail controls and reduced-motion handling. It writes
+dialog focus return, mouse/keyboard/touch project-rail controls, direct
+case-study routes, gallery/lightbox behavior and reduced-motion handling. It writes
 `artifacts/visual-qa/diagnostics.json` on both success and failure, including
 the Vite child lifecycle, output and local-port checks.
 
@@ -112,6 +132,17 @@ $env:PORTFOLIO_BROWSER_EXECUTABLE = 'C:\Program Files\Google\Chrome\Application\
 npm run qa:visual
 ```
 
+When a restricted execution environment cannot create a loopback listener,
+start the project-owned Vite process in the same local environment and make the
+connection explicit. The runner will use it without replacing or stopping it:
+
+```powershell
+npm run dev -- --host 127.0.0.1 --port 5173 --strictPort
+$env:PORTFOLIO_BROWSER_EXECUTABLE = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+$env:PORTFOLIO_QA_BASE_URL = 'http://127.0.0.1:5173/'
+npm run qa:visual
+```
+
 A normal local PowerShell run completed visual QA successfully. It captured and
 reviewed the light-first redesign at 1440px and 390px, loaded all four genuine
 images (including lazy-loaded project captures), found no horizontal overflow,
@@ -125,6 +156,16 @@ The 23 October 2026 project-showcase refinement used the explicit installed-Chro
 fallback to capture and review 1440px, 768px and 390px screenshots. It verifies
 the contained FWMS dashboard presentation, the responsive project rail and the
 single documented NPTEL credential without inventing a verification URL.
+
+The detailed-case-study candidate was rendered and reviewed on 23 October 2026
+using the same local Chrome fallback. Its four direct URLs loaded, all 13 genuine
+gallery images loaded at their intrinsic 1920×1080 dimensions, and the FWMS,
+Finora and Chit galleries passed next/previous, keyboard, thumbnail, lightbox
+focus-return and mobile touch checks. The 390px FWMS gallery was corrected to
+retain its 16:9 frame without clipping or an oversized image stage. RAG remains
+text-flow-only by design. The run recorded no console errors, page errors or
+failed requests; the resulting artifacts remain ignored under
+`artifacts/visual-qa/`.
 
 ## Dependency security
 
