@@ -2,6 +2,33 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Refinement candidate — 23 October 2026 (verified locally; not yet released)
+
+- The FWMS capture is a genuine 1920×1080 recruiter-demo dashboard image. Its
+  apparent left-side clipping was caused by the featured card’s media column
+  stretching to the height of adjacent copy and applying `object-fit: cover`.
+  The revised featured stage uses `object-fit: contain`, preserving the full
+  screenshot without stretching it.
+- Supporting projects retain the existing accessible scroll-snap rail: desktop
+  shows three aligned cards, tablet shows two with an intentional next-card
+  peek, and mobile exposes one touch-scrollable card at a time. Previous/next,
+  keyboard arrow and touch-control coverage remains in the QA runner.
+- A concise Certifications section restores only **Cloud Computing
+  Fundamentals — NPTEL (2025)**. The bundled resume is the available evidence;
+  there is no standalone certificate file or public verification URL, so no
+  credential ID, score, date, image or external verification link is claimed.
+- The local Chrome fallback completed visual QA at 1440px, 768px and 390px:
+  all images loaded, the FWMS presentation computed as `contain`, no
+  horizontal overflow occurred, and no console, page or request errors were
+  captured. It also passed skip-link, native-dialog focus return, mobile-menu
+  Escape/focus return, carousel pointer/keyboard/touch and reduced-motion
+  checks. The ignored screenshot evidence is in
+  `artifacts/visual-qa/desktop-1440.png`, `tablet-768.png` and
+  `mobile-390.png`.
+- The refinement passed `npm run build`, JavaScript syntax checks,
+  `git diff --check` and `npm audit --omit=dev` (zero vulnerabilities).
+  No production push or deployment has been made for this candidate.
+
 ## Production release — 23 October 2026
 
 - Application release commit `3df3207be00732112601f649dc902f55d24d5a28` was

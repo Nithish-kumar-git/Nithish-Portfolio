@@ -88,7 +88,7 @@ npm run preview
 
 The repository includes a Playwright-based local QA runner. It first confirms
 that the active runtime can make a loopback connection, then starts Vite on
-`127.0.0.1:5173`, captures full-page desktop (1440px) and mobile (390px)
+`127.0.0.1:5173`, captures full-page desktop (1440px), tablet (768px) and mobile (390px)
 screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
 loading, horizontal overflow, console/network failures, keyboard navigation,
 dialog focus return, mouse/keyboard/touch project-rail controls and reduced-motion handling. It writes
@@ -101,6 +101,14 @@ Playwright location, then run the check:
 ```powershell
 $env:PLAYWRIGHT_BROWSERS_PATH = '0'
 npx playwright install chromium
+npm run qa:visual
+```
+
+If the bundled Playwright Chromium closes during capture, use an installed local
+Chrome executable explicitly rather than treating a partial run as a pass:
+
+```powershell
+$env:PORTFOLIO_BROWSER_EXECUTABLE = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 npm run qa:visual
 ```
 

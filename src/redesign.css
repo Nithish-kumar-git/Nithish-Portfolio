@@ -35,3 +35,17 @@
 
 @media (max-width:1024px){.project-grid>.project{flex-basis:calc((100% - 20px)/2)}.project--rag .project__media{aspect-ratio:16/9}.education{padding-top:0}}
 @media (max-width:760px){.project--featured:hover,.project--card:hover{transform:none}.project--featured .project__media{border-radius:var(--radius) var(--radius) 0 0}.project-carousel{margin-top:20px}.project-grid{gap:16px;padding-bottom:12px}.project-grid>.project{flex-basis:min(84vw,332px)}.project--card .project__content{min-height:unset}.education-item{grid-template-columns:36px minmax(0,1fr);gap:12px;padding:23px 0}.education-item__result{grid-column:2;justify-items:start;text-align:left}.education-item h3{font-size:1.25rem}.education-item p{font-size:.8rem}}
+
+/* Feature screenshots retain their genuine 16:9 framing rather than cropping to adjacent copy. */
+.project--featured .project__media--fwms{display:grid;place-items:center;background:#eef0ee}
+.project--featured .project__media--fwms img{object-fit:contain;object-position:center;transform:none}
+.project--featured:hover .project__media--fwms img{transform:none}
+
+/* A single documented credential is intentionally presented as one focused card. */
+.certifications{border-block:1px solid var(--line)}
+.certification-card{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:24px;align-items:center;padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.certification-card__index{color:var(--blue);font:500 .67rem 'DM Mono',monospace}
+.certification-card h3{margin-top:10px;font-size:clamp(1.3rem,2.2vw,1.75rem);letter-spacing:-.035em}
+.certification-card p:not(.eyebrow){max-width:62ch;margin-top:10px;font-size:.85rem}
+.certification-card__status{justify-self:end;color:var(--muted);font:500 .64rem/1.35 'DM Mono',monospace;letter-spacing:.05em;text-align:right;text-transform:uppercase}
+@media (max-width:760px){.certification-card{grid-template-columns:36px minmax(0,1fr);gap:12px;padding:23px 0}.certification-card__status{grid-column:2;justify-self:start;text-align:left}.certification-card p:not(.eyebrow){font-size:.8rem}}

@@ -1,5 +1,6 @@
 import { chromium } from '@playwright/test';
 import { mkdir, readdir, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import net from 'node:net';
 import { resolve } from 'node:path';
@@ -117,6 +118,24 @@ function plainServerOutput() {
   return serverOutput.replace(ansiPattern, '');
 }
 
+async function browserExecutable() {
+  const requestedPath = process.env.PORTFOLIO_BROWSER_EXECUTABLE;
+  if (requestedPath) {
+    if (!existsSync(requestedPath)) {
+      throw new Error(`PORTFOLIO_BROWSER_EXECUTABLE does not exist: ${requestedPath}`);
+    }
+    return requestedPath;
+  }
+  const chromiumDirectory = (await readdir(browsersDir, { withFileTypes: true }))
+    .find((entry) => entry.isDirectory() && entry.name.startsWith('chromium-'))?.name;
+  if (!chromiumDirectory) throw new Error('Project-local Playwright Chromium was not installed.');
+  const chromiumPath = resolve(browsersDir, chromiumDirectory);
+  const executableDirectory = (await readdir(chromiumPath, { withFileTypes: true }))
+    .find((entry) => entry.isDirectory() && entry.name.startsWith('chrome-win'))?.name;
+  if (!executableDirectory) throw new Error('Project-local Playwright Chromium executable was not found.');
+  return resolve(chromiumPath, executableDirectory, 'chrome.exe');
+}
+
 async function waitForServer() {
   const deadline = Date.now() + 15_000;
   let readyAt;
@@ -230,18 +249,13 @@ async function run() {
   await waitForServer();
 
   const events = { consoleErrors: [], pageErrors: [], failedRequests: [], imageResponses: [] };
-  const chromiumDirectory = (await readdir(browsersDir, { withFileTypes: true }))
-    .find((entry) => entry.isDirectory() && entry.name.startsWith('chromium-'))?.name;
-  if (!chromiumDirectory) throw new Error('Project-local Playwright Chromium was not installed.');
-  const chromiumPath = resolve(browsersDir, chromiumDirectory);
-  const executableDirectory = (await readdir(chromiumPath, { withFileTypes: true }))
-    .find((entry) => entry.isDirectory() && entry.name.startsWith('chrome-win'))?.name;
-  if (!executableDirectory) throw new Error('Project-local Playwright Chromium executable was not found.');
+  const executablePath = await browserExecutable();
+  diagnostics.browserExecutable = executablePath;
   const browser = await chromium.launch({
     headless: true,
-    executablePath: resolve(chromiumPath, executableDirectory, 'chrome.exe'),
+    executablePath,
   });
-  const results = { baseUrl, screenshots: [], desktop: {}, mobile: {}, interactions: {}, reducedMotion: {}, events };
+  const results = { baseUrl, screenshots: [], desktop: {}, tablet: {}, mobile: {}, interactions: {}, reducedMotion: {}, events };
 
   try {
     const desktop = await openPage(browser, { width: 1440, height: 1200 }, events);
@@ -252,7 +266,16 @@ async function run() {
     await assert(!results.desktop.overflow.hasOverflow, 'Desktop page has horizontal overflow.');
     await assert(results.desktop.images.every((image) => image.loaded), 'One or more desktop images failed to load.');
     await assert(await desktop.page.locator('#education').count() === 1, 'Education section is missing.');
+    await assert(await desktop.page.locator('#certifications').count() === 1, 'Certifications section is missing.');
     await assert(await desktop.page.getByText('CGPA 8.96 / 10', { exact: true }).count() === 1, 'Verified MCA CGPA is missing.');
+    await assert(await desktop.page.getByText('Cloud Computing Fundamentals', { exact: true }).count() === 1, 'Documented NPTEL credential is missing.');
+    results.desktop.fwmsPresentation = await desktop.page.locator('.project__media--fwms img').evaluate((image) => ({
+      objectFit: getComputedStyle(image).objectFit,
+      objectPosition: getComputedStyle(image).objectPosition,
+      naturalWidth: image.naturalWidth,
+      naturalHeight: image.naturalHeight,
+    }));
+    await assert(results.desktop.fwmsPresentation.objectFit === 'contain', 'FWMS capture is not presented without cropping.');
     await desktop.page.locator('.project--featured').hover();
     await desktop.page.locator('[data-dialog="fwms-dialog"]').focus();
     results.interactions.projectCardHoverAndFocus = 'passed';
@@ -267,6 +290,20 @@ async function run() {
     await assert(await dialogTrigger.evaluate((trigger) => document.activeElement === trigger), 'Dialog did not restore focus to its trigger.');
     results.interactions.dialogFocusReturn = 'passed';
     await desktop.context.close();
+
+    const tablet = await openPage(browser, { width: 768, height: 1024 }, events);
+    results.tablet.images = await loadImages(tablet.page);
+    await revealPage(tablet.page);
+    results.tablet.overflow = await overflowState(tablet.page);
+    await assert(!results.tablet.overflow.hasOverflow, 'Tablet page has horizontal overflow.');
+    await assert(results.tablet.images.every((image) => image.loaded), 'One or more tablet images failed to load.');
+    results.tablet.carousel = await tablet.page.locator('[data-carousel-track]').evaluate((track) => ({
+      scrollWidth: track.scrollWidth, clientWidth: track.clientWidth, scrollable: track.scrollWidth > track.clientWidth,
+    }));
+    await assert(results.tablet.carousel.scrollable, 'Tablet project carousel is not horizontally scrollable.');
+    await tablet.page.screenshot({ path: resolve(outputDir, 'tablet-768.png'), fullPage: true });
+    results.screenshots.push('tablet-768.png');
+    await tablet.context.close();
 
     const mobile = await openPage(browser, { width: 390, height: 844 }, events, { hasTouch: true, isMobile: true });
     results.mobile.initialImages = await imageState(mobile.page);
