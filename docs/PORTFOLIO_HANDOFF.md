@@ -2,7 +2,7 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
-## Refinement candidate — 23 October 2026 (verified locally; not yet released)
+## Project showcase refinement — 23 October 2026 (released)
 
 - The FWMS capture is a genuine 1920×1080 recruiter-demo dashboard image. Its
   apparent left-side clipping was caused by the featured card’s media column
@@ -26,8 +26,16 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   `artifacts/visual-qa/desktop-1440.png`, `tablet-768.png` and
   `mobile-390.png`.
 - The refinement passed `npm run build`, JavaScript syntax checks,
-  `git diff --check` and `npm audit --omit=dev` (zero vulnerabilities).
-  No production push or deployment has been made for this candidate.
+  `git diff --check` and `npm audit` (zero vulnerabilities).
+- Application commit `818abc23e07b26091e91a12a67834ba0655dbcb3` was pushed
+  normally to `main`. Vercel production deployment
+  `dpl_8n2A2NeR1UZJKx9x41AYzNMnxpqr` reached `READY`, is Git-sourced from
+  that exact commit, and is assigned to
+  `https://nithish-portfolio-seven.vercel.app/`.
+- A read-only live desktop/mobile smoke test confirmed no horizontal overflow,
+  the contained FWMS dashboard, the certification section, matching FWMS
+  recruiter-demo/source links in the card and native dialog, mobile-menu
+  Escape/focus return, and no observed console or failed-network requests.
 
 ## Production release — 23 October 2026
 

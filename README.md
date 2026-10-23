@@ -121,6 +121,11 @@ message, scrolls native lazy images into view before asserting their load state,
 and saves partial results when a future run fails. Its ignored screenshot and
 JSON artifacts remain the evidence for each run.
 
+The 23 October 2026 project-showcase refinement used the explicit installed-Chrome
+fallback to capture and review 1440px, 768px and 390px screenshots. It verifies
+the contained FWMS dashboard presentation, the responsive project rail and the
+single documented NPTEL credential without inventing a verification URL.
+
 ## Dependency security
 
 The development-only Vite toolchain was updated to `vite@8.1.6` on 23 October
