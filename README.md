@@ -124,11 +124,14 @@ There are no runtime environment variables or automated test script in this repo
 
 ## Deployment
 
-The approved redesign was released on 23 October 2026 from commit
-`e56aee942f2de30affa8ad6f47bf321bd3e0c809`. Vercel deployment
-`dpl_88bhcwSa6Fjdm8WFfhrhdVik29fC` completed with status `READY` and the
-production URL served the redesigned page. Read-only desktop and 390px mobile
-smoke checks confirmed navigation, image loading and no horizontal overflow or
-browser/network errors.
+The luxury refinement was released on 23 October 2026 from application commit
+`3df3207be00732112601f649dc902f55d24d5a28`. Vercel deployment
+`dpl_9F4dgySNFQ2be4fT96r75cDQuWAT` completed with status `READY`, targeted
+production and served the exact Git commit. Read-only local and public smoke
+checks confirmed the ivory/charcoal/bronze design, project screenshots,
+responsive navigation, the BCA **8.20 / 10** portfolio value, and no observed
+horizontal overflow or browser/network errors. The bundled resume remains
+unchanged and still records BCA 7.96 / 10 pending a marksheet/transcript-backed
+resume update.
 
 See [docs/PORTFOLIO_HANDOFF.md](docs/PORTFOLIO_HANDOFF.md) for repository state, validation evidence and the safe resumption boundary.

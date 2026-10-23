@@ -2,6 +2,25 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Production release — 23 October 2026
+
+- Application release commit `3df3207be00732112601f649dc902f55d24d5a28` was
+  fast-forwarded to `main` and pushed normally; no history was rewritten.
+- Vercel production deployment `dpl_9F4dgySNFQ2be4fT96r75cDQuWAT` is `READY`,
+  Git-sourced from that exact commit, and assigned to
+  `https://nithish-portfolio-seven.vercel.app/`.
+- Read-only production smoke testing opened the homepage, project captures and
+  mobile navigation. The menu opened, Escape returned focus to its toggle, and
+  the live Education section visibly displayed BCA CGPA 8.20 / 10. The local
+  1440px/390px suite had already confirmed loaded images, no horizontal
+  overflow, carousel pointer/keyboard/touch controls, skip-link and dialog
+  focus behavior, reduced motion, and no console/page/network errors.
+- The release passed `npm ci`, production build, JavaScript syntax checks,
+  `git diff --check`, `npm audit` with zero vulnerabilities, and local visual
+  QA. The bundled resume remains intentionally unchanged: it records BCA 7.96
+  / 10, while the user-confirmed portfolio value is 8.20 / 10. A marksheet or
+  transcript is still required before changing the resume.
+
 ## Local luxury refinement — 23 October 2026 (not pushed or deployed)
 
 - The refinement is isolated on local branch `feature/luxury-education-projects`,
