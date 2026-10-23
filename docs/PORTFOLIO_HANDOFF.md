@@ -2,7 +2,7 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
-## Detailed case studies — 23 October 2026 (local release candidate)
+## Detailed case studies — 23 October 2026 (released)
 
 - `case-study.html` is a separately emitted Vite entry. It loads directly with
   `?project=fwms`, `finora`, `chit` or `rag`; the homepage cards link to those
@@ -34,10 +34,15 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   `case-chit-desktop-1440.png`, `case-rag-desktop-1440.png` and
   `gallery-fwms-mobile-390.png` under `artifacts/visual-qa/`.
 - `npm run build`, JavaScript syntax checks, `git diff --check` and `npm audit`
-  passed; the audit reported zero vulnerabilities. This candidate is local only:
-  it has not been committed, pushed or deployed. Before release, review the
-  exact diff, confirm `origin/main` remains at the reviewed base, then verify
-  the Vercel deployment’s Git commit and live case-study URLs.
+  passed; the audit reported zero vulnerabilities. Application release commit
+  `6ff5c31099cccd8f40fae76b8c023bad1f6bc2e0` was pushed normally to `main`.
+  Vercel production deployment `dpl_ELS4t7xPN4bEW18cAkrUDF2XUqpa` is `READY`,
+  is Git-sourced from that exact commit, and is assigned to
+  `https://nithish-portfolio-seven.vercel.app/`. Read-only live smoke testing
+  confirmed the homepage plus FWMS, Finora, Chit Fund Analytics and RAG direct
+  case-study URLs. The live FWMS case still links only to
+  `https://fwms-recruiter-demo.vercel.app/` for the public demo; no FWMS,
+  Render or institutional system was modified.
 
 ## Project showcase refinement — 23 October 2026 (released)
 

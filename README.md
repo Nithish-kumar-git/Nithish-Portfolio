@@ -167,6 +167,11 @@ text-flow-only by design. The run recorded no console errors, page errors or
 failed requests; the resulting artifacts remain ignored under
 `artifacts/visual-qa/`.
 
+The case-study implementation was released from
+`6ff5c31099cccd8f40fae76b8c023bad1f6bc2e0`. Vercel production deployment
+`dpl_ELS4t7xPN4bEW18cAkrUDF2XUqpa` reached `READY` for that exact commit and
+the production alias serves the homepage plus all four case-study URLs.
+
 ## Dependency security
 
 The development-only Vite toolchain was updated to `vite@8.1.6` on 23 October
