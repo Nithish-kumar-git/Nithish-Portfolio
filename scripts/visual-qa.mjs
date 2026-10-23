@@ -208,8 +208,8 @@ async function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-async function openPage(browser, viewport, events) {
-  const context = await browser.newContext({ viewport });
+async function openPage(browser, viewport, events, options = {}) {
+  const context = await browser.newContext({ viewport, ...options });
   const page = await context.newPage();
   trackPage(page, events);
   await page.goto(baseUrl, { waitUntil: 'networkidle' });
@@ -268,7 +268,7 @@ async function run() {
     results.interactions.dialogFocusReturn = 'passed';
     await desktop.context.close();
 
-    const mobile = await openPage(browser, { width: 390, height: 844 }, events);
+    const mobile = await openPage(browser, { width: 390, height: 844 }, events, { hasTouch: true, isMobile: true });
     results.mobile.initialImages = await imageState(mobile.page);
     results.mobile.images = await loadImages(mobile.page);
     await revealPage(mobile.page);
@@ -301,21 +301,32 @@ async function run() {
 
     const projectTrack = mobile.page.locator('[data-carousel-track]');
     const carouselNext = mobile.page.locator('[data-carousel-next]');
+    const carouselPrevious = mobile.page.locator('[data-carousel-previous]');
     await projectTrack.scrollIntoViewIfNeeded();
     const carouselBefore = await projectTrack.evaluate((track) => ({
       scrollLeft: track.scrollLeft, scrollWidth: track.scrollWidth, clientWidth: track.clientWidth,
     }));
     await assert(carouselBefore.scrollWidth > carouselBefore.clientWidth, 'Mobile project carousel is not horizontally scrollable.');
+    await carouselNext.click();
+    await mobile.page.waitForTimeout(350);
+    const carouselAfterPointer = await projectTrack.evaluate((track) => track.scrollLeft);
+    await assert(carouselAfterPointer > carouselBefore.scrollLeft, 'Mobile project carousel pointer control did not advance.');
     await carouselNext.focus();
     await carouselNext.press('Enter');
     await mobile.page.waitForTimeout(350);
-    const carouselAfter = await projectTrack.evaluate((track) => track.scrollLeft);
-    await assert(carouselAfter > carouselBefore.scrollLeft, 'Mobile project carousel next control did not advance.');
+    const carouselAfterKeyboard = await projectTrack.evaluate((track) => track.scrollLeft);
+    await assert(carouselAfterKeyboard >= carouselAfterPointer, 'Mobile project carousel keyboard control did not advance.');
     await projectTrack.focus();
     await projectTrack.press('ArrowRight');
     await mobile.page.waitForTimeout(350);
-    await assert(await projectTrack.evaluate((track) => track.scrollLeft) >= carouselAfter, 'Mobile project carousel did not respond to ArrowRight.');
-    results.interactions.mobileProjectCarousel = 'passed';
+    const carouselAfterArrow = await projectTrack.evaluate((track) => track.scrollLeft);
+    await assert(carouselAfterArrow >= carouselAfterKeyboard, 'Mobile project carousel did not respond to ArrowRight.');
+    const previousBounds = await carouselPrevious.boundingBox();
+    await assert(previousBounds, 'Mobile project carousel previous control is not visible.');
+    await mobile.page.touchscreen.tap(previousBounds.x + previousBounds.width / 2, previousBounds.y + previousBounds.height / 2);
+    await mobile.page.waitForTimeout(350);
+    await assert(await projectTrack.evaluate((track) => track.scrollLeft) < carouselAfterArrow, 'Mobile project carousel touch control did not move back.');
+    results.interactions.mobileProjectCarousel = 'pointer, keyboard and touch passed';
 
     const reducedContext = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
     const reducedPage = await reducedContext.newPage();

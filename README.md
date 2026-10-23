@@ -89,7 +89,7 @@ that the active runtime can make a loopback connection, then starts Vite on
 `127.0.0.1:5173`, captures full-page desktop (1440px) and mobile (390px)
 screenshots under the ignored `artifacts/visual-qa/` directory, and checks image
 loading, horizontal overflow, console/network failures, keyboard navigation,
-dialog focus return, mobile project-rail controls and reduced-motion handling. It writes
+dialog focus return, mouse/keyboard/touch project-rail controls and reduced-motion handling. It writes
 `artifacts/visual-qa/diagnostics.json` on both success and failure, including
 the Vite child lifecycle, output and local-port checks.
 

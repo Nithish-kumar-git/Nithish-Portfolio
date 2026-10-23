@@ -29,6 +29,18 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   It recorded no horizontal overflow, console errors, page errors or failed
   requests; all portrait and project images loaded with HTTP 200 after native
   lazy-loading was triggered.
+- Final pre-release QA repeated the rendered review at 1440px and 390px after
+  a clean `npm ci`. It passed pointer, keyboard and touch activation for the
+  project rail, hover/focus, skip link, dialog focus return, mobile-menu
+  Escape/focus return and reduced motion. The four linked public destinations
+  (FWMS, Finora, Chit Fund Analytics and the Evidence-Grounded RAG source)
+  each returned HTTP 200 in a read-only check.
+- Release checklist discrepancy: the included resume is the available
+  authoritative source and states a BCA CGPA of **7.96 / 10**. A separate
+  release request expected 8.20 / 10. The feature branch deliberately keeps
+  7.96 and no value was invented. Resolve that factual conflict with an
+  updated authoritative source or explicit approval before an intentional
+  production release that must claim 8.20.
 
 ## Release verification — 23 October 2026
 
