@@ -21,6 +21,34 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   / 10, while the user-confirmed portfolio value is 8.20 / 10. A marksheet or
   transcript is still required before changing the resume.
 
+## FWMS recruiter-demo link audit — 23 October 2026 (local documentation update, not deployed)
+
+- The featured FWMS card and its project dialog now use the public recruiter-demo
+  destination: <https://fwms-recruiter-demo.vercel.app/>. The source link remains
+  <https://github.com/Nithish-kumar-git/fwms-workload-system>.
+- The public recruiter demo is a separately hosted synthetic-data experience with
+  faculty, timetable-coordinator and HOD workflows. It uses its dedicated demo
+  backend and must not be represented as the institutional application, evidence
+  of institutional adoption, or a production-readiness claim.
+- The project card no longer says that the isolated demo rollout is pending. This
+  content change is local only until a separately approved portfolio release is
+  built, pushed and verified; it does not alter the live portfolio, FWMS backend,
+  institutional frontend or any provider setting.
+- This local content audit passed `npm ci` (zero vulnerabilities), `npm run
+  build`, JavaScript syntax checks and `git diff --check`. The stock
+  `npm run qa:visual` runner reached its local Vite server and completed its
+  desktop image/overflow/hover/focus checks, but the freshly installed bundled
+  Chromium closed during screenshot capture. A separate same-machine run using
+  the installed Chrome captured and visually reviewed
+  `artifacts/visual-qa/desktop-1440-system-chrome-revealed.png` and
+  `mobile-390-system-chrome-revealed.png`: all project images loaded, no
+  horizontal overflow or browser errors occurred, the FWMS CTA used the recruiter
+  demo URL, and no rendered link used the institutional frontend URL. This is
+  visual evidence for the content change, not a replacement claim that the full
+  Playwright interaction suite completed in this audit. The same fallback also
+  verified the FWMS dialog CTA and focus return, skip link, mobile-menu
+  Escape/focus return and reduced-motion behavior.
+
 ## Local luxury refinement — 23 October 2026 (not pushed or deployed)
 
 - The refinement is isolated on local branch `feature/luxury-education-projects`,
@@ -215,7 +243,10 @@ A push to `main` can create a new Vercel deployment through the existing Git int
 - Finora links must use the Netlify frontend for the live app; the Vercel root is the backend/API, not the interactive frontend.
 - Finora’s public demo is synthetic. Personal cloud synchronization remains incomplete.
 - FWMS has faculty, coordinator and HOD roles; no separately enforced Admin role is claimed.
-- FWMS recruiter-demo and institutional paths are distinct. Do not claim institutional adoption, production readiness, or that local repair commits are deployed.
+- FWMS recruiter-demo and institutional paths are distinct. The isolated recruiter
+  demo is separately released; do not claim institutional adoption or production
+  readiness, and do not conflate its reviewed static-artifact source with the
+  institutional deployment.
 - Chit Fund Analytics must not be called production-ready while its documented integrity/concurrency blockers remain.
 - Evidence-Grounded RAG is a local demo with no public deployment. Mock evaluation is not live Gemini/pgvector proof, and citation integrity is not semantic entailment.
 

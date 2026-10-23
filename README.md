@@ -43,9 +43,9 @@ and dialogs rather than being implied by visual polish.
 
 FWMS implements faculty preference, semester/cycle and workload-allocation workflows for three enforced application roles: faculty, timetable coordinator and HOD. The public recruiter demo uses synthetic, isolated data and is distinct from the institutional configuration.
 
-- Recruiter/institutional frontend entry: <https://fwms-workload-system.vercel.app/>
+- Public recruiter demo: <https://fwms-recruiter-demo.vercel.app/>
 - Source: <https://github.com/Nithish-kumar-git/fwms-workload-system>
-- Status: the two local repair commits `f6b61d3` and `cb9f324` are not pushed or deployed. PostgreSQL repair checks passed; Docker and hosted browser workflows remain unverified. No claim of institutional adoption or production readiness is made.
+- Status: the separate recruiter-demo frontend is live against its dedicated synthetic backend. It remains distinct from the institutional application; no institutional adoption or production-readiness claim is made.
 
 ### Finora
 
