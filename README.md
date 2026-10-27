@@ -1,6 +1,6 @@
 # Nithish Kumar V — Portfolio
 
-A static portfolio for data analytics, full-stack engineering and applied AI work. It is built with semantic HTML, CSS, vanilla JavaScript and Vite, and deployed on Vercel.
+A static portfolio focused on AI application development and Python/backend engineering, with Generative AI, RAG, SQL, data analytics and full-stack work as supporting skills. It is built with semantic HTML, CSS, vanilla JavaScript and Vite, and deployed on Vercel.
 
 ## Interface refresh
 
@@ -10,14 +10,19 @@ the static Vite architecture while adding responsive navigation, keyboard-safe
 project dialogs, a visible focus treatment, reduced-motion support and stable
 image dimensions.
 
-The current local refinement branch adds a concise Education section and a
-user-controlled, scroll-snap rail for the three supporting project cards. The
-rail has labelled previous/next controls, keyboard Left/Right support and touch
-scrolling; it does not autoplay. Academic values were checked against the
-included resume and a user-confirmed academic correction: the MCA CGPA is
-**8.96 / 10** (expected 2026), not the former 8.97 value shown in an earlier
-hero summary. The portfolio's BCA CGPA is **8.20 / 10**; the bundled resume
-has not been changed and still requires a marksheet/transcript-backed update.
+The live site includes a concise Education section and a user-controlled,
+scroll-snap rail for the three supporting project cards. The rail has labelled
+previous/next controls, keyboard Left/Right support and touch scrolling; it does
+not autoplay. The professional summary presents AI application development
+and Python/backend engineering as the primary focus, with Generative AI, RAG,
+SQL, data analytics and full-stack development as supporting skills. The
+education section reflects the verified record supplied for this update:
+MCA CGPA **8.97 / 10** (2026), BCA CGPA **8.20 / 10** (2024), HSC **85.86%**
+(2021) and SSC **80.40%** (2019).
+
+The bundled resume at `public/Nithish_Kumar_V_Resume.pdf` reflects the verified
+MCA and BCA grades, 2026 MCA graduation, and current AI application development
+and Python/backend positioning. All Resume links open this file.
 
 The work section uses genuine project imagery where it is available:
 
@@ -60,7 +65,7 @@ homepage loading first.
 
 ### Faculty Workload Management System
 
-FWMS implements faculty preference, semester/cycle and workload-allocation workflows for three enforced application roles: faculty, timetable coordinator and HOD. The public recruiter demo uses synthetic, isolated data and is distinct from the institutional configuration.
+FWMS is a faculty workload management system with a PostgreSQL-backed data model, REST APIs, and a five-pass allocation fallback strategy that progressively relaxes constraints to improve allocation feasibility. It includes workload reporting, Excel exports, and role-based access controls. The public recruiter demo uses synthetic, isolated data and is distinct from the institutional configuration.
 
 - Public recruiter demo: <https://fwms-recruiter-demo.vercel.app/>
 - Source: <https://github.com/Nithish-kumar-git/fwms-workload-system>
@@ -189,8 +194,8 @@ The luxury refinement was released on 23 October 2026 from application commit
 production and served the exact Git commit. Read-only local and public smoke
 checks confirmed the ivory/charcoal/bronze design, project screenshots,
 responsive navigation, the BCA **8.20 / 10** portfolio value, and no observed
-horizontal overflow or browser/network errors. The bundled resume remains
-unchanged and still records BCA 7.96 / 10 pending a marksheet/transcript-backed
-resume update.
+horizontal overflow or browser/network errors. The bundled resume was replaced
+on 27 October 2026 with the finalized PDF at
+`public/Nithish_Kumar_V_Resume.pdf`.
 
 See [docs/PORTFOLIO_HANDOFF.md](docs/PORTFOLIO_HANDOFF.md) for repository state, validation evidence and the safe resumption boundary.

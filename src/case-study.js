@@ -22,7 +22,7 @@ const studies = {
       { src: '/images/workload.png', alt: 'FWMS workload allocation screen', caption: 'Workload allocation — genuine capture of the allocation workflow.' },
       { src: '/images/login.png', alt: 'FWMS recruiter demo login screen', caption: 'Recruiter demo entry — genuine capture of the synthetic-data experience.' },
     ],
-    features: ['Role-based application flow for faculty, coordinator and HOD review.', 'Subject preference collection and semester/cycle context.', 'Workload allocation review and report-oriented exports.', 'A separate recruiter demo that keeps public exploration on synthetic data.'],
+    features: ['Role-based application flow for faculty, coordinator and HOD review.', 'Subject preference collection and semester/cycle context.', 'A five-pass allocation fallback that progressively relaxes constraints to improve allocation feasibility.', 'Workload reporting and Excel exports.', 'A separate recruiter demo that keeps public exploration on synthetic data.'],
     stack: ['React', 'TypeScript', 'Vite', 'FastAPI', 'PostgreSQL', 'Docker'],
     architecture: 'The source separates a React/TypeScript client, FastAPI routes and PostgreSQL persistence. The public recruiter demo is a distinct deployment path; it is not evidence of institutional data or adoption.',
     decisions: ['Keep the recruiter experience isolated from the institutional environment.', 'Use role boundaries to make preference and allocation responsibilities reviewable.', 'Present the public app as a demonstration, not an institutional-production claim.'],

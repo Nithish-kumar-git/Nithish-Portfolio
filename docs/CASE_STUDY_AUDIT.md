@@ -38,7 +38,7 @@ unverified claims.
 
 ## Certification evidence
 
-`public/Nithish_Kumar_Analyst_Resume.pdf` records **Cloud Computing
+`public/Nithish_Kumar_V_Resume.pdf` records **Cloud Computing
 Fundamentals — NPTEL (2025)**. No separate certificate file, credential ID,
 score, issue date or public verification URL is present in this checkout. The
 portfolio may show only the documented credential and this limitation. Earlier

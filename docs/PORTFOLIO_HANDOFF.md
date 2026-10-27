@@ -2,6 +2,19 @@
 
 Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content and safe resumption of the static portfolio.
 
+## Current profile and education record — 27 October 2026
+
+- Primary positioning: **AI Application Development | Python & Backend
+  Engineering**. The owner is an MCA graduate applying for Junior Developer -
+  AI and related software engineering roles; Generative AI, RAG, SQL, data
+  analytics and full-stack development remain supporting skills.
+- Verified education for current portfolio copy: MCA — Hindustan Institute of
+  Technology & Science, Chennai — CGPA **8.97 / 10**, 2026; BCA — Hindustan
+  College of Arts & Science, Chennai — CGPA **8.20 / 10**, 2024; HSC — AEHSS-2,
+  Chennai — **85.86%**, 2021; SSC — AECS-2, Chennai — **80.40%**, 2019.
+- The bundled `public/Nithish_Kumar_V_Resume.pdf` is the finalized resume
+  supplied on 27 October 2026. Website Resume links point to this file.
+
 ## Detailed case studies — 23 October 2026 (released)
 
 - `case-study.html` is a separately emitted Vite entry. It loads directly with
@@ -94,9 +107,8 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   focus behavior, reduced motion, and no console/page/network errors.
 - The release passed `npm ci`, production build, JavaScript syntax checks,
   `git diff --check`, `npm audit` with zero vulnerabilities, and local visual
-  QA. The bundled resume remains intentionally unchanged: it records BCA 7.96
-  / 10, while the user-confirmed portfolio value is 8.20 / 10. A marksheet or
-  transcript is still required before changing the resume.
+  QA. The resume was replaced on 27 October 2026 with the finalized PDF; see
+  the current closeout diff for asset and link verification.
 
 ## FWMS recruiter-demo link audit — 23 October 2026 (released)
 
@@ -138,12 +150,9 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   FWMS, Finora and Chit Fund dashboard captures; the source-only RAG project
   remains a clearly labelled workflow representation rather than a fabricated
   product screenshot.
-- A semantic Education section records MCA — Hindustan Institute of Technology
-  & Science, Chennai — CGPA 8.96 / 10, expected 2026; BCA — Hindustan College
-  of Arts & Science, Chennai — CGPA 8.20 / 10, 2024; HSC — AEHSS-2, Chennai —
-  85.86%, 2021; and SSC — AECS-2, Chennai — 80.40%, 2019. The included resume
-  was visually checked as the authority; it resolves the former page conflict
-  by confirming 8.96 rather than 8.97 for the MCA.
+- A semantic Education section originally recorded the then-available
+  academic details. Its MCA grade and expected-graduation status were later
+  superseded by the verified record listed at the top of this handoff.
 - Supporting project cards are now a responsive, scroll-snap carousel with
   labelled previous/next buttons, keyboard Left/Right operation and native
   touch scrolling. It has no autoplay. The visual QA runner exercises this
@@ -161,11 +170,9 @@ Updated 22 October 2026 (Asia/Calcutta). This handoff governs factual content an
   Escape/focus return and reduced motion. The four linked public destinations
   (FWMS, Finora, Chit Fund Analytics and the Evidence-Grounded RAG source)
   each returned HTTP 200 in a read-only check.
-- Academic-record discrepancy: the user explicitly confirmed the portfolio BCA
-  CGPA is **8.20 / 10** for release. The bundled resume still states **7.96 /
-  10** and was deliberately not altered because no authoritative
-  marksheet/transcript was supplied. Update the resume only after that source
-  is available; until then, the portfolio and resume values differ by record.
+- The finalized resume is bundled as
+  `public/Nithish_Kumar_V_Resume.pdf`; its education details match the verified
+  record at the top of this handoff.
 
 ## Release verification — 23 October 2026
 

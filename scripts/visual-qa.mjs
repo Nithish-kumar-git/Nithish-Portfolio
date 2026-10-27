@@ -274,7 +274,7 @@ async function run() {
     await assert(results.desktop.images.every((image) => image.loaded), 'One or more desktop images failed to load.');
     await assert(await desktop.page.locator('#education').count() === 1, 'Education section is missing.');
     await assert(await desktop.page.locator('#certifications').count() === 1, 'Certifications section is missing.');
-    await assert(await desktop.page.getByText('CGPA 8.96 / 10', { exact: true }).count() === 1, 'Verified MCA CGPA is missing.');
+    await assert(await desktop.page.getByText('CGPA 8.97 / 10', { exact: true }).count() === 1, 'Verified MCA CGPA is missing.');
     await assert(await desktop.page.getByText('Cloud Computing Fundamentals', { exact: true }).count() === 1, 'Documented NPTEL credential is missing.');
     results.desktop.fwmsPresentation = await desktop.page.locator('.project__media--fwms img').evaluate((image) => ({
       objectFit: getComputedStyle(image).objectFit,
